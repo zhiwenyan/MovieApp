@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:ignore="RtlSymmetry,RtlHardcoded,ContentDescription,MissingConstraints">
+
+    <androidx.cardview.widget.CardView
+            app:cardCornerRadius="4dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            android:layout_width="match_parent"
+            android:layout_marginTop="@dimen/y"
+            android:layout_marginLeft="@dimen/x"
+            android:layout_marginRight="@dimen/x"
+            android:layout_height="wrap_content">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+            <ImageView
+                    android:id="@+id/iv_movie"
+                    android:background="@color/colorPrimary"
+                    android:layout_width="88dp"
+                    android:layout_height="120dp"/>
+
+
+            <TextView
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:textColor="@color/color_black"
+                    android:textSize="20sp"
+                    android:text="大黄蜂"
+                    android:paddingTop="@dimen/y"
+                    android:paddingLeft="@dimen/x"
+                    app:layout_constraintLeft_toRightOf="@+id/iv_movie"
+                    android:id="@+id/name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+            <TextView
+                    android:id="@+id/genres"
+                    android:paddingLeft="@dimen/x"
+                    android:text="类型：动作/科幻"
+                    app:layout_constraintTop_toBottomOf="@+id/name"
+                    android:layout_width="wrap_content"
+                    app:layout_constraintLeft_toRightOf="@+id/iv_movie"
+                    android:layout_height="wrap_content"/>
+            <TextView
+                    android:id="@+id/country"
+                    android:paddingLeft="@dimen/x"
+                    android:text="制片国家/地区：美国"
+                    app:layout_constraintTop_toBottomOf="@+id/genres"
+                    android:layout_width="wrap_content"
+                    app:layout_constraintLeft_toRightOf="@+id/iv_movie"
+                    android:layout_height="wrap_content"/>
+            <TextView
+                    android:id="@+id/pubdates"
+                    android:paddingLeft="@dimen/x"
+                    android:text="上映日期：2019-01-08"
+                    android:maxLines="1"
+                    app:layout_constraintTop_toBottomOf="@+id/country"
+                    android:layout_width="wrap_content"
+                    app:layout_constraintLeft_toRightOf="@+id/iv_movie"
+                    android:layout_height="wrap_content"/>
+            <TextView
+                    android:id="@+id/durations"
+                    android:paddingLeft="@dimen/x"
+                    android:text="片长：132分钟"
+                    app:layout_constraintTop_toBottomOf="@+id/pubdates"
+                    android:layout_width="wrap_content"
+                    app:layout_constraintLeft_toRightOf="@+id/iv_movie"
+                    android:layout_height="wrap_content"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    </androidx.cardview.widget.CardView>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
