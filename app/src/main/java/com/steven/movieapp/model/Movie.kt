@@ -5,7 +5,7 @@ package com.steven.movieapp.model
  * Data：2019/1/28
  * Author:Steven
  */
-data class Movies(
+data class Movie(
     //评分
     val  rating:Rate,
     //类型

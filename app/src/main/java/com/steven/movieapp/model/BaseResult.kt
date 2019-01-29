@@ -6,8 +6,8 @@ package com.steven.movieapp.model
  * Author:Steven
  */
 data class BaseResult<T>(
-    val count:Int,
-    val start:Int,
-    val total:Int,
-    val subjects:List<T>
-    )
+        val count: Int,
+        val start: Int,
+        val total: Int,
+        val subjects: T
+)
