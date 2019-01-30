@@ -5,6 +5,6 @@ package com.steven.movieapp.recyclerview
  * Data：2019/1/28
  * Author:Steven
  */
- interface OnItemClickListener{
-      fun onItemClick(position: Int)
+ interface OnItemClickListener<T>{
+      fun onItemClick(position: Int,item:T)
 }

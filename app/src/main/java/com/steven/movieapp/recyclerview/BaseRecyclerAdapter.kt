@@ -16,7 +16,7 @@ abstract class BaseRecyclerAdapter<T>(
     var data: List<T>
 ) : RecyclerView.Adapter<BaseViewHolder>() {
     //点击事件
-    private var mOnItemClickListener: OnItemClickListener? = null
+    private var mOnItemClickListener: OnItemClickListener<T>? = null
     //支持多种布局
     private var mMultiTypeSupport: MultiTypeSupport<T>? = null
     //mInflater
@@ -45,7 +45,7 @@ abstract class BaseRecyclerAdapter<T>(
     override fun onBindViewHolder(holder: BaseViewHolder, position: Int) {
         if (mOnItemClickListener != null) {
             holder.itemView.setOnClickListener {
-                mOnItemClickListener?.apply { onItemClick(position) }
+                mOnItemClickListener?.apply { onItemClick(position,data[position]) }
             }
         }
         convert(holder, position, data[position])
@@ -56,7 +56,7 @@ abstract class BaseRecyclerAdapter<T>(
     /**
      * 设置itemView的点击事件
      */
-    fun setOnItemClickListener(onItemClickListener: OnItemClickListener) {
+    fun setOnItemClickListener(onItemClickListener: OnItemClickListener<T>) {
         this.mOnItemClickListener = onItemClickListener
     }
 

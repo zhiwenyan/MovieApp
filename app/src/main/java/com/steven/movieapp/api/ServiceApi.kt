@@ -22,14 +22,22 @@ interface ServiceApi {
     @GET("in_theaters")
     fun getInTheaters(@Query("apikey") apiKey: String): Call<BaseResult<List<Movie>>>
 
+
+    /**
+     *
+     * 即将上映
+     * 请求实例 https://api.douban.com/v2/movie/coming_soon?apikey=0b2bdeda43b5688921839c8ecb20399b
+     */
+    @GET("coming_soon")
+    fun getComingSoon(@Query("apikey") apiKey: String): Call<BaseResult<List<Movie>>>
+
+
     /**
      * 豆瓣评分排名top250
      *
      */
     @GET("top250")
-    fun getTop250Movie(@Query("apikey") apiKey: String,
-                       @Query("start") start: Int,
-                       @Query("count") count: Int): Call<BaseResult<Movie>>
+    fun getTop250Movie(@Query("apikey") apiKey: String, @Query("start") start: Int, @Query("count") count: Int): Call<BaseResult<Movie>>
 
 
 }

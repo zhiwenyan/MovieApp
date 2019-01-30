@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.steven.movieapp.Constants
 import com.steven.movieapp.R
@@ -17,7 +18,8 @@ import com.steven.movieapp.widget.LoopTextView
 import kotlinx.android.synthetic.main.fragment_movie.*
 
 
-class MovieFragment : BaseFragment(), SwipeRefreshLayout.OnRefreshListener, OnItemClickListener {
+class MovieFragment : BaseFragment(), SwipeRefreshLayout.OnRefreshListener, OnItemClickListener<Movie> {
+
 
 
     lateinit var movieViewModel: MovieViewModel
@@ -35,7 +37,7 @@ class MovieFragment : BaseFragment(), SwipeRefreshLayout.OnRefreshListener, OnIt
         swipeRefreshLayout.setColorSchemeColors(ContextCompat.getColor(mContext!!, R.color.colorAccent))
         swipeRefreshLayout.setOnRefreshListener(this)
         swipeRefreshLayout.isRefreshing = true
-        recyclerView.layoutManager = LinearLayoutManager(mContext!!, LinearLayoutManager.VERTICAL, false)
+        recyclerView.layoutManager = LinearLayoutManager(mContext!!, RecyclerView.VERTICAL, false)
 
     }
 
@@ -59,7 +61,8 @@ class MovieFragment : BaseFragment(), SwipeRefreshLayout.OnRefreshListener, OnIt
         })
     }
 
-    override fun onItemClick(position: Int) {
+    override fun onItemClick(position: Int, item: Movie) {
+
     }
 
     override fun onRefresh() {

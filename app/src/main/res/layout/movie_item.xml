@@ -49,15 +49,15 @@
                 app:layout_constraintLeft_toRightOf="@+id/iv_movie"
                 app:layout_constraintTop_toBottomOf="@+id/name" />
 
-            <TextView
-                android:id="@+id/country"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:paddingLeft="@dimen/x"
-                android:paddingTop="@dimen/y_half"
-                android:text="制片国家/地区：美国"
-                app:layout_constraintLeft_toRightOf="@+id/iv_movie"
-                app:layout_constraintTop_toBottomOf="@+id/genres" />
+            <!--<TextView-->
+                <!--android:id="@+id/country"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:paddingLeft="@dimen/x"-->
+                <!--android:paddingTop="@dimen/y_half"-->
+                <!--android:text="制片国家/地区：美国"-->
+                <!--app:layout_constraintLeft_toRightOf="@+id/iv_movie"-->
+                <!--app:layout_constraintTop_toBottomOf="@+id/genres" />-->
 
             <TextView
                 android:id="@+id/pubdates"
@@ -68,7 +68,7 @@
                 android:paddingTop="@dimen/y_half"
                 android:text="上映日期：2019-01-08"
                 app:layout_constraintLeft_toRightOf="@+id/iv_movie"
-                app:layout_constraintTop_toBottomOf="@+id/country" />
+                app:layout_constraintTop_toBottomOf="@+id/genres" />
 
             <TextView
                 android:id="@+id/durations"
