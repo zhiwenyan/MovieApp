@@ -68,7 +68,7 @@ class MovieFragment : BaseFragment(), SwipeRefreshLayout.OnRefreshListener, OnIt
 
     private fun setUpMovieName(movies: List<Movie>) {
         val textList = ArrayList<String>()
-        movies.forEach { textList.add(it.title) }
+        movies.forEach { textList.add(it.title + " | " + it.original_title) }
         activity!!.findViewById<LoopTextView>(R.id.loop_movie_name)!!.setTextList(textList)
 
     }

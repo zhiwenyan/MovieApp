@@ -20,7 +20,7 @@ import com.steven.movieapp.R
  * Data：1/29/2019-4:41 PM
  * @author yanzhiwen
  */
- class LoopTextView : FrameLayout {
+class LoopTextView : FrameLayout {
     private lateinit var textList: ArrayList<String>
     private lateinit var anim_out: Animation
     private lateinit var anim_in: Animation
@@ -88,7 +88,8 @@ import com.steven.movieapp.R
                 FrameLayout.LayoutParams.MATCH_PARENT, FrameLayout.LayoutParams.MATCH_PARENT, Gravity.CENTER_VERTICAL)
         textView.layoutParams = layoutParams
         textView.ellipsize = TextUtils.TruncateAt.END
-        textView.compoundDrawablePadding = 10
+        textView.compoundDrawablePadding = 8
+        textView.maxLines = 1
         textView.setTextColor(ContextCompat.getColor(context, R.color.color_black))
         textView.setCompoundDrawables(loadDrawable(), null, null, null)
         textView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16f)
