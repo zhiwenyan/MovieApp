@@ -1,4 +1,4 @@
-package com.steven.movieapp.ui
+package com.steven.movieapp.base
 
 import android.content.Context
 import android.os.Bundle
@@ -15,8 +15,8 @@ import androidx.fragment.app.Fragment
 
 abstract class BaseFragment : Fragment() {
 
-    public var mRootView: View? = null
-    public var mContext: Context? = null
+    var mRootView: View? = null
+    var mContext: Context? = null
 
     override fun onAttach(context: Context?) {
         super.onAttach(context)

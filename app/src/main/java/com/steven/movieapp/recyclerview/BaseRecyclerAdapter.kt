@@ -2,6 +2,7 @@ package com.steven.movieapp.recyclerview
 
 import android.content.Context
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 
@@ -10,17 +11,25 @@ import androidx.recyclerview.widget.RecyclerView
  * Data：2019/1/28
  * Author:Steven
  */
-abstract class BaseRecyclerAdapter<T>(
-    context: Context,
-    var layoutId: Int,
-    var data: List<T>
-) : RecyclerView.Adapter<BaseViewHolder>() {
+abstract class BaseRecyclerAdapter<T> : RecyclerView.Adapter<BaseViewHolder> {
+
     //点击事件
     private var mOnItemClickListener: OnItemClickListener<T>? = null
     //支持多种布局
     private var mMultiTypeSupport: MultiTypeSupport<T>? = null
     //mInflater
-    private var mInflater: LayoutInflater = LayoutInflater.from(context)
+    private var mInflater: LayoutInflater
+    private var context: Context
+    private var layoutId: Int
+    private var data: List<T>
+    private lateinit var itemView: View
+
+    constructor(context: Context, layoutId: Int, data: List<T>) {
+        this.context = context
+        this.layoutId = layoutId
+        this.data = data
+        this.mInflater = LayoutInflater.from(context)
+    }
 
 
     constructor(context: Context, data: List<T>, multiTypeSupport: MultiTypeSupport<T>)
@@ -29,7 +38,6 @@ abstract class BaseRecyclerAdapter<T>(
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseViewHolder {
-
         mMultiTypeSupport?.also {
             this.layoutId = viewType
         }
@@ -43,12 +51,22 @@ abstract class BaseRecyclerAdapter<T>(
 
 
     override fun onBindViewHolder(holder: BaseViewHolder, position: Int) {
+        itemView = holder.itemView
         if (mOnItemClickListener != null) {
             holder.itemView.setOnClickListener {
-                mOnItemClickListener?.apply { onItemClick(position,data[position]) }
+                mOnItemClickListener?.apply { onItemClick(position, data[position]) }
             }
         }
+
         convert(holder, position, data[position])
+    }
+
+
+    override fun getItemViewType(position: Int): Int {
+        //多布局
+        return if (mMultiTypeSupport != null) {
+            mMultiTypeSupport!!.getLayoutId(data[position], position)
+        } else super.getItemViewType(position)
     }
 
     abstract fun convert(holder: BaseViewHolder, position: Int, item: T)
@@ -59,6 +77,11 @@ abstract class BaseRecyclerAdapter<T>(
     fun setOnItemClickListener(onItemClickListener: OnItemClickListener<T>) {
         this.mOnItemClickListener = onItemClickListener
     }
+
+    fun setLayoutId(layoutId: Int) {
+        this.layoutId = layoutId
+    }
+    fun getItemView():View=itemView
 
 }
 

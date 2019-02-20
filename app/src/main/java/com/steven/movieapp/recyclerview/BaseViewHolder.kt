@@ -12,7 +12,7 @@ import com.bumptech.glide.Glide
  * Data：2019/1/28
  * Author:Steven
  */
-class BaseViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+open class BaseViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
     private val mViews: SparseArray<View> = SparseArray()
 

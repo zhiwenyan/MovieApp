@@ -1,8 +1,9 @@
 package com.steven.movieapp.api
 
 import android.util.Log
-import com.steven.movieapp.Constants.Companion.BASE_URL
-import com.steven.movieapp.Constants.Companion.TAG
+import com.steven.movieapp.BASE_URL
+import com.steven.movieapp.TAG
+import com.steven.movieapp.utils.LiveDataCallAdapterFactory
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
@@ -29,6 +30,7 @@ class RetrofitClient {
                         ).build()
                 )
                 .addConverterFactory(GsonConverterFactory.create())
+                .addCallAdapterFactory(LiveDataCallAdapterFactory())
                 .build()
             retrofitClient.create(ServiceApi::class.java)
         }

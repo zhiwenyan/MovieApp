@@ -1,13 +1,10 @@
 package com.steven.movieapp.viewmodel
 
-import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import com.steven.movieapp.api.RetrofitClient
 import com.steven.movieapp.model.BaseResult
 import com.steven.movieapp.model.Movie
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 
 /**
  * Description:
@@ -15,22 +12,41 @@ import retrofit2.Response
  * @author yanzhiwen
  */
 class MovieViewModel : ViewModel() {
-    private val movieLiveData = MutableLiveData<BaseResult<List<Movie>>>()
 
-    fun getInTheaters(apiKey: String): MutableLiveData<BaseResult<List<Movie>>> {
-
-        RetrofitClient.serviceApi.getInTheaters(apiKey).enqueue(object : Callback<BaseResult<List<Movie>>> {
-            override fun onResponse(call: Call<BaseResult<List<Movie>>>, response: Response<BaseResult<List<Movie>>>) {
-                movieLiveData.value = response.body()
-            }
-
-            override fun onFailure(call: Call<BaseResult<List<Movie>>>, t: Throwable) {
-            }
-        })
+    /**
+     * 院线热映
+     */
+    fun getInTheaters(apiKey: String): LiveData<BaseResult<List<Movie>>> =
+        RetrofitClient.serviceApi.getInTheaters(apiKey)
 
 
+    /**
+     * 即将上映
+     */
+    fun getComingSoon(apiKey: String): LiveData<BaseResult<List<Movie>>> =
+        RetrofitClient.serviceApi.getComingSoon(apiKey)
 
+    /**
+     * 口碑榜
+     */
+    fun getMovieWeekly(apiKey: String): LiveData<List<Movie>> =
+        RetrofitClient.serviceApi.getMovieWeekly(apiKey)
 
-        return movieLiveData
-    }
+    /**
+     * 北美票房榜
+     */
+    fun getMovieUsBox(apiKey: String): LiveData<BaseResult<List<Movie>>> =
+        RetrofitClient.serviceApi.getMovieUsBox(apiKey)
+
+    /**
+     *  新片榜
+     */
+    fun getMovieNewMovies(apiKey: String): LiveData<BaseResult<List<Movie>>> =
+        RetrofitClient.serviceApi.getMovieNewMovies(apiKey)
+
+    /**
+     *  top250
+     */
+    fun getTop250Movie(apiKey: String, start: Int, count: Int): LiveData<BaseResult<List<Movie>>> =
+        RetrofitClient.serviceApi.getTop250Movie(apiKey, start, count)
 }

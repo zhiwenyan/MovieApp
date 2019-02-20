@@ -12,6 +12,7 @@
         android:layout_height="wrap_content"
         android:theme="@style/AppTheme.AppBarOverlay">
 
+
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="48dp">
@@ -33,7 +34,7 @@
             android:layout_height="wrap_content"
             android:background="@color/color_white"
             app:tabIndicatorColor="@color/colorAccent"
-            app:tabMode="scrollable"
+            app:tabMode="fixed"
             app:tabSelectedTextColor="@color/colorAccent"
             app:tabTextAppearance="@style/TabLayoutTextAppearance"
             app:tabTextColor="@color/color_black" />
@@ -44,5 +45,16 @@
         android:id="@+id/viewPager"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        tools:ignore="PrivateResource" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_margin="@dimen/x"
+        app:fabSize="auto"
+        app:layout_behavior="@string/fab_translation_behavior"
+        app:srcCompat="@mipmap/ic_grid" />
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
