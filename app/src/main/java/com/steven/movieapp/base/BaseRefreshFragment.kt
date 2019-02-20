@@ -1,5 +1,7 @@
 package com.steven.movieapp.base
 
+import android.view.LayoutInflater
+import android.view.View
 import android.view.animation.AnimationUtils
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
@@ -28,10 +30,11 @@ abstract class BaseRefreshFragment : BaseFragment(), SwipeRefreshLayout.OnRefres
     protected lateinit var movieViewModel: MovieViewModel
 
     protected lateinit var mObserver: Observer<BaseResult<List<Movie>>>
-
+    protected lateinit var mHeaderView: View
     override fun getLayoutId() = R.layout.fragment_base_refresh
 
     override fun initView() {
+        mHeaderView = LayoutInflater.from(mContext).inflate(R.layout.refresh_header_view, null)
         swipeRefreshLayout.setColorSchemeColors(ContextCompat.getColor(mContext!!, R.color.colorAccent))
         swipeRefreshLayout.setOnRefreshListener(this)
         swipeRefreshLayout.isRefreshing = true
@@ -53,6 +56,8 @@ abstract class BaseRefreshFragment : BaseFragment(), SwipeRefreshLayout.OnRefres
             if (adapter == null) {
                 adapter = MovieAdapter(mContext!!, R.layout.movie_list_item, it.subjects)
                 recyclerView.adapter = adapter
+                recyclerView.addHeaderView(mHeaderView)
+                println("=="+mHeaderView)
                 adapter?.apply { setOnItemClickListener(this@BaseRefreshFragment) }
             } else {
                 adapter?.apply { notifyDataSetChanged() }
