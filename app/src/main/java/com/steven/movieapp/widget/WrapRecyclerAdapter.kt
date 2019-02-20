@@ -27,8 +27,6 @@ class WrapRecyclerAdapter(private val adapter: RecyclerView.Adapter<RecyclerView
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-        println("-------" + viewType)
-
         if (isHeaderViewType(viewType)) {
 
             val headerView = mHeaderViews.get(viewType)
@@ -54,8 +52,6 @@ class WrapRecyclerAdapter(private val adapter: RecyclerView.Adapter<RecyclerView
 
     override fun getItemViewType(position: Int): Int {
         if (isHeaderPosition(position)) {
-            println("isHeaderViewType2")
-
             return mHeaderViews.keyAt(position)
         }
         if (isFooterPosition(position)) {

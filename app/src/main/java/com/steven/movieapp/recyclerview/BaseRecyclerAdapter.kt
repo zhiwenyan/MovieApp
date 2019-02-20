@@ -2,7 +2,6 @@ package com.steven.movieapp.recyclerview
 
 import android.content.Context
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 
@@ -22,7 +21,6 @@ abstract class BaseRecyclerAdapter<T> : RecyclerView.Adapter<BaseViewHolder> {
     private var context: Context
     private var layoutId: Int
     private var data: List<T>
-    private lateinit var itemView: View
 
     constructor(context: Context, layoutId: Int, data: List<T>) {
         this.context = context
@@ -51,7 +49,6 @@ abstract class BaseRecyclerAdapter<T> : RecyclerView.Adapter<BaseViewHolder> {
 
 
     override fun onBindViewHolder(holder: BaseViewHolder, position: Int) {
-        itemView = holder.itemView
         if (mOnItemClickListener != null) {
             holder.itemView.setOnClickListener {
                 mOnItemClickListener?.apply { onItemClick(position, data[position]) }
@@ -81,7 +78,7 @@ abstract class BaseRecyclerAdapter<T> : RecyclerView.Adapter<BaseViewHolder> {
     fun setLayoutId(layoutId: Int) {
         this.layoutId = layoutId
     }
-    fun getItemView():View=itemView
+
 
 }
 

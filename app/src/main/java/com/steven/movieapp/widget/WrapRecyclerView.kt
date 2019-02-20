@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.RecyclerView
  * Author:Steven
  */
 
-class WrapRecyclerView : RecyclerView {
+open class WrapRecyclerView : RecyclerView {
 
     private lateinit var mWrapRecyclerAdapter: WrapRecyclerAdapter
 
@@ -79,8 +79,15 @@ class WrapRecyclerView : RecyclerView {
         mWrapRecyclerAdapter.addHeaderView(view)
     }
 
-
     fun addFooterView(view: View) {
         mWrapRecyclerAdapter.addFooterView(view)
+    }
+
+    fun removeHeaderView(view: View) {
+        mWrapRecyclerAdapter.removeHeaderView(view)
+    }
+
+    fun removeFooterView(view: View) {
+        mWrapRecyclerAdapter.removeFooterView(view)
     }
 }

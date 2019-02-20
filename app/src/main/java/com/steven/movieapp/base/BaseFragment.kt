@@ -44,6 +44,7 @@ abstract class BaseFragment : Fragment() {
 
     }
 
+
     abstract fun getLayoutId(): Int
     abstract fun initData()
     abstract fun initView()
