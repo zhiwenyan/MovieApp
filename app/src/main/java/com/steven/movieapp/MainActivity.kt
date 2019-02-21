@@ -50,18 +50,8 @@ class MainActivity : BaseActivity() {
         tab.setupWithViewPager(viewPager)
     }
 
-//        fab.setOnClickListener {
-//            val adapter = (recyclerView.adapter as W)
-//            if (recyclerView.layoutManager is GridLayoutManager) {
-//                recyclerView.layoutManager = linearLayoutManager
-//                adapter.setLayoutId(R.layout.movie_list_item)
-//                fab.setImageResource(R.mipmap.ic_grid)
-//            } else {
-//                recyclerView.layoutManager = gridLayoutManager
-//                adapter.setLayoutId(R.layout.movie_grid_item)
-//                fab.setImageResource(R.mipmap.ic_list)
-//            }
-//            recyclerView.adapter = adapter
-//        }
+    override fun onRequestData() {
+
+    }
 
 }

@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 /**
  * Description:
  * Data：2019/1/28
- * Author:Steven
+ * Actor:Steven
  */
 abstract class BaseRecyclerAdapter<T> : RecyclerView.Adapter<BaseViewHolder> {
 

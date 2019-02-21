@@ -12,7 +12,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 /**
  * Description:
  * Data：2019/1/28
- * Author:Steven
+ * Actor:Steven
  */
 class RetrofitClient {
     companion object {

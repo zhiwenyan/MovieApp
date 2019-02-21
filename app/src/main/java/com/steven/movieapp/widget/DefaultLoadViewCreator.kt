@@ -11,7 +11,7 @@ import com.steven.movieapp.R
 /**
  * Description:
  * Data：2019/2/20
- * Author:Steven
+ * Actor:Steven
  */
 class DefaultLoadViewCreator : LoadViewCreator() {
     private lateinit var mIvRefresh: View

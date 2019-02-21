@@ -11,7 +11,7 @@ import com.steven.movieapp.R
 /**
  * Description:
  * Data：2019/2/20
- * Author:Steven
+ * Actor:Steven
  */
 class DefaultRefreshViewCreator : RefreshViewCreator() {
     private lateinit var mIvRefresh: View

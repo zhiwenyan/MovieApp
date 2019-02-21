@@ -3,13 +3,15 @@ package com.steven.movieapp.api
 import androidx.lifecycle.LiveData
 import com.steven.movieapp.model.BaseResult
 import com.steven.movieapp.model.Movie
+import com.steven.movieapp.model.MovieInfo
 import retrofit2.http.GET
+import retrofit2.http.Path
 import retrofit2.http.Query
 
 /**
  * Description: https://www.jianshu.com/p/a7e51129b042
  * Data：2019/1/26
- * Author:Steven
+ * Actor:Steven
  */
 
 interface ServiceApi {
@@ -63,6 +65,9 @@ interface ServiceApi {
     @GET("top250")
     fun getTop250Movie(@Query("apikey") apiKey: String, @Query("start") start: Int, @Query("count") count: Int):
             LiveData<BaseResult<List<Movie>>>
+
+    @GET("subject/{movieId}")
+    fun getMovieInfo(@Path("movieId") movieId: String, @Query("apikey") apikey: String):LiveData<MovieInfo>
 
 }
 

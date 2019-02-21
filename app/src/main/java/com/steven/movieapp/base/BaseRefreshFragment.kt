@@ -10,7 +10,7 @@ import com.steven.movieapp.adapter.MovieAdapter
 import com.steven.movieapp.model.BaseResult
 import com.steven.movieapp.model.Movie
 import com.steven.movieapp.recyclerview.OnItemClickListener
-import com.steven.movieapp.ui.MoviInfoActivity
+import com.steven.movieapp.ui.MovieInfoActivity
 import com.steven.movieapp.ui.Top250MovieFragment
 import com.steven.movieapp.viewmodel.MovieViewModel
 import com.steven.movieapp.widget.*
@@ -26,7 +26,10 @@ abstract class BaseRefreshFragment : BaseFragment(), OnItemClickListener<Movie>,
     LoadRefreshRecyclerView.OnLoadListener {
 
     private var adapter: MovieAdapter? = null
-    protected lateinit var movieViewModel: MovieViewModel
+    protected val movieViewModel: MovieViewModel by lazy {
+        ViewModelProviders.of(this).get(MovieViewModel::class.java)
+
+    }
     protected lateinit var mObserver: Observer<BaseResult<List<Movie>>>
 
     override fun getLayoutId() = R.layout.fragment_base_refresh
@@ -45,7 +48,7 @@ abstract class BaseRefreshFragment : BaseFragment(), OnItemClickListener<Movie>,
     }
 
     override fun initData() {
-        movieViewModel = ViewModelProviders.of(this).get(MovieViewModel::class.java)
+     //   movieViewModel = ViewModelProviders.of(this).get(MovieViewModel::class.java)
 
     }
 
@@ -71,7 +74,8 @@ abstract class BaseRefreshFragment : BaseFragment(), OnItemClickListener<Movie>,
 
 
     override fun onItemClick(position: Int, item: Movie) {
-        val intent =Intent(mContext,MoviInfoActivity::class.java)
+        val intent =Intent(mContext,MovieInfoActivity::class.java)
+        intent.putExtra("id",item.id)
         startActivity(intent)
     }
 

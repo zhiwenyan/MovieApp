@@ -3,7 +3,7 @@ package com.steven.movieapp.model
 /**
  * Description:
  * Data：2019/1/28
- * Author:Steven
+ * Actor:Steven
  */
 data class Movie(
     //评分
@@ -33,7 +33,7 @@ data class Movie(
     //影片h5链接
     val alt:String,
     //影片id
-    val id:Int
+    val id:String
 
 
 

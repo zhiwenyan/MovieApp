@@ -10,7 +10,7 @@ import android.view.View
 /**
  * Description:
  * Data：2019/2/20
- * Author:Steven
+ * Actor:Steven
  */
 class LoadRefreshRecyclerView : RefreshRecyclerView {
     private var mLoadViewCreator: LoadViewCreator? = null

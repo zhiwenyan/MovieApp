@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 /**
  * Description:
  * Data：2019/2/20
- * Author:Steven
+ * Actor:Steven
  */
 
 class WrapRecyclerAdapter(private val adapter: RecyclerView.Adapter<RecyclerView.ViewHolder>) :

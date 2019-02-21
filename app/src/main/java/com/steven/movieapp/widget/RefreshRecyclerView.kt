@@ -10,7 +10,7 @@ import android.view.View
 /**
  * Description:
  * Data：2019/2/20
- * Author:Steven
+ * Actor:Steven
  */
 open class RefreshRecyclerView : WrapRecyclerView {
     private lateinit var mRefreshCreator: RefreshViewCreator

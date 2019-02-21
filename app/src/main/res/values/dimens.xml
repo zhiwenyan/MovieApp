@@ -18,5 +18,6 @@
     <dimen name="y">8dp</dimen>
     <dimen name="yy">16dp</dimen>
     <dimen name="yyy">24dp</dimen>
+    <dimen name="yyyy">32dp</dimen>
 
 </resources>

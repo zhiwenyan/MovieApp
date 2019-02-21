@@ -10,7 +10,7 @@ import com.bumptech.glide.Glide
 /**
  * Description:
  * Data：2019/1/28
- * Author:Steven
+ * Actor:Steven
  */
 open class BaseViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 

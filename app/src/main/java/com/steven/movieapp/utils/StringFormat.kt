@@ -1,9 +1,11 @@
 package com.steven.movieapp.utils
 
+import com.steven.movieapp.model.Actor
+
 /**
  * Description:
  * Data：2019/1/30
- * Author:Steven
+ * Actor:Steven
  */
 
 class StringFormat {
@@ -53,5 +55,47 @@ class StringFormat {
                 "未知"
             }
         }
+
+        /**
+         * 格式化导演、主演名字
+         */
+        fun formatName(authors: List<Actor>?): String {
+            return if (authors != null && authors.isNotEmpty()) {
+                val stringBuilder = StringBuilder()
+                for (i in authors.indices) {
+                    if (i < authors.size - 1) {
+                        stringBuilder.append(authors[i].name).append(" / ")
+                    } else {
+                        stringBuilder.append(authors[i].name)
+                    }
+                }
+                stringBuilder.toString()
+
+            } else {
+                "佚名"
+            }
+        }
+
+        /**
+         * 格式化电影类型
+         */
+        fun formatCountry(country: List<String>): String {
+            return if (country.isNotEmpty()) {
+                val stringBuilder = StringBuilder()
+                for (i in country.indices) {
+                    if (i < country.size - 1) {
+                        stringBuilder.append(country[i]).append(" / ")
+                    } else {
+                        stringBuilder.append(country[i])
+                    }
+                }
+                stringBuilder.toString()
+
+            } else {
+                "不知名国家"
+            }
+        }
     }
+
+
 }

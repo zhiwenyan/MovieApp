@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModel
 import com.steven.movieapp.api.RetrofitClient
 import com.steven.movieapp.model.BaseResult
 import com.steven.movieapp.model.Movie
+import com.steven.movieapp.model.MovieInfo
 
 /**
  * Description:
@@ -49,4 +50,7 @@ class MovieViewModel : ViewModel() {
      */
     fun getTop250Movie(apiKey: String, start: Int, count: Int): LiveData<BaseResult<List<Movie>>> =
         RetrofitClient.serviceApi.getTop250Movie(apiKey, start, count)
+
+    fun getMovieInfo(movieId: String, apiKey: String): LiveData<MovieInfo> =
+        RetrofitClient.serviceApi.getMovieInfo(movieId, apiKey)
 }

@@ -7,7 +7,7 @@ import android.view.ViewGroup
 /**
  * Description: 下拉刷新的辅助类，为了匹配所有的效果
  * Data：2019/2/20
- * Author:Steven
+ * Actor:Steven
  */
 open abstract class LoadViewCreator {
 

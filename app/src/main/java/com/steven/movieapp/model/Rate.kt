@@ -3,7 +3,7 @@ package com.steven.movieapp.model
 /**
  * Description: 评分
  * Data：2019/1/28
- * Author:Steven
+ * Actor:Steven
  */
 data class Rate(
     //评分最大值
