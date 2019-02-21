@@ -1,42 +1,52 @@
 package com.steven.movieapp.base
 
-import androidx.core.content.ContextCompat
+import android.content.Intent
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.steven.movieapp.R
 import com.steven.movieapp.adapter.MovieAdapter
 import com.steven.movieapp.model.BaseResult
 import com.steven.movieapp.model.Movie
 import com.steven.movieapp.recyclerview.OnItemClickListener
+import com.steven.movieapp.ui.MoviInfoActivity
+import com.steven.movieapp.ui.Top250MovieFragment
 import com.steven.movieapp.viewmodel.MovieViewModel
-import com.steven.movieapp.widget.DefaultLoadViewCreator
-import com.steven.movieapp.widget.DefaultRefreshViewCreator
-import com.steven.movieapp.widget.LoopTextView
-import kotlinx.android.synthetic.main.fragment_movie.*
+import com.steven.movieapp.widget.*
+import kotlinx.android.synthetic.main.fragment_base_refresh.*
+import kotlinx.android.synthetic.main.load_view.*
 
 /**
  * Description:
  * Data：2/19/2019-3:14 PM
  * @author yanzhiwen
  */
-abstract class BaseRefreshFragment : BaseFragment(), SwipeRefreshLayout.OnRefreshListener, OnItemClickListener<Movie> {
+abstract class BaseRefreshFragment : BaseFragment(), OnItemClickListener<Movie>, RefreshRecyclerView.OnRefreshListener,
+    LoadRefreshRecyclerView.OnLoadListener {
 
-    protected var adapter: MovieAdapter? = null
-
+    private var adapter: MovieAdapter? = null
     protected lateinit var movieViewModel: MovieViewModel
-
     protected lateinit var mObserver: Observer<BaseResult<List<Movie>>>
+
     override fun getLayoutId() = R.layout.fragment_base_refresh
 
     override fun initView() {
-        swipeRefreshLayout.setColorSchemeColors(ContextCompat.getColor(mContext!!, R.color.colorAccent))
-        swipeRefreshLayout.setOnRefreshListener(this)
-        swipeRefreshLayout.isRefreshing = true
         recyclerView.layoutManager = LinearLayoutManager(mContext)
+        recyclerView.itemAnimator = DefaultItemAnimator()
         recyclerView.addRefreshViewCreator(DefaultRefreshViewCreator())
-        recyclerView.addLoadViewCreator(DefaultLoadViewCreator())
+        recyclerView.setOnRefreshListener(this)
+        recyclerView.addLoadingView(load_view)
+        recyclerView.addEmptyView(empty_view)
+        if (this is Top250MovieFragment) {
+            recyclerView.addLoadViewCreator(DefaultLoadViewCreator())
+            recyclerView.setOnLoadListener(this)
+        }
+    }
+
+    override fun initData() {
+        movieViewModel = ViewModelProviders.of(this).get(MovieViewModel::class.java)
+
     }
 
     override fun onRequestData() {
@@ -46,26 +56,32 @@ abstract class BaseRefreshFragment : BaseFragment(), SwipeRefreshLayout.OnRefres
                 recyclerView.adapter = adapter
                 adapter?.apply { setOnItemClickListener(this@BaseRefreshFragment) }
             } else {
-                adapter?.apply { notifyDataSetChanged() }
+                adapter?.apply {
+                    recyclerView.onStopRefresh()
+                    if (this@BaseRefreshFragment is Top250MovieFragment) {
+                        recyclerView.onStopLoad()
+                    }
+                    notifyDataSetChanged()
+                }
             }
-            swipeRefreshLayout.isRefreshing = false
-
             setUpLoopMovieName(it.subjects)
-
         }
 
     }
 
-    override fun initData() {
-        movieViewModel = ViewModelProviders.of(this).get(MovieViewModel::class.java)
-
-    }
 
     override fun onItemClick(position: Int, item: Movie) {
+        val intent =Intent(mContext,MoviInfoActivity::class.java)
+        startActivity(intent)
     }
+
 
     override fun onRefresh() {
         onRequestData()
+    }
+
+    override fun onLoad() {
+
     }
 
 

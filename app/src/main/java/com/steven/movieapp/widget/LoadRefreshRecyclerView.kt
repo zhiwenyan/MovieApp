@@ -13,8 +13,8 @@ import android.view.View
  * Author:Steven
  */
 class LoadRefreshRecyclerView : RefreshRecyclerView {
-    private lateinit var mLoadViewCreator: LoadViewCreator
-    private lateinit var mLoadView: View
+    private var mLoadViewCreator: LoadViewCreator? = null
+    private var mLoadView: View? = null
     private var mFingerDownY: Int = 0
     private var mLoadViewHeight: Int = 0
     private val mDragIndex: Float = 0.35f
@@ -44,13 +44,15 @@ class LoadRefreshRecyclerView : RefreshRecyclerView {
 
     fun addLoadViewCreator(loadViewCreator: LoadViewCreator) {
         this.mLoadViewCreator = loadViewCreator
-        mLoadView = mLoadViewCreator.getLoadView(context, this)
+        mLoadView = mLoadViewCreator!!.getLoadView(context, this)
     }
 
     private fun addLoadView() {
         val adapter = adapter
-        if (adapter != null) {
-            addFooterView(mLoadView)
+        if (adapter != null && mLoadViewCreator != null) {
+            if (mLoadView != null) {
+                addFooterView(mLoadView!!)
+            }
         }
 
     }
@@ -62,18 +64,16 @@ class LoadRefreshRecyclerView : RefreshRecyclerView {
             MotionEvent.ACTION_UP -> if (mCurrentDrag) {
                 restoreLoadView()
             }
-
-
         }
         return super.dispatchTouchEvent(ev)
     }
 
     private fun restoreLoadView() {
-        val currentBottomMargin = (mLoadView.layoutParams as MarginLayoutParams).bottomMargin
-        var finalBottomMargin = 0
+        val currentBottomMargin = (mLoadView!!.layoutParams as MarginLayoutParams).bottomMargin
+        val finalBottomMargin = 0
         if (mCurrentLoadStatus == LOAD_STATUS_LOOSEN_LOADING) {
             mCurrentLoadStatus = LOAD_STATUS_LOADING
-            mLoadViewCreator.onLoading()
+            mLoadViewCreator!!.onLoading()
 
             mListener?.apply {
                 onLoad()
@@ -99,12 +99,12 @@ class LoadRefreshRecyclerView : RefreshRecyclerView {
      */
     private fun setLoadViewMarginBottom(marginBottom: Int) {
         var bottomMargin = marginBottom
-        val params = mLoadView.layoutParams as MarginLayoutParams
+        val params = mLoadView!!.layoutParams as MarginLayoutParams
         if (marginBottom < 0) {
             bottomMargin = 0
         }
         params.bottomMargin = bottomMargin
-        mLoadView.layoutParams = params
+        mLoadView!!.layoutParams = params
     }
 
 
@@ -112,10 +112,10 @@ class LoadRefreshRecyclerView : RefreshRecyclerView {
     override fun onTouchEvent(e: MotionEvent): Boolean {
         when (e.action) {
             MotionEvent.ACTION_MOVE -> {
-                if (canScrollDown() || mCurrentLoadStatus == LOAD_STATUS_LOADING) {
+                if (canScrollDown() || mCurrentLoadStatus == LOAD_STATUS_LOADING || mLoadView == null || mLoadViewCreator == null) {
                     return super.onTouchEvent(e)
                 }
-                mLoadViewHeight = mLoadView.measuredHeight
+                mLoadViewHeight = mLoadView!!.measuredHeight
 
                 if (mCurrentDrag) scrollToPosition(adapter!!.itemCount - 1)
                 //不断的上滑
@@ -137,7 +137,7 @@ class LoadRefreshRecyclerView : RefreshRecyclerView {
             distanceY < mLoadViewHeight -> LOAD_STATUS_PULL_DOWN_REFRESH
             else -> LOAD_STATUS_LOOSEN_LOADING
         }
-        mLoadViewCreator.onPull(distanceY, mLoadViewHeight, mCurrentLoadStatus)
+        mLoadViewCreator!!.onPull(distanceY, mLoadViewHeight, mCurrentLoadStatus)
     }
 
     private fun canScrollDown(): Boolean {
@@ -147,7 +147,7 @@ class LoadRefreshRecyclerView : RefreshRecyclerView {
     fun onStopLoad() {
         mCurrentLoadStatus = LOAD_STATUS_NORMAL
         restoreLoadView()
-        mLoadViewCreator.onStopLoad()
+        mLoadViewCreator!!.onStopLoad()
     }
 
     fun setOnLoadListener(listener: OnLoadListener) {

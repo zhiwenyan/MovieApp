@@ -33,6 +33,7 @@ abstract class BaseFragment : Fragment() {
         } else {
             mRootView = inflater.inflate(getLayoutId(), container, false)
         }
+
         initData()
         return mRootView
     }

@@ -2,13 +2,12 @@ package com.steven.movieapp.ui
 
 
 import androidx.fragment.app.Fragment
-import com.steven.movieapp.API_KEY
-import com.steven.movieapp.base.BaseListRefreshFragment
+import com.steven.movieapp.base.BaseRefreshFragment
 
 /**
  * 口碑榜
  */
-class WeeklyMovieFragment : BaseListRefreshFragment() {
+class WeeklyMovieFragment : BaseRefreshFragment() {
 
     companion object {
         fun newInstance(): Fragment {
@@ -18,6 +17,5 @@ class WeeklyMovieFragment : BaseListRefreshFragment() {
 
     override fun onRequestData() {
         super.onRequestData()
-        movieViewModel.getMovieWeekly(API_KEY).observe(this, mListObserver)
     }
 }
