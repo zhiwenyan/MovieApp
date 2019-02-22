@@ -13,7 +13,7 @@ data class MovieInfo(
     //剧情简介
     val summary: String,
     //评论
-    val popular_comments: List<comments>,
+    val popular_comments: List<Comments>,
     val id: String,
     val title: String,
     val pubdates: List<String>,
@@ -27,7 +27,9 @@ data class MovieInfo(
     //演员
     val casts: List<Actor>,
     //导演
-    val directors: List<Actor>
+    val directors: List<Actor>,
+    //预告片
+    val trailers: List<Trailers>
 
 
 )

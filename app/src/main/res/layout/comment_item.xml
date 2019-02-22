@@ -1,38 +1,97 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-
+<androidx.constraintlayout.widget.ConstraintLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
-        android:orientation="vertical"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content"
+        android:background="@color/color_white"
+        tools:ignore="RtlHardcoded">
+
+    <ImageView
+            android:layout_marginLeft="@dimen/yy"
+            android:layout_marginTop="@dimen/xx"
+            android:src="@drawable/ic_menu_camera"
+            android:id="@+id/avatar"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            android:layout_width="24dp"
+            android:layout_height="24dp"/>
+
+    <TextView
+            android:maxLength="5"
+            app:layout_constraintTop_toTopOf="parent"
+            android:paddingTop="@dimen/yy"
+            android:paddingLeft="@dimen/x"
+            app:layout_constraintLeft_toRightOf="@+id/avatar"
+            android:textColor="@color/color_blue"
+            android:text="懒人"
+            android:id="@+id/name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
 
 
-    <LinearLayout
-            android:orientation="horizontal"
+    <TextView
+            android:paddingTop="@dimen/yy"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintLeft_toRightOf="@+id/name"
+            android:text="2019-01-01"
+            android:id="@+id/pubdates"
+            android:paddingLeft="@dimen/x"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+
+    <TextView
+            android:paddingRight="@dimen/xx"
+            android:paddingTop="@dimen/yy"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            android:text="有用"
+            android:textColor="@color/color_blue"
+            android:id="@+id/useful"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+
+    <TextView
+            android:paddingRight="@dimen/x_half"
+            android:paddingTop="@dimen/yy"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintRight_toLeftOf="@+id/useful"
+            android:text="100"
+            android:textColor="@color/color_blue"
+            android:id="@+id/useful_count"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+
+    <TextView
+            android:maxLines="3"
+            android:id="@+id/content"
+            app:layout_constraintTop_toBottomOf="@+id/name"
+            android:paddingLeft="@dimen/xx"
+            android:paddingRight="@dimen/xx"
+            android:paddingTop="@dimen/y"
+            android:textColor="@color/color_black"
+            android:ellipsize="end"
+            app:layout_constraintLeft_toLeftOf="parent"
+            android:text="我喜欢我喜欢我喜欢"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"/>
 
-        <TextView
-                android:textColor="@color/colorAccent"
-                android:text="懒人  看过"
-                android:id="@+id/name"
-                android:textSize="@dimen/font_small"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
 
-        <TextView
-                android:layout_marginLeft="@dimen/x"
-                android:text="2019-01-01"
-                android:id="@+id/pubdate"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
+    <TextView
+            android:padding="@dimen/x_half"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/content"
+            android:id="@+id/tv_show"
+            android:text="【展开】"
+            android:drawableBottom="@mipmap/ic_down"
+            android:textColor="@color/color_blue"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
 
-        <TextView
-                android:text="111"
-                android:layout_gravity="end"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
 
-    </LinearLayout>
-
-</LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -5,13 +5,13 @@ package com.steven.movieapp.model
  * Data：2/21/2019-2:24 PM
  * @author yanzhiwen
  */
-data class comments(
+data class Comments(
     val rating: Rate,
     val useful_count: Int,
-    val author: Actor,
+    val author: Author,
     val subject_id: String,
     val content: String,
-    val id: String,
-    val name: String
+    val created_at: String,
+    val id: String
 
 )

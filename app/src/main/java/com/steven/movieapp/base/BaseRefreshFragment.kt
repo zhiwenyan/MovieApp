@@ -48,7 +48,6 @@ abstract class BaseRefreshFragment : BaseFragment(), OnItemClickListener<Movie>,
     }
 
     override fun initData() {
-     //   movieViewModel = ViewModelProviders.of(this).get(MovieViewModel::class.java)
 
     }
 
@@ -63,6 +62,9 @@ abstract class BaseRefreshFragment : BaseFragment(), OnItemClickListener<Movie>,
                     recyclerView.onStopRefresh()
                     if (this@BaseRefreshFragment is Top250MovieFragment) {
                         recyclerView.onStopLoad()
+                        if (it.subjects.isNotEmpty()) {
+
+                        }
                     }
                     notifyDataSetChanged()
                 }
@@ -74,8 +76,8 @@ abstract class BaseRefreshFragment : BaseFragment(), OnItemClickListener<Movie>,
 
 
     override fun onItemClick(position: Int, item: Movie) {
-        val intent =Intent(mContext,MovieInfoActivity::class.java)
-        intent.putExtra("id",item.id)
+        val intent = Intent(mContext, MovieInfoActivity::class.java)
+        intent.putExtra("id", item.id)
         startActivity(intent)
     }
 

@@ -7,4 +7,6 @@
     <color name="color_second_text_color">#999999</color>
     <color name="color_black">#333333</color>
     <color name="color_gray">#d4d4d4</color>
+    <color name="color_blue">#475CC9</color>
+    <color name="color_line">#c4c4c4</color>
 </resources>
