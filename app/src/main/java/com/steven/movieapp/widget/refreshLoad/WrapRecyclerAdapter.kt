@@ -1,4 +1,4 @@
-package com.steven.movieapp.widget
+package com.steven.movieapp.widget.refreshLoad
 
 import android.util.SparseArray
 import android.view.View

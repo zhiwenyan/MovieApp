@@ -140,7 +140,7 @@
                         android:padding="8dp"
                         android:text="评分：10分"
                         android:textColor="@color/color_black"
-                        android:textSize="@dimen/font_big"
+                        android:textSize="@dimen/font_middle"
                         app:layout_constraintLeft_toLeftOf="parent"
                         app:layout_constraintTop_toTopOf="parent"/>
                 <RatingBar
@@ -164,11 +164,14 @@
                         android:text="剧情简介....."
                         android:padding="@dimen/x"
                         android:textColor="@color/color_black"
-                        android:textSize="@dimen/font_big"
+                        android:textSize="@dimen/font_middle"
                         app:layout_constraintTop_toBottomOf="@+id/rating_bar"/>
 
-                <TextView
-                        android:textSize="@dimen/font_middle"
+                <com.steven.movieapp.widget.CollapsibleTextView
+                        app:collapsedText="【展开】"
+                        app:expandedText="【收起】"
+                        app:collapsedLines="6"
+                        app:suffixColor="@color/color_blue"
                         android:background="@color/color_white"
                         android:textColor="@color/color_black"
                         android:id="@+id/tv_content"
@@ -189,7 +192,7 @@
                         android:text="演职员"
                         android:padding="@dimen/x"
                         android:textColor="@color/color_black"
-                        android:textSize="@dimen/font_big"
+                        android:textSize="@dimen/font_middle"
                         app:layout_constraintTop_toBottomOf="@+id/tv_content"/>
 
 
@@ -210,7 +213,7 @@
                         android:text="预告片"
                         android:padding="@dimen/x"
                         android:textColor="@color/color_black"
-                        android:textSize="@dimen/font_big"
+                        android:textSize="@dimen/font_middle"
                         app:layout_constraintTop_toBottomOf="@+id/rv_actors"/>
 
 
@@ -230,11 +233,11 @@
                         android:text="热评"
                         android:padding="@dimen/x"
                         android:textColor="@color/color_black"
-                        android:textSize="@dimen/font_big"
+                        android:textSize="@dimen/font_middle"
                         app:layout_constraintTop_toBottomOf="@+id/rv_trailers"/>
 
 
-                <com.steven.movieapp.widget.WrapRecyclerView
+                <com.steven.movieapp.widget.refreshLoad.WrapRecyclerView
                         android:id="@+id/rv_comments"
                         android:layout_width="match_parent"
                         app:layout_constraintLeft_toLeftOf="parent"
@@ -243,7 +246,7 @@
                         app:layout_constraintTop_toBottomOf="@+id/tv_comment">
 
 
-                </com.steven.movieapp.widget.WrapRecyclerView>
+                </com.steven.movieapp.widget.refreshLoad.WrapRecyclerView>
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 

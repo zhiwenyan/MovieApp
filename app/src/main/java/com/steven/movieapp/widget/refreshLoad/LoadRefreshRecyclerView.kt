@@ -1,4 +1,4 @@
-package com.steven.movieapp.widget
+package com.steven.movieapp.widget.refreshLoad
 
 import android.animation.ObjectAnimator
 import android.annotation.SuppressLint
@@ -19,16 +19,17 @@ class LoadRefreshRecyclerView : RefreshRecyclerView {
     private var mLoadViewHeight: Int = 0
     private val mDragIndex: Float = 0.35f
     private var mCurrentDrag: Boolean = false
-    private var mCurrentLoadStatus: Int = LOAD_STATUS_NORMAL
+    private var mCurrentLoadStatus: Int =
+        LOAD_STATUS_NORMAL
     private var mListener: OnLoadListener? = null
 
     companion object {
         //默认状态
         private const val LOAD_STATUS_NORMAL = 0x0011
         //上滑加载状态
-        private const val LOAD_STATUS_PULL_DOWN_REFRESH = 0x0022
+        const val LOAD_STATUS_PULL_DOWN_REFRESH = 0x0022
         //松开加载状态
-        private const val LOAD_STATUS_LOOSEN_LOADING = 0x0033
+        const val LOAD_STATUS_LOOSEN_LOADING = 0x0033
         //正在刷加载状态
         private const val LOAD_STATUS_LOADING = 0x0044
     }
@@ -72,7 +73,8 @@ class LoadRefreshRecyclerView : RefreshRecyclerView {
         val currentBottomMargin = (mLoadView!!.layoutParams as MarginLayoutParams).bottomMargin
         val finalBottomMargin = 0
         if (mCurrentLoadStatus == LOAD_STATUS_LOOSEN_LOADING) {
-            mCurrentLoadStatus = LOAD_STATUS_LOADING
+            mCurrentLoadStatus =
+                LOAD_STATUS_LOADING
             mLoadViewCreator!!.onLoading()
 
             mListener?.apply {

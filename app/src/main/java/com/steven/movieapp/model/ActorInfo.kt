@@ -13,7 +13,7 @@ data class ActorInfo(
     val works:List<Works>,
     val professions: List<String>,
     val summary: String,
-    val avatars: Avaters,
+    val avatars: Images,
     //影人图片
     val photos: List<Photo>,
     //出生日期

@@ -1,4 +1,4 @@
-package com.steven.movieapp.widget
+package com.steven.movieapp.widget.refreshLoad
 
 import android.content.Context
 import android.util.AttributeSet
@@ -120,11 +120,14 @@ open class WrapRecyclerView : RecyclerView {
      * Adapter数据改变的方法
      */
     private fun dataChanged() {
-        if (mEmptyView != null && mAdapter.itemCount == 0) {
-            // 没有数据
-            mEmptyView!!.visibility = VISIBLE
-        } else {
-            mEmptyView!!.visibility = GONE
+        if (mEmptyView != null) {
+
+            if (mAdapter.itemCount == 0) {
+                // 没有数据
+                mEmptyView!!.visibility = VISIBLE
+            } else {
+                mEmptyView!!.visibility = GONE
+            }
         }
     }
 }

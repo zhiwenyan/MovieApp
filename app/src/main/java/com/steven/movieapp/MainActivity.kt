@@ -1,11 +1,13 @@
 package com.steven.movieapp
 
+import android.content.Intent
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentPagerAdapter
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.steven.movieapp.base.BaseActivity
 import com.steven.movieapp.ui.ComingMovieFragment
+import com.steven.movieapp.ui.SearchMovieActivity
 import com.steven.movieapp.ui.TheaterMovieFragment
 import com.steven.movieapp.ui.Top250MovieFragment
 import kotlinx.android.synthetic.main.activity_main.*
@@ -48,6 +50,10 @@ class MainActivity : BaseActivity() {
         }
         viewPager.offscreenPageLimit = 2
         tab.setupWithViewPager(viewPager)
+        loop_movie_name.setOnClickListener {
+            val intent = Intent(this, SearchMovieActivity::class.java)
+            startActivity(intent)
+        }
     }
 
     override fun onRequestData() {

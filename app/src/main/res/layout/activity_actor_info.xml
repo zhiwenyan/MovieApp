@@ -131,11 +131,8 @@
                     android:layout_height="match_parent">
 
 
-                <com.steven.movieapp.widget.CollapsibleTextView
-                        app:collapsedText="【展开】"
-                        app:expandedText="【收起】"
-                        app:collapsedLines="6"
-                        app:suffixColor="@color/color_blue"
+                <TextView
+
                         app:layout_constraintLeft_toLeftOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
                         android:id="@+id/actor"
@@ -147,12 +144,15 @@
                         android:text="影人简介....."
                         android:padding="@dimen/x"
                         android:textColor="@color/color_black"
-                        android:textSize="@dimen/font_big"/>
+                        android:textSize="@dimen/font_middle"/>
 
-                <TextView
+                <com.steven.movieapp.widget.CollapsibleTextView
+                        app:collapsedText="【展开】"
+                        app:expandedText="【收起】"
+                        app:collapsedLines="6"
+                        app:suffixColor="@color/color_blue"
                         app:layout_constraintRight_toRightOf="parent"
                         app:layout_constraintLeft_toLeftOf="parent"
-                        android:textSize="@dimen/font_middle"
                         android:background="@color/color_white"
                         android:textColor="@color/color_black"
                         android:id="@+id/actor_summary"
@@ -173,7 +173,7 @@
                         android:text="影人图片"
                         android:padding="@dimen/x"
                         android:textColor="@color/color_black"
-                        android:textSize="@dimen/font_big"
+                        android:textSize="@dimen/font_middle"
                         app:layout_constraintTop_toBottomOf="@+id/actor_summary"/>
 
 
@@ -191,10 +191,10 @@
                         android:drawableLeft="@drawable/left_line"
                         android:drawablePadding="4dp"
                         android:lineSpacingExtra="2dp"
-                        android:text="最近作品"
+                        android:text="最近5部作品"
                         android:padding="@dimen/x"
                         android:textColor="@color/color_black"
-                        android:textSize="@dimen/font_big"
+                        android:textSize="@dimen/font_middle"
                         app:layout_constraintTop_toBottomOf="@+id/rv_photos"/>
 
 
@@ -203,7 +203,6 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         app:layout_constraintTop_toBottomOf="@+id/works"/>
-
 
 
             </androidx.constraintlayout.widget.ConstraintLayout>

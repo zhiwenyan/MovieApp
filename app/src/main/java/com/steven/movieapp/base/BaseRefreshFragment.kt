@@ -13,7 +13,11 @@ import com.steven.movieapp.recyclerview.OnItemClickListener
 import com.steven.movieapp.ui.MovieInfoActivity
 import com.steven.movieapp.ui.Top250MovieFragment
 import com.steven.movieapp.viewmodel.MovieViewModel
-import com.steven.movieapp.widget.*
+import com.steven.movieapp.widget.LoopTextView
+import com.steven.movieapp.widget.refreshLoad.DefaultLoadViewCreator
+import com.steven.movieapp.widget.refreshLoad.DefaultRefreshViewCreator
+import com.steven.movieapp.widget.refreshLoad.LoadRefreshRecyclerView
+import com.steven.movieapp.widget.refreshLoad.RefreshRecyclerView
 import kotlinx.android.synthetic.main.fragment_base_refresh.*
 import kotlinx.android.synthetic.main.load_view.*
 
@@ -26,6 +30,7 @@ abstract class BaseRefreshFragment : BaseFragment(), OnItemClickListener<Movie>,
     LoadRefreshRecyclerView.OnLoadListener {
 
     private var adapter: MovieAdapter? = null
+    private var movies = ArrayList<Movie>()
     protected val movieViewModel: MovieViewModel by lazy {
         ViewModelProviders.of(this).get(MovieViewModel::class.java)
 
@@ -52,18 +57,20 @@ abstract class BaseRefreshFragment : BaseFragment(), OnItemClickListener<Movie>,
     }
 
     override fun onRequestData() {
+
         mObserver = Observer {
             if (adapter == null) {
-                adapter = MovieAdapter(mContext!!, R.layout.movie_list_item, it.subjects)
+                movies = it.subjects as ArrayList<Movie>
+                adapter = MovieAdapter(mContext!!, R.layout.movie_list_item, movies)
                 recyclerView.adapter = adapter
                 adapter?.apply { setOnItemClickListener(this@BaseRefreshFragment) }
             } else {
+                recyclerView.onStopRefresh()
                 adapter?.apply {
-                    recyclerView.onStopRefresh()
                     if (this@BaseRefreshFragment is Top250MovieFragment) {
                         recyclerView.onStopLoad()
                         if (it.subjects.isNotEmpty()) {
-
+                            movies.addAll(it.subjects)
                         }
                     }
                     notifyDataSetChanged()

@@ -1,4 +1,4 @@
-package com.steven.movieapp.widget
+package com.steven.movieapp.widget.refreshLoad
 
 import android.animation.ObjectAnimator
 import android.annotation.SuppressLint
@@ -19,7 +19,8 @@ open class RefreshRecyclerView : WrapRecyclerView {
     private var mRefreshViewHeight: Int = 0
     private val mDragIndex: Float = 0.35f
     private var mCurrentDrag: Boolean = false
-    private var mCurrentRefreshStatus: Int = REFRESH_STATUS_NORMAL
+    private var mCurrentRefreshStatus: Int =
+        REFRESH_STATUS_NORMAL
     private var mListener: OnRefreshListener? = null
 
     companion object {
@@ -73,7 +74,8 @@ open class RefreshRecyclerView : WrapRecyclerView {
         var finalTopMargin = -mRefreshViewHeight + 1
         if (mCurrentRefreshStatus == REFRESH_STATUS_LOOSEN_REFRESHING) {
             finalTopMargin = 0
-            mCurrentRefreshStatus = REFRESH_STATUS_REFRESHING
+            mCurrentRefreshStatus =
+                REFRESH_STATUS_REFRESHING
             mRefreshCreator.onRefreshing()
 
             mListener?.apply {
@@ -156,7 +158,8 @@ open class RefreshRecyclerView : WrapRecyclerView {
     }
 
     fun onStopRefresh() {
-        mCurrentRefreshStatus = REFRESH_STATUS_NORMAL
+        mCurrentRefreshStatus =
+            REFRESH_STATUS_NORMAL
         restoreRefreshView()
         mRefreshCreator.onStopRefresh()
     }

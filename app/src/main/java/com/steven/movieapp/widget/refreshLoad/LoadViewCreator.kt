@@ -1,4 +1,4 @@
-package com.steven.movieapp.widget
+package com.steven.movieapp.widget.refreshLoad
 
 import android.content.Context
 import android.view.View
@@ -9,17 +9,17 @@ import android.view.ViewGroup
  * Data：2019/2/20
  * Actor:Steven
  */
- open abstract class RefreshViewCreator {
+open abstract class LoadViewCreator {
 
 
     /**
-     * 获取下拉刷新的View
+     * 获取上拉刷新的View
      *
      * @param context Context
      * @param parent recyclerView
      *
      */
-    abstract fun getRefreshView(context: Context, parent: ViewGroup): View
+    abstract fun getLoadView(context: Context, parent: ViewGroup): View
 
 
     /**
@@ -34,15 +34,15 @@ import android.view.ViewGroup
 
 
     /**
-     * 正在刷新中
+     * 正在加载
      */
-    abstract fun onRefreshing()
+    abstract fun onLoading()
 
 
     /**
-     * 停止刷新
+     * 停止加载
      */
-    abstract fun onStopRefresh()
+    abstract fun onStopLoad()
 
 
 }

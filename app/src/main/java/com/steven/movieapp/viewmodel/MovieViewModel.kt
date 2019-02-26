@@ -62,10 +62,16 @@ class MovieViewModel : ViewModel() {
         RetrofitClient.serviceApi.getComments(movieId, apiKey)
 
 
-
     /**
      * 影人
      */
     fun getCelebrity(celebrityId: String, apiKey: String): LiveData<ActorInfo> =
         RetrofitClient.serviceApi.getCelebrity(celebrityId, apiKey)
+
+    /**
+     * 影人
+     */
+    fun getMovieSearchByTag(
+        tag: String, apikey: String, start: Int, count: Int
+    ): LiveData<BaseResult<List<Movie>>> = RetrofitClient.serviceApi.getMovieSearchByTag(tag, apikey, start, count)
 }

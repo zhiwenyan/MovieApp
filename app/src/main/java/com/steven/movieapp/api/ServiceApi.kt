@@ -74,13 +74,23 @@ interface ServiceApi {
     fun getComments(@Path("movieId") movieId: String, @Query("apikey") apikey: String): LiveData<Comments>
 
 
-
     /**
      * 影人信息
      */
     @GET("celebrity/{celebrityId}")
     fun getCelebrity(@Path("celebrityId") movieId: String, @Query("apikey") apikey: String): LiveData<ActorInfo>
 
+    /**
+     * 根据标签搜索
+     */
+
+    @GET("search")
+    fun getMovieSearchByTag(
+        @Query("tag") tag: String,
+        @Query("apikey") apikey: String,
+        @Query("start") start: Int,
+        @Query("count") count: Int
+    ): LiveData<BaseResult<List<Movie>>>
 
 }
 

@@ -12,12 +12,7 @@
             android:supportsRtl="true"
             android:theme="@style/AppTheme"
             tools:ignore="AllowBackup,GoogleAppIndexingWarning">
-        <activity android:name=".ui.ActorInfoActivity">
-        </activity>
-        <activity
-                android:name=".Main2Activity"
-                android:label="@string/title_activity_main2"
-                android:theme="@style/AppTheme.NoActionBar"/>
+
         <activity
                 android:name=".MainActivity"
                 android:screenOrientation="portrait"
@@ -40,6 +35,16 @@
         </activity>
         <activity
                 android:name=".ui.CommentsActivity"
+                android:screenOrientation="portrait"
+                android:theme="@style/AppTheme.NoActionBar">
+        </activity>
+
+        <activity android:name=".ui.SearchMovieActivity"
+                  android:screenOrientation="portrait"
+                  android:theme="@style/AppTheme.NoActionBar">
+        </activity>
+        <activity
+                android:name=".ui.ActorInfoActivity"
                 android:screenOrientation="portrait"
                 android:theme="@style/AppTheme.NoActionBar">
         </activity>
