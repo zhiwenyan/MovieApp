@@ -14,8 +14,8 @@ import androidx.recyclerview.widget.RecyclerView
 open class WrapRecyclerView : RecyclerView {
 
     private lateinit var mWrapRecyclerAdapter: WrapRecyclerAdapter
-    private lateinit var mEmptyView: View
-    private lateinit var mLoadingView: View
+    private var mEmptyView: View? = null
+    private var mLoadingView: View? = null
     private lateinit var mAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>
     private val mDataObserver = object : RecyclerView.AdapterDataObserver() {
         override fun onChanged() {
@@ -85,8 +85,8 @@ open class WrapRecyclerView : RecyclerView {
         mWrapRecyclerAdapter.adjustSpanSize(this)
 
         // 加载数据页面
-        if (mLoadingView.visibility == View.VISIBLE) {
-            mLoadingView.visibility = View.GONE
+        if (mLoadingView != null && mLoadingView!!.visibility == View.VISIBLE) {
+            mLoadingView!!.visibility = View.GONE
         }
 
     }
@@ -109,7 +109,7 @@ open class WrapRecyclerView : RecyclerView {
 
     fun addLoadingView(loadView: View) {
         this.mLoadingView = loadView
-        mLoadingView.visibility = View.VISIBLE
+        mLoadingView!!.visibility = View.VISIBLE
     }
 
     fun addEmptyView(emptyView: View) {
@@ -120,11 +120,11 @@ open class WrapRecyclerView : RecyclerView {
      * Adapter数据改变的方法
      */
     private fun dataChanged() {
-        if (mAdapter.itemCount == 0) {
+        if (mEmptyView != null && mAdapter.itemCount == 0) {
             // 没有数据
-            mEmptyView.visibility = VISIBLE
+            mEmptyView!!.visibility = VISIBLE
         } else {
-            mEmptyView.visibility = GONE
+            mEmptyView!!.visibility = GONE
         }
     }
 }

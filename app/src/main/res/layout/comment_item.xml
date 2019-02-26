@@ -66,32 +66,42 @@
             android:layout_height="wrap_content"/>
 
 
-    <TextView
-            android:maxLines="3"
+    <com.steven.movieapp.widget.CollapsibleTextView
             android:id="@+id/content"
             app:layout_constraintTop_toBottomOf="@+id/name"
             android:paddingLeft="@dimen/xx"
             android:paddingRight="@dimen/xx"
             android:paddingTop="@dimen/y"
+            android:paddingBottom="@dimen/yy"
             android:textColor="@color/color_black"
-            android:ellipsize="end"
             app:layout_constraintLeft_toLeftOf="parent"
-            android:text="我喜欢我喜欢我喜欢"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
-
-
-    <TextView
-            android:padding="@dimen/x_half"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/content"
-            android:id="@+id/tv_show"
-            android:text="【展开】"
-            android:drawableBottom="@mipmap/ic_down"
-            android:textColor="@color/color_blue"
-            android:layout_width="wrap_content"
+            app:collapsedText="【展开】"
+            android:text="我喜欢我喜欢我喜欢我喜欢我喜欢我喜欢"
+            android:layout_width="match_parent"
+            app:collapsedLines="3"
+            app:expandedText="【收起】"
+            app:suffixColor="@color/color_blue"
             android:layout_height="wrap_content"/>
 
+    <!--<TextView-->
+    <!--android:paddingTop="@dimen/y_half"-->
+    <!--app:layout_constraintRight_toRightOf="parent"-->
+    <!--app:layout_constraintLeft_toLeftOf="parent"-->
+    <!--app:layout_constraintTop_toBottomOf="@+id/content"-->
+    <!--android:id="@+id/show"-->
+    <!--android:text="【展开】"-->
+    <!--android:textColor="@color/color_blue"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"/>-->
+
+    <!--<ImageView-->
+    <!--android:id="@+id/iv_down"-->
+    <!--android:src="@mipmap/ic_down"-->
+    <!--app:layout_constraintRight_toRightOf="parent"-->
+    <!--app:layout_constraintLeft_toLeftOf="parent"-->
+    <!--app:layout_constraintTop_toBottomOf="@+id/show"-->
+    <!--android:layout_width="20dp"-->
+    <!--android:layout_height="20dp"/>-->
 
 </androidx.constraintlayout.widget.ConstraintLayout>

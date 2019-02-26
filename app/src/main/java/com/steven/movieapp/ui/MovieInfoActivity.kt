@@ -2,7 +2,9 @@ package com.steven.movieapp.ui
 
 import android.content.Intent
 import android.os.Build
+import android.view.LayoutInflater
 import android.view.View
+import android.widget.TextView
 import androidx.core.app.ShareCompat
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -14,7 +16,7 @@ import com.steven.movieapp.adapter.CommentsAdapter
 import com.steven.movieapp.adapter.TrailersAdapter
 import com.steven.movieapp.base.BaseActivity
 import com.steven.movieapp.model.Actor
-import com.steven.movieapp.model.Comments
+import com.steven.movieapp.model.Comment
 import com.steven.movieapp.model.MovieInfo
 import com.steven.movieapp.model.Trailers
 import com.steven.movieapp.recyclerview.DividerItemDecoration
@@ -43,7 +45,6 @@ class MovieInfoActivity : BaseActivity(), View.OnClickListener {
     }
 
     override fun initView() {
-        load_view.visibility = View.VISIBLE
         fab.setOnClickListener(this)
     }
 
@@ -79,7 +80,7 @@ class MovieInfoActivity : BaseActivity(), View.OnClickListener {
         tv_content.text = movieInfo.summary
     }
 
-    private fun showMovieComments(popular_comments: List<Comments>) {
+    private fun showMovieComments(popular_comments: List<Comment>) {
         rv_comments.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
         rv_comments.adapter = CommentsAdapter(this, R.layout.comment_item, popular_comments)
         rv_comments.addItemDecoration(
@@ -89,6 +90,18 @@ class MovieInfoActivity : BaseActivity(), View.OnClickListener {
                 LinearLayoutManager.VERTICAL
             )
         )
+        val moreCommentsView =
+            LayoutInflater.from(this).inflate(
+                R.layout.check_more_comments,
+                findViewById(R.id.container), false
+            )
+        rv_comments.addFooterView(moreCommentsView)
+        moreCommentsView.findViewById<TextView>(R.id.comments_more).setOnClickListener {
+            val intent = Intent(this, CommentsActivity::class.java)
+            intent.putExtra("movieId", movieId)
+            startActivity(intent)
+        }
+
     }
 
     private fun showMovieTrailers(trailers: List<Trailers>) {
@@ -98,7 +111,7 @@ class MovieInfoActivity : BaseActivity(), View.OnClickListener {
         adapter.setOnItemClickListener(object : OnItemClickListener<Trailers> {
             override fun onItemClick(position: Int, item: Trailers) {
                 val intent = Intent(this@MovieInfoActivity, PlayTrailersActivity::class.java)
-                intent.putExtra("video_url",item.resource_url)
+                intent.putExtra("video_url", item.resource_url)
                 startActivity(intent)
             }
         })

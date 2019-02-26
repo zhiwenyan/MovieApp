@@ -2,6 +2,7 @@ package com.steven.movieapp.api
 
 import androidx.lifecycle.LiveData
 import com.steven.movieapp.model.BaseResult
+import com.steven.movieapp.model.Comments
 import com.steven.movieapp.model.Movie
 import com.steven.movieapp.model.MovieInfo
 import retrofit2.http.GET
@@ -67,7 +68,13 @@ interface ServiceApi {
             LiveData<BaseResult<List<Movie>>>
 
     @GET("subject/{movieId}")
-    fun getMovieInfo(@Path("movieId") movieId: String, @Query("apikey") apikey: String):LiveData<MovieInfo>
+    fun getMovieInfo(@Path("movieId") movieId: String, @Query("apikey") apikey: String): LiveData<MovieInfo>
+
+    /**
+     * 电影的短评（热评）
+     */
+    @GET("subject/{movieId}/comments")
+    fun getComments(@Path("movieId") movieId: String, @Query("apikey") apikey: String): LiveData<Comments>
 
 }
 

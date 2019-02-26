@@ -12,6 +12,7 @@
             android:supportsRtl="true"
             android:theme="@style/AppTheme"
             tools:ignore="AllowBackup,GoogleAppIndexingWarning">
+
         <activity
                 android:name=".Main2Activity"
                 android:label="@string/title_activity_main2"
@@ -31,11 +32,14 @@
                 android:screenOrientation="portrait"
                 android:theme="@style/AppTheme.NoActionBar">
         </activity>
-        <activity android:name=".ui.PlayTrailersActivity"
-                  android:screenOrientation="landscape"
+        <activity
+                android:name=".ui.PlayTrailersActivity"
+                android:screenOrientation="landscape"
+                android:theme="@style/AppTheme.NoActionBar">
+        </activity>
+        <activity android:name=".ui.CommentsActivity"
+                  android:screenOrientation="portrait"
                   android:theme="@style/AppTheme.NoActionBar">
-
-
         </activity>
     </application>
 

@@ -2,16 +2,10 @@ package com.steven.movieapp.model
 
 /**
  * Description:
- * Data：2/21/2019-2:24 PM
+ * Data：2/26/2019-10:11 AM
  * @author yanzhiwen
  */
 data class Comments(
-    val rating: Rate,
-    val useful_count: Int,
-    val author: Author,
-    val subject_id: String,
-    val content: String,
-    val created_at: String,
-    val id: String
-
+    val count: Int,
+    val comments: List<Comment>
 )
