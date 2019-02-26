@@ -3,10 +3,7 @@ package com.steven.movieapp.viewmodel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import com.steven.movieapp.api.RetrofitClient
-import com.steven.movieapp.model.BaseResult
-import com.steven.movieapp.model.Comments
-import com.steven.movieapp.model.Movie
-import com.steven.movieapp.model.MovieInfo
+import com.steven.movieapp.model.*
 
 /**
  * Description:
@@ -63,4 +60,12 @@ class MovieViewModel : ViewModel() {
      */
     fun getComments(movieId: String, apiKey: String): LiveData<Comments> =
         RetrofitClient.serviceApi.getComments(movieId, apiKey)
+
+
+
+    /**
+     * 影人
+     */
+    fun getCelebrity(celebrityId: String, apiKey: String): LiveData<ActorInfo> =
+        RetrofitClient.serviceApi.getCelebrity(celebrityId, apiKey)
 }

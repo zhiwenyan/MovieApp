@@ -58,11 +58,6 @@ class MovieInfoActivity : BaseActivity(), View.OnClickListener {
 
     }
 
-    private fun showActors(actors: List<Actor>) {
-        rv_actors.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
-        rv_actors.adapter = ActorsAdapter(this, R.layout.actor_image_item, actors)
-    }
-
 
     private fun showMovieInfo(movieInfo: MovieInfo) {
         load_view.visibility = View.GONE
@@ -79,6 +74,20 @@ class MovieInfoActivity : BaseActivity(), View.OnClickListener {
         tv_country.text = String.format("制片国家/地区：%s", StringFormat.formatCountry(movieInfo.countries))
         tv_content.text = movieInfo.summary
     }
+
+    private fun showActors(actors: List<Actor>) {
+        rv_actors.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
+        val adapter = ActorsAdapter(this, R.layout.actor_image_item, actors)
+        rv_actors.adapter = adapter
+        adapter.setOnItemClickListener(object : OnItemClickListener<Actor> {
+            override fun onItemClick(position: Int, item: Actor) {
+                val intent = Intent(this@MovieInfoActivity, ActorInfoActivity::class.java)
+                intent.putExtra("actor_id", item.id)
+                startActivity(intent)
+            }
+        })
+    }
+
 
     private fun showMovieComments(popular_comments: List<Comment>) {
         rv_comments.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
