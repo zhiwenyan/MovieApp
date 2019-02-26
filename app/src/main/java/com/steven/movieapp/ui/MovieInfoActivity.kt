@@ -1,11 +1,9 @@
 package com.steven.movieapp.ui
 
 import android.content.Intent
-import android.os.Build
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.TextView
-import androidx.core.app.ShareCompat
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
@@ -21,6 +19,7 @@ import com.steven.movieapp.model.MovieInfo
 import com.steven.movieapp.model.Trailers
 import com.steven.movieapp.recyclerview.DividerItemDecoration
 import com.steven.movieapp.recyclerview.OnItemClickListener
+import com.steven.movieapp.utils.ShareUtil
 import com.steven.movieapp.utils.StringFormat
 import kotlinx.android.synthetic.main.activity_movie_detail.*
 import kotlinx.android.synthetic.main.load_view.*
@@ -30,7 +29,7 @@ import kotlinx.android.synthetic.main.load_view.*
  * Data：2/21/2019-1:53 PM
  * @author yanzhiwen
  */
-class MovieInfoActivity : BaseActivity(), View.OnClickListener {
+class MovieInfoActivity : BaseActivity() {
 
     private lateinit var shareText: String
 
@@ -45,7 +44,9 @@ class MovieInfoActivity : BaseActivity(), View.OnClickListener {
     }
 
     override fun initView() {
-        fab.setOnClickListener(this)
+        fab.setOnClickListener {
+            ShareUtil.share(this,shareText)
+        }
     }
 
     override fun onRequestData() {
@@ -124,20 +125,5 @@ class MovieInfoActivity : BaseActivity(), View.OnClickListener {
                 startActivity(intent)
             }
         })
-    }
-
-    override fun onClick(v: View) {
-        val shareIntent = ShareCompat.IntentBuilder.from(this)
-            .setText(shareText)
-            .setType("text/plain")
-            .createChooserIntent()
-            .apply {
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                    addFlags(Intent.FLAG_ACTIVITY_NEW_DOCUMENT or Intent.FLAG_ACTIVITY_MULTIPLE_TASK)
-                } else {
-                    addFlags(Intent.FLAG_ACTIVITY_NEW_DOCUMENT)
-                }
-            }
-        startActivity(shareIntent)
     }
 }

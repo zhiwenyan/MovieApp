@@ -10,7 +10,7 @@ data class ActorInfo(
     val name_en: String,
     val gender: String,
     //最受好评的5部作品
-    val works:Works,
+    val works:List<Works>,
     val professions: List<String>,
     val summary: String,
     val avatars: Avaters,
