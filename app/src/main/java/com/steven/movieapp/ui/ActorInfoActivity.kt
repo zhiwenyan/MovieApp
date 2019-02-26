@@ -6,15 +6,17 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.steven.movieapp.API_KEY
 import com.steven.movieapp.R
 import com.steven.movieapp.adapter.ActorPhotoAdapter
+import com.steven.movieapp.adapter.ActorWorksAdapter
 import com.steven.movieapp.base.BaseActivity
 import com.steven.movieapp.model.ActorInfo
 import com.steven.movieapp.model.Photo
 import com.steven.movieapp.model.Works
+import com.steven.movieapp.utils.ShareUtil
 import kotlinx.android.synthetic.main.activity_actor_info.*
 import kotlinx.android.synthetic.main.load_view.*
 
 class ActorInfoActivity : BaseActivity() {
-
+    private lateinit var shareText: String
     private val actorId: String by lazy {
         intent.getStringExtra("actor_id")
     }
@@ -25,6 +27,9 @@ class ActorInfoActivity : BaseActivity() {
     }
 
     override fun initView() {
+        fab.setOnClickListener {
+            ShareUtil.share(this, shareText)
+        }
 
     }
 
@@ -32,7 +37,7 @@ class ActorInfoActivity : BaseActivity() {
         movieViewModel.getCelebrity(actorId, API_KEY).observe(this, Observer {
             showActorInfo(it)
             showPhotos(it.photos)
-            showActorWorks(it.works);
+            showActorWorks(it.works)
         })
     }
 
@@ -45,17 +50,19 @@ class ActorInfoActivity : BaseActivity() {
         birthday.text = String.format("出生日期：%s", actor.birthday)
         born_place.text = String.format("出生地：%s", actor.born_place)
         actor_summary.text = actor.summary
+        shareText = actor.summary
     }
 
     private fun showPhotos(photos: List<Photo>) {
-        rv_photos.layoutManager = LinearLayoutManager(this, R.layout.photo_item, false)
-        rv_photos.adapter = ActorPhotoAdapter(this, R.layout.photo_item, photos)
+        rv_photos.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
+        rv_photos.adapter = ActorPhotoAdapter(this, R.layout.photo_image_item, photos)
     }
 
     /**
      * 最近的5部作品
      */
-    private fun showActorWorks(works: Works) {
-
+    private fun showActorWorks(works: List<Works>) {
+        rv_works.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
+        rv_works.adapter = ActorWorksAdapter(this, R.layout.works_image_item, works)
     }
 }
