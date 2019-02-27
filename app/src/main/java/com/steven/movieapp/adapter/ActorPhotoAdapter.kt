@@ -3,8 +3,8 @@ package com.steven.movieapp.adapter
 import android.content.Context
 import com.steven.movieapp.R
 import com.steven.movieapp.model.Photo
-import com.steven.movieapp.recyclerview.BaseRecyclerAdapter
-import com.steven.movieapp.recyclerview.BaseViewHolder
+import com.steven.movieapp.widget.recyclerview.BaseRecyclerAdapter
+import com.steven.movieapp.widget.recyclerview.BaseViewHolder
 
 /**
  * Description:

@@ -8,7 +8,7 @@ import com.steven.movieapp.R
 import com.steven.movieapp.adapter.CommentsAdapter
 import com.steven.movieapp.base.BaseActivity
 import com.steven.movieapp.model.Comment
-import com.steven.movieapp.recyclerview.DividerItemDecoration
+import com.steven.movieapp.widget.recyclerview.DividerItemDecoration
 import kotlinx.android.synthetic.main.activity_comments.*
 import kotlinx.android.synthetic.main.load_view.*
 

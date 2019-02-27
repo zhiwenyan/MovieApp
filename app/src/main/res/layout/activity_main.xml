@@ -35,7 +35,7 @@
                 android:layout_height="wrap_content"
                 android:background="@color/color_white"
                 app:tabIndicatorColor="@color/colorAccent"
-                app:tabMode="fixed"
+                app:tabMode="scrollable"
                 app:layout_scrollFlags="scroll"
                 app:tabSelectedTextColor="@color/colorAccent"
                 app:tabTextAppearance="@style/TabLayoutTextAppearance"
@@ -55,6 +55,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|end"
+            android:visibility="gone"
             android:layout_margin="@dimen/x"
             app:layout_behavior="@string/fab_translation_behavior"
             app:srcCompat="@mipmap/ic_grid"/>

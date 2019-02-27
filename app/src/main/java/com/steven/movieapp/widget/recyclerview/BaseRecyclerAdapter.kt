@@ -1,4 +1,4 @@
-package com.steven.movieapp.recyclerview
+package com.steven.movieapp.widget.recyclerview
 
 import android.content.Context
 import android.view.LayoutInflater

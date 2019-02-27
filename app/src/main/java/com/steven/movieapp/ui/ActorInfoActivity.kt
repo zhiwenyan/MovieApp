@@ -1,6 +1,7 @@
 package com.steven.movieapp.ui
 
 import android.content.Intent
+import android.os.Parcelable
 import android.view.View
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -13,13 +14,15 @@ import com.steven.movieapp.base.BaseActivity
 import com.steven.movieapp.model.ActorInfo
 import com.steven.movieapp.model.Photo
 import com.steven.movieapp.model.Works
-import com.steven.movieapp.recyclerview.OnItemClickListener
+import com.steven.movieapp.widget.recyclerview.OnItemClickListener
 import com.steven.movieapp.utils.ShareUtil
 import kotlinx.android.synthetic.main.activity_actor_info.*
 import kotlinx.android.synthetic.main.load_view.*
+import java.util.*
 
 class ActorInfoActivity : BaseActivity() {
     private lateinit var shareText: String
+    private lateinit var name: String
     private val actorId: String by lazy {
         intent.getStringExtra("actor_id")
     }
@@ -50,6 +53,7 @@ class ActorInfoActivity : BaseActivity() {
         load_view.visibility = View.GONE
         container.visibility = View.VISIBLE
         toolbar.title = actor.name
+        this.name = actor.name
         Glide.with(this).load(actor.avatars.large).into(iv_actor)
         gender.text = String.format("性别：%s", actor.gender)
         constellation.text = String.format("星座：%s", actor.constellation)
@@ -62,7 +66,18 @@ class ActorInfoActivity : BaseActivity() {
 
     private fun showPhotos(photos: List<Photo>) {
         rv_photos.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
-        rv_photos.adapter = ActorPhotoAdapter(this, R.layout.photo_image_item, photos)
+        val adapter = ActorPhotoAdapter(this, R.layout.photo_image_item, photos)
+        rv_photos.adapter = adapter
+        adapter.setOnItemClickListener(object : OnItemClickListener<Photo> {
+            override fun onItemClick(position: Int, item: Photo) {
+                val intent = Intent(this@ActorInfoActivity, PreviewPhotoActivity::class.java)
+                intent.putExtra("position", position)
+                intent.putParcelableArrayListExtra("photos", photos as ArrayList<out Parcelable>)
+                intent.putExtra("name", this@ActorInfoActivity.name)
+                intent.putExtra("summary", this@ActorInfoActivity.shareText)
+                startActivity(intent)
+            }
+        })
     }
 
     /**

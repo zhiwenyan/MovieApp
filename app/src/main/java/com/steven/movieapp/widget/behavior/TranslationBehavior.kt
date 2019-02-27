@@ -1,4 +1,4 @@
-package com.steven.movieapp.behavior
+package com.steven.movieapp.widget.behavior
 
 import android.content.Context
 import android.util.AttributeSet
@@ -13,17 +13,34 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton
  * @author yanzhiwen
  */
 class TranslationBehavior(context: Context, attrs: AttributeSet) : FloatingActionButton.Behavior(context, attrs) {
-    override fun onStartNestedScroll(coordinatorLayout: CoordinatorLayout, child: FloatingActionButton, directTargetChild: View, target: View, axes: Int, type: Int): Boolean {
+    override fun onStartNestedScroll(
+        coordinatorLayout: CoordinatorLayout,
+        child: FloatingActionButton,
+        directTargetChild: View,
+        target: View,
+        axes: Int,
+        type: Int
+    ): Boolean {
         return axes == ViewCompat.SCROLL_AXIS_VERTICAL
     }
 
-    var isOut: Boolean = false
+    private var isOut: Boolean = false
 
-    override fun onNestedScroll(coordinatorLayout: CoordinatorLayout, child: FloatingActionButton, target: View, dxConsumed: Int, dyConsumed: Int, dxUnconsumed: Int, dyUnconsumed: Int, type: Int) {
+    override fun onNestedScroll(
+        coordinatorLayout: CoordinatorLayout,
+        child: FloatingActionButton,
+        target: View,
+        dxConsumed: Int,
+        dyConsumed: Int,
+        dxUnconsumed: Int,
+        dyUnconsumed: Int,
+        type: Int
+    ) {
         super.onNestedScroll(coordinatorLayout, child, target, dxConsumed, dyConsumed, dxUnconsumed, dyUnconsumed, type)
         if (dyConsumed > 0) {
             if (!isOut) {
-                val translationY = (child.layoutParams as CoordinatorLayout.LayoutParams).bottomMargin + child.measuredHeight
+                val translationY =
+                    (child.layoutParams as CoordinatorLayout.LayoutParams).bottomMargin + child.measuredHeight
                 child.animate().translationY(translationY.toFloat()).setDuration(500).start()
                 isOut = true
             }

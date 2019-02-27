@@ -3,23 +3,11 @@ package com.steven.movieapp
 import android.content.Intent
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentPagerAdapter
-import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.steven.movieapp.base.BaseActivity
-import com.steven.movieapp.ui.ComingMovieFragment
-import com.steven.movieapp.ui.SearchMovieActivity
-import com.steven.movieapp.ui.TheaterMovieFragment
-import com.steven.movieapp.ui.Top250MovieFragment
+import com.steven.movieapp.ui.*
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : BaseActivity() {
-
-    private var linearLayoutManager: LinearLayoutManager =
-        LinearLayoutManager(this)
-
-
-    private var gridLayoutManager: GridLayoutManager =
-        GridLayoutManager(this, 2)
 
 
     override fun getLayoutId(): Int = R.layout.activity_main
@@ -31,12 +19,11 @@ class MainActivity : BaseActivity() {
         val movies = resources.getStringArray(R.array.tab_movies)
         val fragments = ArrayList<Fragment>()
 
-
         fragments.add(TheaterMovieFragment.newInstance())
         fragments.add(ComingMovieFragment.newInstance())
-//            fragments.add(WeeklyMovieFragment.newInstance())
-        //  fragments.add(UsMovieFragment.newInstance())
-        //  fragments.add(NewMoviesFragment.newInstance())
+        fragments.add(WeeklyMovieFragment.newInstance())
+        fragments.add(UsMovieFragment.newInstance())
+        fragments.add(NewMoviesFragment.newInstance())
         fragments.add(Top250MovieFragment.newInstance())
 
         viewPager.adapter = object : FragmentPagerAdapter(supportFragmentManager) {
@@ -48,16 +35,12 @@ class MainActivity : BaseActivity() {
 
             override fun getCount(): Int = movies.size
         }
-        viewPager.offscreenPageLimit = 2
+        viewPager.offscreenPageLimit = fragments.size
         tab.setupWithViewPager(viewPager)
         loop_movie_name.setOnClickListener {
             val intent = Intent(this, SearchMovieActivity::class.java)
             startActivity(intent)
         }
-    }
-
-    override fun onRequestData() {
-
     }
 
 }

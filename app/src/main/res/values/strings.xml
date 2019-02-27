@@ -1,27 +1,18 @@
 <resources>
     <string name="app_name">MovieApp</string>
-    <string name="title_activity_main2">Main2Activity</string>
-    <string name="navigation_drawer_open">Open navigation drawer</string>
-    <string name="navigation_drawer_close">Close navigation drawer</string>
-    <string name="nav_header_title">Android Studio</string>
-    <string name="nav_header_subtitle">android.studio@android.com</string>
-    <string name="nav_header_desc">Navigation header</string>
-    <string name="action_settings">Settings</string>
+
 
 
     <string-array name="tab_movies">
         <item>正在热映</item>
         <item>即将上映</item>
-        <!--<item>口碑榜</item>-->
-        <!--<item>北美票房榜</item>-->
-        <!--<item>新片榜</item>-->
+        <item>口碑榜</item>
+        <item>北美票房榜</item>
+        <item>新片榜</item>
         <item>Top250</item>
     </string-array>
 
 
-    <string name="fab_translation_behavior">com.steven.movieapp.behavior.TranslationBehavior</string>
+    <string name="fab_translation_behavior">com.steven.movieapp.widget.behavior.TranslationBehavior</string>
 
-    <string name="appbarLayout_behavior">com.steven.movieapp.widget.AppBarLayoutBehavior</string>
-
-    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

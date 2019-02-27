@@ -29,7 +29,9 @@ data class MovieInfo(
     //导演
     val directors: List<Actor>,
     //预告片
-    val trailers: List<Trailers>
+    val trailers: List<Trailers>,
+    //预告片
+    val bloopers: List<Bloopers>
 
 
 )

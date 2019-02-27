@@ -12,7 +12,7 @@ import com.steven.movieapp.R
 import com.steven.movieapp.adapter.MovieAdapter
 import com.steven.movieapp.base.BaseActivity
 import com.steven.movieapp.model.Movie
-import com.steven.movieapp.recyclerview.OnItemClickListener
+import com.steven.movieapp.widget.recyclerview.OnItemClickListener
 import com.steven.movieapp.widget.refreshLoad.DefaultLoadViewCreator
 import com.steven.movieapp.widget.refreshLoad.DefaultRefreshViewCreator
 import com.steven.movieapp.widget.refreshLoad.LoadRefreshRecyclerView
@@ -53,9 +53,6 @@ class SearchMovieActivity : BaseActivity(), RefreshRecyclerView.OnRefreshListene
         rv_movies.setOnLoadListener(this)
     }
 
-    override fun onRequestData() {
-    }
-
     private fun searchByName(name: String) {
         this.name = name
         load_view.visibility = View.VISIBLE
@@ -75,7 +72,6 @@ class SearchMovieActivity : BaseActivity(), RefreshRecyclerView.OnRefreshListene
         if (load_view.visibility == View.VISIBLE) {
             load_view.visibility = View.GONE
         }
-        println("adapter$adapter")
         if (adapter == null) {
             adapter = MovieAdapter(this, R.layout.movie_list_item, this.movies)
             rv_movies.adapter = adapter

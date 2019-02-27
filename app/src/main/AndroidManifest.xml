@@ -15,6 +15,7 @@
 
         <activity
                 android:name=".MainActivity"
+                android:launchMode="singleTask"
                 android:screenOrientation="portrait"
                 android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
@@ -29,7 +30,7 @@
                 android:theme="@style/AppTheme.NoActionBar">
         </activity>
         <activity
-                android:name=".ui.PlayTrailersActivity"
+                android:name=".ui.PlayVideoActivity"
                 android:screenOrientation="landscape"
                 android:theme="@style/AppTheme.NoActionBar">
         </activity>
@@ -38,15 +39,20 @@
                 android:screenOrientation="portrait"
                 android:theme="@style/AppTheme.NoActionBar">
         </activity>
-
-        <activity android:name=".ui.SearchMovieActivity"
-                  android:screenOrientation="portrait"
-                  android:theme="@style/AppTheme.NoActionBar">
+        <activity
+                android:name=".ui.SearchMovieActivity"
+                android:screenOrientation="portrait"
+                android:theme="@style/AppTheme.NoActionBar">
         </activity>
         <activity
                 android:name=".ui.ActorInfoActivity"
                 android:screenOrientation="portrait"
                 android:theme="@style/AppTheme.NoActionBar">
+        </activity>
+
+        <activity android:name=".ui.PreviewPhotoActivity"
+                  android:screenOrientation="portrait"
+                  android:theme="@style/AppTheme.NoActionBar">
         </activity>
     </application>
 

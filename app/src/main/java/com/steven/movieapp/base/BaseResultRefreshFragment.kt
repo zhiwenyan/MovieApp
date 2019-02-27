@@ -9,7 +9,7 @@ import com.steven.movieapp.R
 import com.steven.movieapp.adapter.MovieAdapter
 import com.steven.movieapp.model.BaseResult
 import com.steven.movieapp.model.Movie
-import com.steven.movieapp.recyclerview.OnItemClickListener
+import com.steven.movieapp.widget.recyclerview.OnItemClickListener
 import com.steven.movieapp.ui.MovieInfoActivity
 import com.steven.movieapp.ui.Top250MovieFragment
 import com.steven.movieapp.viewmodel.MovieViewModel
@@ -26,7 +26,7 @@ import kotlinx.android.synthetic.main.load_view.*
  * Data：2/19/2019-3:14 PM
  * @author yanzhiwen
  */
-abstract class BaseRefreshFragment : BaseFragment(), OnItemClickListener<Movie>, RefreshRecyclerView.OnRefreshListener,
+abstract class BaseResultRefreshFragment : BaseFragment(), OnItemClickListener<Movie>, RefreshRecyclerView.OnRefreshListener,
     LoadRefreshRecyclerView.OnLoadListener {
 
     private var adapter: MovieAdapter? = null
@@ -35,7 +35,7 @@ abstract class BaseRefreshFragment : BaseFragment(), OnItemClickListener<Movie>,
         ViewModelProviders.of(this).get(MovieViewModel::class.java)
 
     }
-    protected lateinit var mObserver: Observer<BaseResult<List<Movie>>>
+    protected lateinit var mBaseResultObserver: Observer<BaseResult<List<Movie>>>
 
     override fun getLayoutId() = R.layout.fragment_base_refresh
 
@@ -57,17 +57,16 @@ abstract class BaseRefreshFragment : BaseFragment(), OnItemClickListener<Movie>,
     }
 
     override fun onRequestData() {
-
-        mObserver = Observer {
+        mBaseResultObserver = Observer {
             if (adapter == null) {
                 movies = it.subjects as ArrayList<Movie>
                 adapter = MovieAdapter(mContext!!, R.layout.movie_list_item, movies)
                 recyclerView.adapter = adapter
-                adapter?.apply { setOnItemClickListener(this@BaseRefreshFragment) }
+                adapter?.apply { setOnItemClickListener(this@BaseResultRefreshFragment) }
             } else {
                 recyclerView.onStopRefresh()
                 adapter?.apply {
-                    if (this@BaseRefreshFragment is Top250MovieFragment) {
+                    if (this@BaseResultRefreshFragment is Top250MovieFragment) {
                         recyclerView.onStopLoad()
                         if (it.subjects.isNotEmpty()) {
                             movies.addAll(it.subjects)

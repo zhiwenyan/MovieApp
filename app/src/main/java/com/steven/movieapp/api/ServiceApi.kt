@@ -37,7 +37,7 @@ interface ServiceApi {
      * 请求实例 https://api.douban.com/v2/movie/weekly?apikey=0b2bdeda43b5688921839c8ecb20399b
      */
     @GET("weekly")
-    fun getMovieWeekly(@Query("apikey") apiKey: String): LiveData<List<Movie>>
+    fun getMovieWeekly(@Query("apikey") apiKey: String): LiveData<BaseSubjects<Weekly>>
 
     /**
      *
@@ -45,7 +45,7 @@ interface ServiceApi {
      * 请求实例 https://api.douban.com/v2/movie/us_box?apikey=0b2bdeda43b5688921839c8ecb20399b
      */
     @GET("us_box")
-    fun getMovieUsBox(@Query("apikey") apiKey: String): LiveData<BaseResult<List<Movie>>>
+    fun getMovieUsBox(@Query("apikey") apiKey: String): LiveData<BaseSubjects<Weekly>>
 
 
     /**

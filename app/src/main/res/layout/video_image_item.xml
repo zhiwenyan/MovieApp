@@ -29,10 +29,11 @@
 
 
     <TextView
+            android:ellipsize="end"
+            android:maxLines="2"
             android:textColor="@color/color_black"
             android:text="中文预告片中文预告片"
             android:maxWidth="100dp"
-            android:lineSpacingExtra="2dp"
             android:gravity="center_horizontal"
             android:paddingTop="@dimen/y_half"
             android:paddingBottom="@dimen/y_half"

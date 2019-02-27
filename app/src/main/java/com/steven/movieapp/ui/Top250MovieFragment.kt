@@ -3,12 +3,12 @@ package com.steven.movieapp.ui
 
 import androidx.fragment.app.Fragment
 import com.steven.movieapp.API_KEY
-import com.steven.movieapp.base.BaseRefreshFragment
+import com.steven.movieapp.base.BaseResultRefreshFragment
 
 /**
  * 口碑榜
  */
-class Top250MovieFragment : BaseRefreshFragment() {
+class Top250MovieFragment : BaseResultRefreshFragment() {
     private var start: Int = 0
     private var count: Int = 10
 
@@ -20,12 +20,12 @@ class Top250MovieFragment : BaseRefreshFragment() {
 
     override fun onRequestData() {
         super.onRequestData()
-        movieViewModel.getTop250Movie(API_KEY, start, count).observe(this, mObserver)
+        movieViewModel.getTop250Movie(API_KEY, start, count).observe(this, mBaseResultObserver)
     }
 
     override fun onLoad() {
         super.onLoad()
         start += 10
-        movieViewModel.getTop250Movie(API_KEY, start, count).observe(this, mObserver)
+        movieViewModel.getTop250Movie(API_KEY, start, count).observe(this, mBaseResultObserver)
     }
 }

@@ -3,12 +3,12 @@ package com.steven.movieapp.ui
 
 import androidx.fragment.app.Fragment
 import com.steven.movieapp.API_KEY
-import com.steven.movieapp.base.BaseRefreshFragment
+import com.steven.movieapp.base.BaseResultRefreshFragment
 
 /**
  * 院线正在热映
  */
-class TheaterMovieFragment : BaseRefreshFragment() {
+class TheaterMovieFragment : BaseResultRefreshFragment() {
 
     companion object {
         fun newInstance(): Fragment {
@@ -18,6 +18,6 @@ class TheaterMovieFragment : BaseRefreshFragment() {
 
     override fun onRequestData() {
         super.onRequestData()
-        movieViewModel.getInTheaters(API_KEY).observe(this, mObserver)
+        movieViewModel.getInTheaters(API_KEY).observe(this, mBaseResultObserver)
     }
 }

@@ -28,13 +28,13 @@ class MovieViewModel : ViewModel() {
     /**
      * 口碑榜
      */
-    fun getMovieWeekly(apiKey: String): LiveData<List<Movie>> =
+    fun getMovieWeekly(apiKey: String): LiveData<BaseSubjects<Weekly>> =
         RetrofitClient.serviceApi.getMovieWeekly(apiKey)
 
     /**
      * 北美票房榜
      */
-    fun getMovieUsBox(apiKey: String): LiveData<BaseResult<List<Movie>>> =
+    fun getMovieUsBox(apiKey: String): LiveData<BaseSubjects<Weekly>> =
         RetrofitClient.serviceApi.getMovieUsBox(apiKey)
 
     /**
@@ -69,7 +69,7 @@ class MovieViewModel : ViewModel() {
         RetrofitClient.serviceApi.getCelebrity(celebrityId, apiKey)
 
     /**
-     * 影人
+     * 搜索影片
      */
     fun getMovieSearchByTag(
         tag: String, apikey: String, start: Int, count: Int

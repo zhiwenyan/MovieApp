@@ -10,15 +10,13 @@ import com.bumptech.glide.Glide
 import com.steven.movieapp.API_KEY
 import com.steven.movieapp.R
 import com.steven.movieapp.adapter.ActorsAdapter
+import com.steven.movieapp.adapter.BloopersAdapter
 import com.steven.movieapp.adapter.CommentsAdapter
 import com.steven.movieapp.adapter.TrailersAdapter
 import com.steven.movieapp.base.BaseActivity
-import com.steven.movieapp.model.Actor
-import com.steven.movieapp.model.Comment
-import com.steven.movieapp.model.MovieInfo
-import com.steven.movieapp.model.Trailers
-import com.steven.movieapp.recyclerview.DividerItemDecoration
-import com.steven.movieapp.recyclerview.OnItemClickListener
+import com.steven.movieapp.model.*
+import com.steven.movieapp.widget.recyclerview.DividerItemDecoration
+import com.steven.movieapp.widget.recyclerview.OnItemClickListener
 import com.steven.movieapp.utils.ShareUtil
 import com.steven.movieapp.utils.StringFormat
 import kotlinx.android.synthetic.main.activity_movie_detail.*
@@ -45,7 +43,7 @@ class MovieInfoActivity : BaseActivity() {
 
     override fun initView() {
         fab.setOnClickListener {
-            ShareUtil.share(this,shareText)
+            ShareUtil.share(this, shareText)
         }
     }
 
@@ -53,8 +51,9 @@ class MovieInfoActivity : BaseActivity() {
         movieViewModel.getMovieInfo(movieId, API_KEY).observe(this, Observer {
             showMovieInfo(it)
             showActors(it.casts)
-            showMovieComments(it.popular_comments)
             showMovieTrailers(it.trailers)
+            showBloopers(it.bloopers)
+            showMovieComments(it.popular_comments)
         })
 
     }
@@ -89,6 +88,34 @@ class MovieInfoActivity : BaseActivity() {
         })
     }
 
+    private fun showBloopers(bloopers: List<Bloopers>) {
+        rv_bloopers.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
+        val adapter = BloopersAdapter(this, R.layout.video_image_item, bloopers)
+        rv_bloopers.adapter = adapter
+        adapter.setOnItemClickListener(object : OnItemClickListener<Bloopers> {
+            override fun onItemClick(position: Int, item: Bloopers) {
+                val intent = Intent(this@MovieInfoActivity, PlayVideoActivity::class.java)
+                intent.putExtra("video_url", item.resource_url)
+                intent.putExtra("title", item.title)
+                startActivity(intent)
+            }
+        })
+    }
+
+    private fun showMovieTrailers(trailers: List<Trailers>) {
+        rv_trailers.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
+        val adapter = TrailersAdapter(this, R.layout.video_image_item, trailers)
+        rv_trailers.adapter = adapter
+        adapter.setOnItemClickListener(object : OnItemClickListener<Trailers> {
+            override fun onItemClick(position: Int, item: Trailers) {
+                val intent = Intent(this@MovieInfoActivity, PlayVideoActivity::class.java)
+                intent.putExtra("video_url", item.resource_url)
+                intent.putExtra("title", item.title)
+
+                startActivity(intent)
+            }
+        })
+    }
 
     private fun showMovieComments(popular_comments: List<Comment>) {
         rv_comments.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
@@ -112,18 +139,5 @@ class MovieInfoActivity : BaseActivity() {
             startActivity(intent)
         }
 
-    }
-
-    private fun showMovieTrailers(trailers: List<Trailers>) {
-        rv_trailers.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
-        val adapter = TrailersAdapter(this, R.layout.trailers_image_item, trailers)
-        rv_trailers.adapter = adapter
-        adapter.setOnItemClickListener(object : OnItemClickListener<Trailers> {
-            override fun onItemClick(position: Int, item: Trailers) {
-                val intent = Intent(this@MovieInfoActivity, PlayTrailersActivity::class.java)
-                intent.putExtra("video_url", item.resource_url)
-                startActivity(intent)
-            }
-        })
     }
 }

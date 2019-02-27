@@ -62,7 +62,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="16dp"
                             android:layout_marginTop="16dp"
-                            android:padding="2dp"
+                            android:paddingTop="2dp"
                             android:text="性别：男"
                             android:textColor="@color/color_white"
                             app:layout_constraintLeft_toRightOf="@+id/iv_actor"
@@ -73,7 +73,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="16dp"
-                            android:padding="2dp"
+                            android:paddingTop="2dp"
                             android:text="星座：处女座"
                             android:textColor="@color/color_white"
                             app:layout_constraintLeft_toRightOf="@+id/iv_actor"
@@ -84,7 +84,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="16dp"
-                            android:padding="2dp"
+                            android:paddingTop="2dp"
                             android:text="出生日期：1981-01-01"
                             android:textColor="@color/color_white"
                             app:layout_constraintLeft_toRightOf="@+id/iv_actor"
@@ -95,7 +95,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="16dp"
-                            android:padding="2dp"
+                            android:paddingTop="2dp"
                             android:text="出身地：美国"
                             android:textColor="@color/color_white"
                             app:layout_constraintLeft_toRightOf="@+id/iv_actor"
@@ -107,7 +107,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="16dp"
-                            android:padding="2dp"
+                            android:paddingTop="2dp"
                             android:text="职业：演员"
                             android:textColor="@color/color_white"
                             app:layout_constraintLeft_toRightOf="@+id/iv_actor"
@@ -179,6 +179,8 @@
 
                 <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/rv_photos"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintRight_toRightOf="parent"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         app:layout_constraintTop_toBottomOf="@+id/tv_photos"/>
@@ -191,7 +193,7 @@
                         android:drawableLeft="@drawable/left_line"
                         android:drawablePadding="4dp"
                         android:lineSpacingExtra="2dp"
-                        android:text="最近5部作品"
+                        android:text="最近作品"
                         android:padding="@dimen/x"
                         android:textColor="@color/color_black"
                         android:textSize="@dimen/font_middle"
@@ -200,6 +202,8 @@
 
                 <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/rv_works"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintRight_toRightOf="parent"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         app:layout_constraintTop_toBottomOf="@+id/works"/>
