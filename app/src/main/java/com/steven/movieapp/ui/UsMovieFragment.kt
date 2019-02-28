@@ -2,7 +2,6 @@ package com.steven.movieapp.ui
 
 
 import androidx.fragment.app.Fragment
-import com.steven.movieapp.API_KEY
 import com.steven.movieapp.base.BaseSubjectsRefreshFragment
 
 /**
@@ -18,6 +17,6 @@ class UsMovieFragment : BaseSubjectsRefreshFragment() {
 
     override fun onRequestData() {
         super.onRequestData()
-        movieViewModel.getMovieUsBox(API_KEY).observe(this, mBaseSubjectsObserver)
+        movieViewModel.getMovieUsBox().observe(this, mBaseSubjectsObserver)
     }
 }

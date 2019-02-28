@@ -1,45 +1,46 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:orientation="vertical"
-              android:paddingLeft="@dimen/x"
-              android:background="@color/color_white"
-              android:layout_width="wrap_content"
-              android:layout_height="wrap_content">
+    android:orientation="vertical"
+    android:paddingLeft="@dimen/x"
+    android:background="@color/color_white"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
 
-    <RelativeLayout android:layout_width="160dp"
-                    android:layout_height="wrap_content">
+    <RelativeLayout
+        android:layout_width="160dp"
+        android:layout_height="wrap_content">
 
-
-        <ImageView
-                android:layout_marginTop="@dimen/y_half"
-                android:src="@mipmap/ic_movie_default"
-                android:id="@+id/iv_trailers"
-                android:layout_width="160dp"
-                android:scaleType="centerCrop"
-                android:layout_gravity="center_horizontal"
-                android:layout_height="100dp"/>
 
         <ImageView
-                android:layout_centerInParent="true"
-                android:src="@mipmap/ic_play"
-                android:layout_width="36dp"
-                android:layout_height="36dp"/>
+            android:layout_marginTop="@dimen/y_half"
+            android:src="@mipmap/ic_movie_default"
+            android:id="@+id/iv_trailers"
+            android:layout_width="160dp"
+            android:scaleType="centerCrop"
+            android:layout_gravity="center_horizontal"
+            android:layout_height="100dp" />
+
+        <ImageView
+            android:layout_centerInParent="true"
+            android:src="@mipmap/ic_default_play"
+            android:layout_width="36dp"
+            android:layout_height="36dp" />
 
     </RelativeLayout>
 
 
     <TextView
-            android:ellipsize="end"
-            android:maxLines="2"
-            android:textColor="@color/color_black"
-            android:text="中文预告片中文预告片"
-            android:maxWidth="100dp"
-            android:gravity="center_horizontal"
-            android:paddingTop="@dimen/y_half"
-            android:paddingBottom="@dimen/y_half"
-            android:layout_gravity="center_horizontal"
-            android:id="@+id/title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+        android:ellipsize="end"
+        android:maxLines="2"
+        android:textColor="@color/color_black"
+        android:text="中文预告片中文预告片"
+        android:maxWidth="100dp"
+        android:gravity="center_horizontal"
+        android:paddingTop="@dimen/y_half"
+        android:paddingBottom="@dimen/y_half"
+        android:layout_gravity="center_horizontal"
+        android:id="@+id/title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
 
 </LinearLayout>

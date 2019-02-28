@@ -86,10 +86,10 @@ interface ServiceApi {
 
     @GET("search")
     fun getMovieSearchByTag(
-        @Query("tag") tag: String,
-        @Query("apikey") apikey: String,
-        @Query("start") start: Int,
-        @Query("count") count: Int
+            @Query("tag") tag: String,
+            @Query("apikey") apikey: String,
+            @Query("start") start: Int,
+            @Query("count") count: Int
     ): LiveData<BaseResult<List<Movie>>>
 
 }

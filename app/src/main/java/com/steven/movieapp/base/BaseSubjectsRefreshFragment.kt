@@ -11,6 +11,7 @@ import com.steven.movieapp.model.BaseSubjects
 import com.steven.movieapp.model.Weekly
 import com.steven.movieapp.ui.MovieInfoActivity
 import com.steven.movieapp.viewmodel.MovieViewModel
+import com.steven.movieapp.viewmodel.MovieViewModelFactory
 import com.steven.movieapp.widget.LoopTextView
 import com.steven.movieapp.widget.recyclerview.OnItemClickListener
 import com.steven.movieapp.widget.refreshLoad.DefaultRefreshViewCreator
@@ -24,11 +25,11 @@ import kotlinx.android.synthetic.main.load_view.*
  * @author yanzhiwen
  */
 abstract class BaseSubjectsRefreshFragment : BaseFragment(), OnItemClickListener<Weekly>,
-    RefreshRecyclerView.OnRefreshListener {
+        RefreshRecyclerView.OnRefreshListener {
 
     private var adapter: WeeklyAdapter? = null
     protected val movieViewModel: MovieViewModel by lazy {
-        ViewModelProviders.of(this).get(MovieViewModel::class.java)
+        ViewModelProviders.of(this, MovieViewModelFactory()).get(MovieViewModel::class.java)
 
     }
     protected lateinit var mBaseSubjectsObserver: Observer<BaseSubjects<Weekly>>
@@ -65,7 +66,7 @@ abstract class BaseSubjectsRefreshFragment : BaseFragment(), OnItemClickListener
 
     override fun onItemClick(position: Int, item: Weekly) {
         val intent = Intent(mContext, MovieInfoActivity::class.java)
-        intent.putExtra("id", item.subject.id)
+        intent.putExtra("movie_id", item.subject.id)
         startActivity(intent)
     }
 

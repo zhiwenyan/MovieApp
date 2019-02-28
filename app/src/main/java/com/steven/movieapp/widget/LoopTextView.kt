@@ -74,8 +74,8 @@ class LoopTextView : FrameLayout {
 
     private fun newAnimation(fromYValue: Float, fromToValue: Float): Animation {
         val animation = TranslateAnimation(
-            Animation.RELATIVE_TO_SELF, 0f, Animation.RELATIVE_TO_SELF, 0f,
-            Animation.RELATIVE_TO_SELF, fromYValue, Animation.RELATIVE_TO_SELF, fromToValue
+                Animation.RELATIVE_TO_SELF, 0f, Animation.RELATIVE_TO_SELF, 0f,
+                Animation.RELATIVE_TO_SELF, fromYValue, Animation.RELATIVE_TO_SELF, fromToValue
         )
         animation.duration = 888
         animation.startOffset = 3600
@@ -87,7 +87,7 @@ class LoopTextView : FrameLayout {
     private fun newTextView(): TextView {
         val textView = TextView(context)
         val layoutParams = FrameLayout.LayoutParams(
-            FrameLayout.LayoutParams.MATCH_PARENT, FrameLayout.LayoutParams.MATCH_PARENT, Gravity.CENTER_VERTICAL
+                FrameLayout.LayoutParams.MATCH_PARENT, FrameLayout.LayoutParams.MATCH_PARENT, Gravity.CENTER_VERTICAL
         )
         textView.layoutParams = layoutParams
         textView.ellipsize = TextUtils.TruncateAt.END

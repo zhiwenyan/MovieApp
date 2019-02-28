@@ -7,7 +7,6 @@ import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.steven.movieapp.API_KEY
 import com.steven.movieapp.R
 import com.steven.movieapp.adapter.MovieAdapter
 import com.steven.movieapp.base.BaseActivity
@@ -21,19 +20,28 @@ import kotlinx.android.synthetic.main.activity_search_movie.*
 import kotlinx.android.synthetic.main.load_view.*
 
 class SearchMovieActivity : BaseActivity(), RefreshRecyclerView.OnRefreshListener,
-    LoadRefreshRecyclerView.OnLoadListener {
+        LoadRefreshRecyclerView.OnLoadListener {
 
 
-    override fun getLayoutId(): Int = R.layout.activity_search_movie
     private var adapter: MovieAdapter? = null
     private var movies = ArrayList<Movie>()
     private var start: Int = 0
     private lateinit var name: String
+
+    override fun getLayoutId(): Int = R.layout.activity_search_movie
+
     override fun initData() {
     }
 
     override fun initView() {
         load_view.visibility = View.GONE
+        rv_movies.layoutManager = LinearLayoutManager(this)
+        rv_movies.itemAnimator = DefaultItemAnimator()
+        rv_movies.addRefreshViewCreator(DefaultRefreshViewCreator())
+        rv_movies.addLoadViewCreator(DefaultLoadViewCreator())
+        rv_movies.setOnRefreshListener(this)
+        rv_movies.setOnLoadListener(this)
+
         iv_back.setOnClickListener {
             finish()
         }
@@ -44,13 +52,6 @@ class SearchMovieActivity : BaseActivity(), RefreshRecyclerView.OnRefreshListene
                 searchByName(search_name.text.toString())
             }
         }
-
-        rv_movies.layoutManager = LinearLayoutManager(this)
-        rv_movies.itemAnimator = DefaultItemAnimator()
-        rv_movies.addRefreshViewCreator(DefaultRefreshViewCreator())
-        rv_movies.addLoadViewCreator(DefaultLoadViewCreator())
-        rv_movies.setOnRefreshListener(this)
-        rv_movies.setOnLoadListener(this)
     }
 
     private fun searchByName(name: String) {
@@ -62,7 +63,7 @@ class SearchMovieActivity : BaseActivity(), RefreshRecyclerView.OnRefreshListene
             this.movies.clear()
             adapter = null
         }
-        movieViewModel.getMovieSearchByTag(name, API_KEY, 0, 10).observe(this, Observer {
+        movieViewModel.getMovieSearchByTag(name, 0, 10).observe(this, Observer {
             this.movies = it.subjects as ArrayList<Movie>
             showMovie()
         })
@@ -83,13 +84,12 @@ class SearchMovieActivity : BaseActivity(), RefreshRecyclerView.OnRefreshListene
         adapter?.setOnItemClickListener(object : OnItemClickListener<Movie> {
             override fun onItemClick(position: Int, item: Movie) {
                 val intent = Intent(this@SearchMovieActivity, MovieInfoActivity::class.java)
-                intent.putExtra("id", item.id)
+                intent.putExtra("movie_id", item.id)
                 startActivity(intent)
             }
         })
 
     }
-
 
     override fun onRefresh() {
         showMovie()
@@ -97,7 +97,7 @@ class SearchMovieActivity : BaseActivity(), RefreshRecyclerView.OnRefreshListene
 
     override fun onLoad() {
         start += 10
-        movieViewModel.getMovieSearchByTag(name, API_KEY, start, 10).observe(this, Observer {
+        movieViewModel.getMovieSearchByTag(name, start, 10).observe(this, Observer {
             this.movies.addAll(it.subjects)
             showMovie()
         })

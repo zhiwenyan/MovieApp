@@ -6,14 +6,15 @@ import androidx.core.content.ContextCompat
 import androidx.viewpager.widget.PagerAdapter
 import androidx.viewpager.widget.ViewPager
 import com.bumptech.glide.Glide
+import com.steven.movieapp.R
 import com.steven.movieapp.base.BaseActivity
 import com.steven.movieapp.model.Photo
 import com.steven.movieapp.utils.StatusBarUtil
 import com.wingsofts.dragphotoview.DragPhotoView
-import kotlinx.android.synthetic.main.activity_preview_photo.*
+import kotlinx.android.synthetic.main.activity_preview_photos.*
 
 
-class PreviewPhotoActivity : BaseActivity(), DragPhotoView.OnExitListener {
+class PreviewPhotosActivity : BaseActivity(), DragPhotoView.OnExitListener {
 
 
     private val position: Int by lazy {
@@ -31,7 +32,7 @@ class PreviewPhotoActivity : BaseActivity(), DragPhotoView.OnExitListener {
 
     }
 
-    override fun getLayoutId() = com.steven.movieapp.R.layout.activity_preview_photo
+    override fun getLayoutId() = R.layout.activity_preview_photos
 
     override fun initData() {
     }
@@ -43,8 +44,8 @@ class PreviewPhotoActivity : BaseActivity(), DragPhotoView.OnExitListener {
         index.text = String.format("%d/%d", position + 1, photos.size)
         viewPager.adapter = object : PagerAdapter() {
             override fun instantiateItem(container: ViewGroup, position: Int): Any {
-                val photoView = DragPhotoView(this@PreviewPhotoActivity)
-                photoView.setOnExitListener(this@PreviewPhotoActivity)
+                val photoView = DragPhotoView(this@PreviewPhotosActivity)
+                photoView.setOnExitListener(this@PreviewPhotosActivity)
                 Glide.with(photoView).load(photos[position].image).into(photoView)
                 container.addView(photoView)
                 return photoView

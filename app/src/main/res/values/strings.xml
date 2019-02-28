@@ -1,6 +1,5 @@
 <resources>
-    <string name="app_name">MovieApp</string>
-
+    <string name="app_name">豆瓣电影</string>
 
 
     <string-array name="tab_movies">

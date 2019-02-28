@@ -9,7 +9,7 @@ import android.view.ViewGroup
  * Data：2019/2/20
  * Actor:Steven
  */
- open abstract class RefreshViewCreator {
+open abstract class RefreshViewCreator {
 
 
     /**

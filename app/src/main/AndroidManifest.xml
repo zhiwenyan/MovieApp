@@ -32,7 +32,7 @@
         <activity
                 android:name=".ui.PlayVideoActivity"
                 android:screenOrientation="landscape"
-                android:theme="@style/AppTheme.NoActionBar">
+                android:theme="@style/AppTheme.FullScreen">
         </activity>
         <activity
                 android:name=".ui.CommentsActivity"
@@ -50,7 +50,7 @@
                 android:theme="@style/AppTheme.NoActionBar">
         </activity>
 
-        <activity android:name=".ui.PreviewPhotoActivity"
+        <activity android:name=".ui.PreviewPhotosActivity"
                   android:screenOrientation="portrait"
                   android:theme="@style/AppTheme.NoActionBar">
         </activity>

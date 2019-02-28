@@ -16,16 +16,16 @@ class ShareUtil {
 
         fun share(context: Context, message: String) {
             val shareIntent = ShareCompat.IntentBuilder.from(context as Activity)
-                .setText(message)
-                .setType("text/plain")
-                .createChooserIntent()
-                .apply {
-                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                        addFlags(Intent.FLAG_ACTIVITY_NEW_DOCUMENT or Intent.FLAG_ACTIVITY_MULTIPLE_TASK)
-                    } else {
-                        addFlags(Intent.FLAG_ACTIVITY_NEW_DOCUMENT)
+                    .setText(message)
+                    .setType("text/plain")
+                    .createChooserIntent()
+                    .apply {
+                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                            addFlags(Intent.FLAG_ACTIVITY_NEW_DOCUMENT or Intent.FLAG_ACTIVITY_MULTIPLE_TASK)
+                        } else {
+                            addFlags(Intent.FLAG_ACTIVITY_NEW_DOCUMENT)
+                        }
                     }
-                }
             context.startActivity(shareIntent)
         }
     }

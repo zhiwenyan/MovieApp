@@ -6,16 +6,15 @@ import android.view.View
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
-import com.steven.movieapp.API_KEY
 import com.steven.movieapp.R
-import com.steven.movieapp.adapter.ActorPhotoAdapter
+import com.steven.movieapp.adapter.ActorPhotosAdapter
 import com.steven.movieapp.adapter.ActorWorksAdapter
 import com.steven.movieapp.base.BaseActivity
 import com.steven.movieapp.model.ActorInfo
 import com.steven.movieapp.model.Photo
 import com.steven.movieapp.model.Works
-import com.steven.movieapp.widget.recyclerview.OnItemClickListener
 import com.steven.movieapp.utils.ShareUtil
+import com.steven.movieapp.widget.recyclerview.OnItemClickListener
 import kotlinx.android.synthetic.main.activity_actor_info.*
 import kotlinx.android.synthetic.main.load_view.*
 import java.util.*
@@ -41,7 +40,7 @@ class ActorInfoActivity : BaseActivity() {
     }
 
     override fun onRequestData() {
-        movieViewModel.getCelebrity(actorId, API_KEY).observe(this, Observer {
+        movieViewModel.getCelebrity(actorId).observe(this, Observer {
             showActorInfo(it)
             showPhotos(it.photos)
             showActorWorks(it.works)
@@ -66,11 +65,11 @@ class ActorInfoActivity : BaseActivity() {
 
     private fun showPhotos(photos: List<Photo>) {
         rv_photos.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
-        val adapter = ActorPhotoAdapter(this, R.layout.photo_image_item, photos)
+        val adapter = ActorPhotosAdapter(this, R.layout.photo_image_item, photos)
         rv_photos.adapter = adapter
         adapter.setOnItemClickListener(object : OnItemClickListener<Photo> {
             override fun onItemClick(position: Int, item: Photo) {
-                val intent = Intent(this@ActorInfoActivity, PreviewPhotoActivity::class.java)
+                val intent = Intent(this@ActorInfoActivity, PreviewPhotosActivity::class.java)
                 intent.putExtra("position", position)
                 intent.putParcelableArrayListExtra("photos", photos as ArrayList<out Parcelable>)
                 intent.putExtra("name", this@ActorInfoActivity.name)

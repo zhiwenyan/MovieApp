@@ -12,11 +12,11 @@ import com.steven.movieapp.widget.recyclerview.BaseViewHolder
  * @author yanzhiwen
  */
 class BloopersAdapter(context: Context, layoutId: Int, data: List<Bloopers>) :
-    BaseRecyclerAdapter<Bloopers>(context, layoutId, data) {
+        BaseRecyclerAdapter<Bloopers>(context, layoutId, data) {
 
 
     override fun convert(holder: BaseViewHolder, position: Int, item: Bloopers) {
-        holder.setImage(R.id.iv_trailers,item.medium)
-            .setText(R.id.title,item.title)
+        holder.setImage(R.id.iv_trailers, item.medium)
+                .setText(R.id.title, item.title)
     }
 }

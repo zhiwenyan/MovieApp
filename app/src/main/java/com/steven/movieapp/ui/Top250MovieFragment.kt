@@ -2,7 +2,6 @@ package com.steven.movieapp.ui
 
 
 import androidx.fragment.app.Fragment
-import com.steven.movieapp.API_KEY
 import com.steven.movieapp.base.BaseResultRefreshFragment
 
 /**
@@ -20,12 +19,12 @@ class Top250MovieFragment : BaseResultRefreshFragment() {
 
     override fun onRequestData() {
         super.onRequestData()
-        movieViewModel.getTop250Movie(API_KEY, start, count).observe(this, mBaseResultObserver)
+        movieViewModel.getTop250Movie(start, count).observe(this, mBaseResultObserver)
     }
 
     override fun onLoad() {
         super.onLoad()
         start += 10
-        movieViewModel.getTop250Movie(API_KEY, start, count).observe(this, mBaseResultObserver)
+        movieViewModel.getTop250Movie(start, count).observe(this, mBaseResultObserver)
     }
 }

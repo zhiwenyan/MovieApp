@@ -14,7 +14,7 @@ import android.view.WindowManager
  * Data：2/27/2019-3:40 PM
  * @author yanzhiwen
  */
-class StatusBarUtil{
+class StatusBarUtil {
     companion object {
         /**
          * 设置状态栏的颜色
@@ -49,7 +49,7 @@ class StatusBarUtil{
         private fun createStatusBarView(activity: Activity): View {
             val statusBarView = View(activity)
             val statusBarParams = ViewGroup.LayoutParams(
-                ViewGroup.LayoutParams.MATCH_PARENT, getStatusBarHeight(activity)
+                    ViewGroup.LayoutParams.MATCH_PARENT, getStatusBarHeight(activity)
             )
             statusBarView.layoutParams = statusBarParams
             return statusBarView

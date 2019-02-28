@@ -19,7 +19,7 @@ class CustomLinkMovementMethod : LinkMovementMethod() {
 
 
     companion object {
-         val instance: CustomLinkMovementMethod by lazy {
+        val instance: CustomLinkMovementMethod by lazy {
             CustomLinkMovementMethod()
         }
     }
@@ -28,7 +28,7 @@ class CustomLinkMovementMethod : LinkMovementMethod() {
         val action = event.action
         //以下 基本copy 的LinkMovementMethod
         if (action == MotionEvent.ACTION_UP ||
-            action == MotionEvent.ACTION_DOWN
+                action == MotionEvent.ACTION_DOWN
         ) {
             mPressedSpan = getPressedSpan(textView, spannable, event);
             if (mPressedSpan != null) {
@@ -36,9 +36,9 @@ class CustomLinkMovementMethod : LinkMovementMethod() {
                     mPressedSpan!!.onClick(textView)
                 } else if (action == MotionEvent.ACTION_DOWN) {
                     Selection.setSelection(
-                        spannable,
-                        spannable.getSpanStart(mPressedSpan),
-                        spannable.getSpanEnd(mPressedSpan)
+                            spannable,
+                            spannable.getSpanStart(mPressedSpan),
+                            spannable.getSpanEnd(mPressedSpan)
                     )
                 }
 
@@ -56,7 +56,7 @@ class CustomLinkMovementMethod : LinkMovementMethod() {
     }
 
 
-    private  fun getPressedSpan(textView: TextView, spannable: Spannable, event: MotionEvent): ClickableSpan? {
+    private fun getPressedSpan(textView: TextView, spannable: Spannable, event: MotionEvent): ClickableSpan? {
 
         //触摸点相对于其所在组件原点的x坐标
         var x = event.x.toInt()
@@ -76,7 +76,7 @@ class CustomLinkMovementMethod : LinkMovementMethod() {
         // 和 触摸点在该行X轴上的偏移量。此方法得到的该值会根据该行上的文字的多少而变化，并不是横向上的像素大小。
         val off = layout.getOffsetForHorizontal(line, x.toFloat())
 
-        Log.d("文本", "line = $line  off = $off")
+        Log.e("文本", "line = $line  off = $off")
         //获取点击位置存在的ClickableSpan对象
         val link = spannable.getSpans<ClickableSpan>(off, off, ClickableSpan::class.java)
         var touchedSpan: ClickableSpan? = null

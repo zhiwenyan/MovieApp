@@ -20,7 +20,7 @@ class LoadRefreshRecyclerView : RefreshRecyclerView {
     private val mDragIndex: Float = 0.35f
     private var mCurrentDrag: Boolean = false
     private var mCurrentLoadStatus: Int =
-        LOAD_STATUS_NORMAL
+            LOAD_STATUS_NORMAL
     private var mListener: OnLoadListener? = null
 
     companion object {
@@ -74,7 +74,7 @@ class LoadRefreshRecyclerView : RefreshRecyclerView {
         val finalBottomMargin = 0
         if (mCurrentLoadStatus == LOAD_STATUS_LOOSEN_LOADING) {
             mCurrentLoadStatus =
-                LOAD_STATUS_LOADING
+                    LOAD_STATUS_LOADING
             mLoadViewCreator!!.onLoading()
 
             mListener?.apply {
@@ -85,7 +85,7 @@ class LoadRefreshRecyclerView : RefreshRecyclerView {
         val distance = currentBottomMargin - finalBottomMargin
 
         val animator = ObjectAnimator.ofFloat(currentBottomMargin.toFloat(), finalBottomMargin.toFloat())
-            .setDuration(distance.toLong())
+                .setDuration(distance.toLong())
         animator.addUpdateListener { animation ->
             @Suppress("NAME_SHADOWING")
             val currentBottomMargin = animation.animatedValue as Float

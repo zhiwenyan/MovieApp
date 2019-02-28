@@ -121,7 +121,6 @@ open class WrapRecyclerView : RecyclerView {
      */
     private fun dataChanged() {
         if (mEmptyView != null) {
-
             if (mAdapter.itemCount == 0) {
                 // 没有数据
                 mEmptyView!!.visibility = VISIBLE

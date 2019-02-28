@@ -17,7 +17,7 @@ open class BaseViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
     private val mViews: SparseArray<View> = SparseArray()
 
 
-     fun <T : View> getView(viewId: Int): T {
+    fun <T : View> getView(viewId: Int): T {
         var view: View? = mViews.get(viewId)
         if (view == null) {
             view = itemView.findViewById(viewId)
@@ -41,8 +41,8 @@ open class BaseViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
     fun setImage(viewId: Int, url: String): BaseViewHolder {
         val imageView = getView<ImageView>(viewId)
         Glide.with(imageView.context)
-            .load(url)
-            .into(imageView)
+                .load(url)
+                .into(imageView)
         return this
 
     }

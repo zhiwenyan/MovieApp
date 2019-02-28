@@ -3,7 +3,6 @@ package com.steven.movieapp.ui
 import android.view.View
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.steven.movieapp.API_KEY
 import com.steven.movieapp.R
 import com.steven.movieapp.adapter.CommentsAdapter
 import com.steven.movieapp.base.BaseActivity
@@ -16,7 +15,7 @@ class CommentsActivity : BaseActivity() {
 
 
     private val movieId: String by lazy {
-        intent.getStringExtra("movieId")
+        intent.getStringExtra("movie_id")
     }
 
     override fun getLayoutId() = R.layout.activity_comments
@@ -25,15 +24,14 @@ class CommentsActivity : BaseActivity() {
     }
 
     override fun initView() {
-        supportActionBar!!.title = ""
-        fab.setOnClickListener{
+        fab.setOnClickListener {
             rv_more_comments.scrollToPosition(0)
         }
     }
 
     override fun onRequestData() {
-        movieViewModel.getComments(movieId, API_KEY).observe(this, Observer {
-            supportActionBar!!.title = "热评(" + it.count + ")"
+        movieViewModel.getComments(movieId).observe(this, Observer {
+            supportActionBar?.apply { title = "热评(" + it.count + ")" }
             showComments(it.comments)
         })
 
@@ -46,11 +44,11 @@ class CommentsActivity : BaseActivity() {
         rv_more_comments.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
         rv_more_comments.adapter = CommentsAdapter(this, R.layout.comment_item, comments)
         rv_more_comments.addItemDecoration(
-            DividerItemDecoration(
-                this,
-                R.drawable.ic_divider_item,
-                LinearLayoutManager.VERTICAL
-            )
+                DividerItemDecoration(
+                        this,
+                        R.drawable.ic_divider_item,
+                        LinearLayoutManager.VERTICAL
+                )
         )
     }
 }

@@ -9,11 +9,12 @@ import com.steven.movieapp.R
 import com.steven.movieapp.adapter.MovieAdapter
 import com.steven.movieapp.model.BaseResult
 import com.steven.movieapp.model.Movie
-import com.steven.movieapp.widget.recyclerview.OnItemClickListener
 import com.steven.movieapp.ui.MovieInfoActivity
 import com.steven.movieapp.ui.Top250MovieFragment
 import com.steven.movieapp.viewmodel.MovieViewModel
+import com.steven.movieapp.viewmodel.MovieViewModelFactory
 import com.steven.movieapp.widget.LoopTextView
+import com.steven.movieapp.widget.recyclerview.OnItemClickListener
 import com.steven.movieapp.widget.refreshLoad.DefaultLoadViewCreator
 import com.steven.movieapp.widget.refreshLoad.DefaultRefreshViewCreator
 import com.steven.movieapp.widget.refreshLoad.LoadRefreshRecyclerView
@@ -27,12 +28,12 @@ import kotlinx.android.synthetic.main.load_view.*
  * @author yanzhiwen
  */
 abstract class BaseResultRefreshFragment : BaseFragment(), OnItemClickListener<Movie>, RefreshRecyclerView.OnRefreshListener,
-    LoadRefreshRecyclerView.OnLoadListener {
+        LoadRefreshRecyclerView.OnLoadListener {
 
     private var adapter: MovieAdapter? = null
     private var movies = ArrayList<Movie>()
     protected val movieViewModel: MovieViewModel by lazy {
-        ViewModelProviders.of(this).get(MovieViewModel::class.java)
+        ViewModelProviders.of(this, MovieViewModelFactory()).get(MovieViewModel::class.java)
 
     }
     protected lateinit var mBaseResultObserver: Observer<BaseResult<List<Movie>>>
@@ -83,7 +84,7 @@ abstract class BaseResultRefreshFragment : BaseFragment(), OnItemClickListener<M
 
     override fun onItemClick(position: Int, item: Movie) {
         val intent = Intent(mContext, MovieInfoActivity::class.java)
-        intent.putExtra("id", item.id)
+        intent.putExtra("movie_id", item.id)
         startActivity(intent)
     }
 
