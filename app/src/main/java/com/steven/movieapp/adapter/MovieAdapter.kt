@@ -14,13 +14,13 @@ import com.steven.movieapp.widget.recyclerview.BaseViewHolder
  *
  */
 class MovieAdapter(context: Context, layoutId: Int, data: List<Movie>) :
-        BaseRecyclerAdapter<Movie>(context, layoutId, data) {
+    BaseRecyclerAdapter<Movie>(context, layoutId, data) {
 
     override fun convert(holder: BaseViewHolder, position: Int, item: Movie) {
         holder.setText(R.id.name, item.title)
-                .setText(R.id.genres, String.format("类型：%s", StringFormat.formatGenres(item.genres)))
-                .setText(R.id.pubdates, String.format("上映日期：%s", item.mainland_pubdate))
-                .setText(R.id.durations, String.format("片长：%s", StringFormat.formatDurations(item.durations)))
-                .setImage(R.id.iv_movie, item.images.large)
+            .setText(R.id.genres, String.format("类型：%s", StringFormat.formatGenres(item.genres)))
+            .setText(R.id.pubdates, String.format("上映日期：%s", item.mainland_pubdate))
+            .setText(R.id.durations, String.format("片长：%s", StringFormat.formatDurations(item.durations)))
+            .setImage(R.id.iv_movie, item.images.large)
     }
 }

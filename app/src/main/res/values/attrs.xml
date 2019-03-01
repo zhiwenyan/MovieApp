@@ -14,4 +14,11 @@
     </declare-styleable>
 
 
+    <declare-styleable name="RoundCornerImageView">
+        <attr name="borderWidth" format="dimension"/>
+        <attr name="borderColor" format="color"/>
+        <attr name="radius" format="dimension"/>
+        <attr name="ratio"/>
+    </declare-styleable>
+
 </resources>

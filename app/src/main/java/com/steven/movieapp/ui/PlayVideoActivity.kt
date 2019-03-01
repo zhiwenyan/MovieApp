@@ -40,9 +40,6 @@ class PlayVideoActivity : BaseActivity() {
 
     override fun getLayoutId(): Int = R.layout.activity_play_video
 
-    override fun initData() {
-    }
-
     override fun initView() {
         StatusBarUtil.statusBarTranslucent(this)
         movie_name.text = this.title

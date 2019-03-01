@@ -5,6 +5,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.howshea.basemodule.component.fragment.LazyFragment
 import com.steven.movieapp.R
 import com.steven.movieapp.adapter.WeeklyAdapter
 import com.steven.movieapp.model.BaseSubjects
@@ -24,35 +25,19 @@ import kotlinx.android.synthetic.main.load_view.*
  * Data：2/19/2019-3:14 PM
  * @author yanzhiwen
  */
-abstract class BaseSubjectsRefreshFragment : BaseFragment(), OnItemClickListener<Weekly>,
-        RefreshRecyclerView.OnRefreshListener {
+abstract class BaseSubjectsRefreshFragment : LazyFragment(), OnItemClickListener<Weekly>,
+    RefreshRecyclerView.OnRefreshListener {
 
     private var adapter: WeeklyAdapter? = null
     protected val movieViewModel: MovieViewModel by lazy {
         ViewModelProviders.of(this, MovieViewModelFactory()).get(MovieViewModel::class.java)
 
     }
-    protected lateinit var mBaseSubjectsObserver: Observer<BaseSubjects<Weekly>>
 
-    override fun getLayoutId() = R.layout.fragment_base_refresh
-
-    override fun initView() {
-        recyclerView.layoutManager = LinearLayoutManager(mContext)
-        recyclerView.itemAnimator = DefaultItemAnimator()
-        recyclerView.addRefreshViewCreator(DefaultRefreshViewCreator())
-        recyclerView.setOnRefreshListener(this)
-        recyclerView.addLoadingView(load_view)
-        recyclerView.addEmptyView(empty_view)
-    }
-
-    override fun initData() {
-
-    }
-
-    override fun onRequestData() {
-        mBaseSubjectsObserver = Observer {
+    protected val mBaseSubjectsObserver: Observer<BaseSubjects<Weekly>> by lazy {
+        Observer<BaseSubjects<Weekly>> {
             if (adapter == null) {
-                adapter = WeeklyAdapter(mContext!!, R.layout.movie_list_item, it.subjects)
+                adapter = WeeklyAdapter(context!!, R.layout.movie_list_item, it.subjects)
                 recyclerView.adapter = adapter
                 adapter?.apply { setOnItemClickListener(this@BaseSubjectsRefreshFragment) }
             } else {
@@ -63,9 +48,20 @@ abstract class BaseSubjectsRefreshFragment : BaseFragment(), OnItemClickListener
         }
     }
 
+    override fun getLayoutId() = R.layout.fragment_base_refresh
+
+    override fun initView() {
+        recyclerView.layoutManager = LinearLayoutManager(context)
+        recyclerView.itemAnimator = DefaultItemAnimator()
+        recyclerView.addRefreshViewCreator(DefaultRefreshViewCreator())
+        recyclerView.setOnRefreshListener(this)
+        recyclerView.addLoadingView(load_view)
+        recyclerView.addEmptyView(empty_view)
+    }
+
 
     override fun onItemClick(position: Int, item: Weekly) {
-        val intent = Intent(mContext, MovieInfoActivity::class.java)
+        val intent = Intent(context, MovieInfoActivity::class.java)
         intent.putExtra("movie_id", item.subject.id)
         startActivity(intent)
     }

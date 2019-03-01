@@ -16,7 +16,6 @@ class UsMovieFragment : BaseSubjectsRefreshFragment() {
     }
 
     override fun onRequestData() {
-        super.onRequestData()
         movieViewModel.getMovieUsBox().observe(this, mBaseSubjectsObserver)
     }
 }

@@ -28,7 +28,7 @@ class CustomLinkMovementMethod : LinkMovementMethod() {
         val action = event.action
         //以下 基本copy 的LinkMovementMethod
         if (action == MotionEvent.ACTION_UP ||
-                action == MotionEvent.ACTION_DOWN
+            action == MotionEvent.ACTION_DOWN
         ) {
             mPressedSpan = getPressedSpan(textView, spannable, event);
             if (mPressedSpan != null) {
@@ -36,9 +36,9 @@ class CustomLinkMovementMethod : LinkMovementMethod() {
                     mPressedSpan!!.onClick(textView)
                 } else if (action == MotionEvent.ACTION_DOWN) {
                     Selection.setSelection(
-                            spannable,
-                            spannable.getSpanStart(mPressedSpan),
-                            spannable.getSpanEnd(mPressedSpan)
+                        spannable,
+                        spannable.getSpanStart(mPressedSpan),
+                        spannable.getSpanEnd(mPressedSpan)
                     )
                 }
 

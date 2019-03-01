@@ -5,6 +5,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.howshea.basemodule.component.fragment.LazyFragment
 import com.steven.movieapp.R
 import com.steven.movieapp.adapter.MovieAdapter
 import com.steven.movieapp.model.BaseResult
@@ -27,21 +28,45 @@ import kotlinx.android.synthetic.main.load_view.*
  * Data：2/19/2019-3:14 PM
  * @author yanzhiwen
  */
-abstract class BaseResultRefreshFragment : BaseFragment(), OnItemClickListener<Movie>, RefreshRecyclerView.OnRefreshListener,
-        LoadRefreshRecyclerView.OnLoadListener {
+abstract class BaseResultRefreshFragment : LazyFragment(), OnItemClickListener<Movie>,
+    RefreshRecyclerView.OnRefreshListener,
+    LoadRefreshRecyclerView.OnLoadListener {
 
     private var adapter: MovieAdapter? = null
-    private var movies = ArrayList<Movie>()
+
+    private var movies = arrayListOf<Movie>()
+
     protected val movieViewModel: MovieViewModel by lazy {
         ViewModelProviders.of(this, MovieViewModelFactory()).get(MovieViewModel::class.java)
-
     }
-    protected lateinit var mBaseResultObserver: Observer<BaseResult<List<Movie>>>
+
+    protected val mBaseResultObserver: Observer<BaseResult<List<Movie>>> by lazy {
+        Observer<BaseResult<List<Movie>>> {
+            if (adapter == null) {
+                movies = it.subjects as ArrayList<Movie>
+                adapter = MovieAdapter(context!!, R.layout.movie_list_item, movies)
+                recyclerView.adapter = adapter
+            } else {
+                recyclerView.onStopRefresh()
+                adapter?.apply {
+                    if (this@BaseResultRefreshFragment is Top250MovieFragment) {
+                        recyclerView.onStopLoad()
+                        if (it.subjects.isNotEmpty() && recyclerView.isLoading()) {
+                            movies.addAll(it.subjects)
+                        }
+                    }
+                    notifyDataSetChanged()
+                }
+            }
+            adapter?.apply { setOnItemClickListener(this@BaseResultRefreshFragment) }
+            setUpLoopMovieName(it.subjects)
+        }
+    }
 
     override fun getLayoutId() = R.layout.fragment_base_refresh
 
     override fun initView() {
-        recyclerView.layoutManager = LinearLayoutManager(mContext)
+        recyclerView.layoutManager = LinearLayoutManager(context)
         recyclerView.itemAnimator = DefaultItemAnimator()
         recyclerView.addRefreshViewCreator(DefaultRefreshViewCreator())
         recyclerView.setOnRefreshListener(this)
@@ -53,37 +78,8 @@ abstract class BaseResultRefreshFragment : BaseFragment(), OnItemClickListener<M
         }
     }
 
-    override fun initData() {
-
-    }
-
-    override fun onRequestData() {
-        mBaseResultObserver = Observer {
-            if (adapter == null) {
-                movies = it.subjects as ArrayList<Movie>
-                adapter = MovieAdapter(mContext!!, R.layout.movie_list_item, movies)
-                recyclerView.adapter = adapter
-                adapter?.apply { setOnItemClickListener(this@BaseResultRefreshFragment) }
-            } else {
-                recyclerView.onStopRefresh()
-                adapter?.apply {
-                    if (this@BaseResultRefreshFragment is Top250MovieFragment) {
-                        recyclerView.onStopLoad()
-                        if (it.subjects.isNotEmpty()) {
-                            movies.addAll(it.subjects)
-                        }
-                    }
-                    notifyDataSetChanged()
-                }
-            }
-            setUpLoopMovieName(it.subjects)
-        }
-
-    }
-
-
     override fun onItemClick(position: Int, item: Movie) {
-        val intent = Intent(mContext, MovieInfoActivity::class.java)
+        val intent = Intent(context, MovieInfoActivity::class.java)
         intent.putExtra("movie_id", item.id)
         startActivity(intent)
     }
@@ -94,9 +90,7 @@ abstract class BaseResultRefreshFragment : BaseFragment(), OnItemClickListener<M
     }
 
     override fun onLoad() {
-
     }
-
 
     private fun setUpLoopMovieName(movies: List<Movie>) {
         val textList = ArrayList<String>()

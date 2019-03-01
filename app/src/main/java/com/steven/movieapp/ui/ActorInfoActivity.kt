@@ -2,7 +2,9 @@ package com.steven.movieapp.ui
 
 import android.content.Intent
 import android.os.Parcelable
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
@@ -28,8 +30,6 @@ class ActorInfoActivity : BaseActivity() {
 
     override fun getLayoutId() = R.layout.activity_actor_info
 
-    override fun initData() {
-    }
 
     override fun initView() {
 
@@ -63,6 +63,10 @@ class ActorInfoActivity : BaseActivity() {
 
     }
 
+    /***
+     * 影人剧照
+     * @param photos
+     */
     private fun showPhotos(photos: List<Photo>) {
         rv_photos.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
         val adapter = ActorPhotosAdapter(this, R.layout.photo_image_item, photos)
@@ -77,6 +81,17 @@ class ActorInfoActivity : BaseActivity() {
                 startActivity(intent)
             }
         })
+        val footerView = LayoutInflater.from(this).inflate(
+            R.layout.check_more_view,
+            findViewById<View>(R.id.container) as ViewGroup, false
+        )
+        rv_photos.addFooterView(footerView)
+        footerView.setOnClickListener {
+            val intent = Intent(this@ActorInfoActivity, PhotosActivity::class.java)
+            intent.putExtra("celebrity_id", actorId)
+            intent.putExtra("name", this@ActorInfoActivity.name)
+            startActivity(intent)
+        }
     }
 
     /**
@@ -89,7 +104,7 @@ class ActorInfoActivity : BaseActivity() {
         adapter.setOnItemClickListener(object : OnItemClickListener<Works> {
             override fun onItemClick(position: Int, item: Works) {
                 val intent = Intent(this@ActorInfoActivity, MovieInfoActivity::class.java)
-                intent.putExtra("id", item.subject.id)
+                intent.putExtra("movie_id", item.subject.id)
                 startActivity(intent)
             }
         })

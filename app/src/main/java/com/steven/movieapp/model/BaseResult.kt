@@ -6,8 +6,8 @@ package com.steven.movieapp.model
  * Actor:Steven
  */
 data class BaseResult<T>(
-        val count: Int,
-        val start: Int,
-        val total: Int,
-        val subjects: T
+    val count: Int,
+    val start: Int,
+    val total: Int,
+    val subjects: T
 )

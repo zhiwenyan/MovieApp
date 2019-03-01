@@ -20,7 +20,7 @@ open class RefreshRecyclerView : WrapRecyclerView {
     private val mDragIndex: Float = 0.35f
     private var mCurrentDrag: Boolean = false
     private var mCurrentRefreshStatus: Int =
-            REFRESH_STATUS_NORMAL
+        REFRESH_STATUS_NORMAL
     private var mListener: OnRefreshListener? = null
 
     companion object {
@@ -75,7 +75,7 @@ open class RefreshRecyclerView : WrapRecyclerView {
         if (mCurrentRefreshStatus == REFRESH_STATUS_LOOSEN_REFRESHING) {
             finalTopMargin = 0
             mCurrentRefreshStatus =
-                    REFRESH_STATUS_REFRESHING
+                REFRESH_STATUS_REFRESHING
             mRefreshCreator.onRefreshing()
 
             mListener?.apply {
@@ -86,7 +86,7 @@ open class RefreshRecyclerView : WrapRecyclerView {
         val distance = currentTopMargin - finalTopMargin
 
         val animator = ObjectAnimator.ofFloat(currentTopMargin.toFloat(), finalTopMargin.toFloat())
-                .setDuration(distance.toLong())
+            .setDuration(distance.toLong())
         animator.addUpdateListener { animation ->
             @Suppress("NAME_SHADOWING")
             val currentTooMargin = animation.animatedValue as Float
@@ -159,7 +159,7 @@ open class RefreshRecyclerView : WrapRecyclerView {
 
     fun onStopRefresh() {
         mCurrentRefreshStatus =
-                REFRESH_STATUS_NORMAL
+            REFRESH_STATUS_NORMAL
         restoreRefreshView()
         mRefreshCreator.onStopRefresh()
     }

@@ -8,7 +8,7 @@ package com.steven.movieapp.model
 
 data class Avaters(
     //演员图片
-    val avatars:Images,
+    val avatars: Images,
     //英文名
     val name_en: String,
     //中文名

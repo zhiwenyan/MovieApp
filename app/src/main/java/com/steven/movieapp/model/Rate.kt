@@ -7,11 +7,11 @@ package com.steven.movieapp.model
  */
 data class Rate(
     //评分最大值
-    val max:Int,
+    val max: Int,
     //平均值
-    val average:Double,
+    val average: Double,
     //期待指数
-    val stars:Int,
+    val stars: Int,
     //评分最小值
-    val min:Int
+    val min: Int
 )

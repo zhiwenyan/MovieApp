@@ -12,12 +12,12 @@ import com.steven.movieapp.widget.recyclerview.BaseViewHolder
  * @author yanzhiwen
  */
 class ActorsAdapter(context: Context, layoutId: Int, data: List<Actor>) :
-        BaseRecyclerAdapter<Actor>(context, layoutId, data) {
+    BaseRecyclerAdapter<Actor>(context, layoutId, data) {
 
 
     override fun convert(holder: BaseViewHolder, position: Int, item: Actor) {
         holder.setImage(R.id.iv_actor, item.avatars.large)
-                .setText(R.id.name, item.name)
+            .setText(R.id.name, item.name)
     }
 
 }

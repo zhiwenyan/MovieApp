@@ -16,7 +16,6 @@ class NewMoviesFragment : BaseResultRefreshFragment() {
     }
 
     override fun onRequestData() {
-        super.onRequestData()
         movieViewModel.getMovieNewMovies().observe(this, mBaseResultObserver)
     }
 }

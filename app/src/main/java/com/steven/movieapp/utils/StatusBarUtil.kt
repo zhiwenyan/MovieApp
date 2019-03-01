@@ -49,7 +49,7 @@ class StatusBarUtil {
         private fun createStatusBarView(activity: Activity): View {
             val statusBarView = View(activity)
             val statusBarParams = ViewGroup.LayoutParams(
-                    ViewGroup.LayoutParams.MATCH_PARENT, getStatusBarHeight(activity)
+                ViewGroup.LayoutParams.MATCH_PARENT, getStatusBarHeight(activity)
             )
             statusBarView.layoutParams = statusBarParams
             return statusBarView

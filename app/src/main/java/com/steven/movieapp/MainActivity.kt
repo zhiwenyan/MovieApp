@@ -2,7 +2,7 @@ package com.steven.movieapp
 
 import android.content.Intent
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentPagerAdapter
+import androidx.fragment.app.FragmentStatePagerAdapter
 import com.steven.movieapp.base.BaseActivity
 import com.steven.movieapp.ui.*
 import kotlinx.android.synthetic.main.activity_main.*
@@ -11,9 +11,6 @@ class MainActivity : BaseActivity() {
 
 
     override fun getLayoutId(): Int = R.layout.activity_main
-    override fun initData() {
-
-    }
 
     override fun initView() {
         val movies = resources.getStringArray(R.array.tab_movies)
@@ -26,7 +23,7 @@ class MainActivity : BaseActivity() {
         fragments.add(NewMoviesFragment.newInstance())
         fragments.add(Top250MovieFragment.newInstance())
 
-        viewPager.adapter = object : FragmentPagerAdapter(supportFragmentManager) {
+        viewPager.adapter = object : FragmentStatePagerAdapter(supportFragmentManager) {
 
             override fun getItem(position: Int): Fragment = fragments[position]
 
@@ -35,7 +32,7 @@ class MainActivity : BaseActivity() {
 
             override fun getCount(): Int = movies.size
         }
-        viewPager.offscreenPageLimit = fragments.size
+        viewPager.offscreenPageLimit = fragments.size - 1
         tab.setupWithViewPager(viewPager)
         loop_movie_name.setOnClickListener {
             val intent = Intent(this, SearchMovieActivity::class.java)

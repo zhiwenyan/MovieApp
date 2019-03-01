@@ -80,16 +80,29 @@ interface ServiceApi {
     @GET("celebrity/{celebrityId}")
     fun getCelebrity(@Path("celebrityId") movieId: String, @Query("apikey") apikey: String): LiveData<ActorInfo>
 
+
+    /**
+     * 影人剧照
+     */
+    @GET("celebrity/{celebrityId}/photos")
+    fun getCelebrityPhotos(
+        @Path("celebrityId") movieId: String,
+        @Query("start") start: Int,
+        @Query("count") count: Int,
+        @Query("apikey") apikey: String
+    ): LiveData<Photos>
+
+
     /**
      * 根据标签搜索
      */
 
     @GET("search")
     fun getMovieSearchByTag(
-            @Query("tag") tag: String,
-            @Query("apikey") apikey: String,
-            @Query("start") start: Int,
-            @Query("count") count: Int
+        @Query("tag") tag: String,
+        @Query("apikey") apikey: String,
+        @Query("start") start: Int,
+        @Query("count") count: Int
     ): LiveData<BaseResult<List<Movie>>>
 
 }

@@ -13,7 +13,7 @@ import androidx.recyclerview.widget.RecyclerView
  */
 
 class WrapRecyclerAdapter(private val adapter: RecyclerView.Adapter<RecyclerView.ViewHolder>) :
-        RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+    RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     private val mHeaderViews: SparseArray<View> = SparseArray()
 

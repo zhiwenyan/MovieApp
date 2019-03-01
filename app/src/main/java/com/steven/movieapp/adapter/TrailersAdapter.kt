@@ -12,11 +12,11 @@ import com.steven.movieapp.widget.recyclerview.BaseViewHolder
  * @author yanzhiwen
  */
 class TrailersAdapter(context: Context, layoutId: Int, data: List<Trailers>) :
-        BaseRecyclerAdapter<Trailers>(context, layoutId, data) {
+    BaseRecyclerAdapter<Trailers>(context, layoutId, data) {
 
 
     override fun convert(holder: BaseViewHolder, position: Int, item: Trailers) {
         holder.setImage(R.id.iv_trailers, item.medium)
-                .setText(R.id.title, item.title)
+            .setText(R.id.title, item.title)
     }
 }

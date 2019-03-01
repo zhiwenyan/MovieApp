@@ -12,7 +12,7 @@ import com.steven.movieapp.widget.recyclerview.BaseViewHolder
  * @author yanzhiwen
  */
 class ActorPhotosAdapter(context: Context, layoutId: Int, data: List<Photo>) :
-        BaseRecyclerAdapter<Photo>(context, layoutId, data) {
+    BaseRecyclerAdapter<Photo>(context, layoutId, data) {
 
 
     override fun convert(holder: BaseViewHolder, position: Int, item: Photo) {

@@ -89,7 +89,7 @@ class CollapsibleTextView : TextView {
     constructor(context: Context, attrs: AttributeSet?, defStyleAttr: Int) : super(context, attrs, defStyleAttr) {
         val typedArray = context.obtainStyledAttributes(attrs, R.styleable.CollapsibleTextView)
         collapsedLines =
-                typedArray.getInteger(R.styleable.CollapsibleTextView_collapsedLines, defaultLines)
+            typedArray.getInteger(R.styleable.CollapsibleTextView_collapsedLines, defaultLines)
         collapsedText = typedArray.getString(R.styleable.CollapsibleTextView_collapsedText)
         expandedText = typedArray.getString(R.styleable.CollapsibleTextView_expandedText)
         suffixColor = typedArray.getColor(R.styleable.CollapsibleTextView_suffixColor, Color.RED)
@@ -150,36 +150,36 @@ class CollapsibleTextView : TextView {
         }
         //设置后缀点击事件
         str.setSpan(
-                mClickSpanListener,
-                temp.length,
-                temp.length + suffix.length,
-                SpannableString.SPAN_EXCLUSIVE_EXCLUSIVE
+            mClickSpanListener,
+            temp.length,
+            temp.length + suffix.length,
+            SpannableString.SPAN_EXCLUSIVE_EXCLUSIVE
         )
         //设置后缀文字颜色
         str.setSpan(
-                ForegroundColorSpan(suffixColor),
-                temp.length,
-                temp.length + suffix.length,
-                SpannableString.SPAN_EXCLUSIVE_EXCLUSIVE
+            ForegroundColorSpan(suffixColor),
+            temp.length,
+            temp.length + suffix.length,
+            SpannableString.SPAN_EXCLUSIVE_EXCLUSIVE
 
         )
         if (this.onTextClickListener != null) {
             //一定要判断。【一般自身点击与父容器点击只存其一。如果不判断，相当于整个TextView均含clickspan，不会再响应父容器点击事件】
             str.setSpan(
-                    selfClickSpan,
-                    0,
-                    temp.length,
-                    SpannableString.SPAN_EXCLUSIVE_EXCLUSIVE
+                selfClickSpan,
+                0,
+                temp.length,
+                SpannableString.SPAN_EXCLUSIVE_EXCLUSIVE
             )
         }
         //设置自身点击事件【避免与自身点击事件冲突，采用剩余部位点击事件实现
         //一定要判断。,一般自身点击与父容器点击只存其一。如果不判断，相当于整个TextView均含clickspan，不会再响应父容器点击事件
         if (onTextClickListener != null) {
             str.setSpan(
-                    selfClickSpan,
-                    0,
-                    temp.length,
-                    SpannableString.SPAN_EXCLUSIVE_EXCLUSIVE
+                selfClickSpan,
+                0,
+                temp.length,
+                SpannableString.SPAN_EXCLUSIVE_EXCLUSIVE
             )
         }
         text = str

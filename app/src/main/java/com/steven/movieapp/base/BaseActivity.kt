@@ -12,6 +12,7 @@ import kotlinx.android.synthetic.main.activity_movie_info.*
  * Actor:Steven
  */
 abstract class BaseActivity : AppCompatActivity() {
+
     protected val movieViewModel: MovieViewModel by lazy {
         ViewModelProviders.of(this).get(MovieViewModel::class.java)
 
@@ -21,7 +22,6 @@ abstract class BaseActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(getLayoutId())
         setUpActionBar()
-        initData()
         initView()
         onRequestData()
     }
@@ -34,7 +34,6 @@ abstract class BaseActivity : AppCompatActivity() {
     }
 
     abstract fun getLayoutId(): Int
-    abstract fun initData()
     abstract fun initView()
     open fun onRequestData() {
 

@@ -10,7 +10,7 @@ data class Trailers(
     val title: String,
     val subject_id: String,
     val alt: String,
-    val small:String,
-    val resource_url:String,
+    val small: String,
+    val resource_url: String,
     val id: String
-    )
+)

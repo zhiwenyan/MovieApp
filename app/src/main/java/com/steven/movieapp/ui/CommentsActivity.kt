@@ -20,8 +20,6 @@ class CommentsActivity : BaseActivity() {
 
     override fun getLayoutId() = R.layout.activity_comments
 
-    override fun initData() {
-    }
 
     override fun initView() {
         fab.setOnClickListener {
@@ -44,11 +42,11 @@ class CommentsActivity : BaseActivity() {
         rv_more_comments.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
         rv_more_comments.adapter = CommentsAdapter(this, R.layout.comment_item, comments)
         rv_more_comments.addItemDecoration(
-                DividerItemDecoration(
-                        this,
-                        R.drawable.ic_divider_item,
-                        LinearLayoutManager.VERTICAL
-                )
+            DividerItemDecoration(
+                this,
+                R.drawable.ic_divider_item,
+                LinearLayoutManager.VERTICAL
+            )
         )
     }
 }

@@ -5,8 +5,8 @@ package com.steven.movieapp.model
  * Data：2019/1/28
  * Actor:Steven
  */
-data  class Directors(
-    val avatars:Avaters,
+data class Directors(
+    val avatars: Avaters,
     //英文名
     val name_en: String,
     //中文名

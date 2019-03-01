@@ -36,10 +36,6 @@ class MovieInfoActivity : BaseActivity() {
 
     override fun getLayoutId(): Int = R.layout.activity_movie_info
 
-    override fun initData() {
-
-    }
-
     override fun initView() {
         fab.setOnClickListener {
             ShareUtil.share(this, shareText)
@@ -147,17 +143,16 @@ class MovieInfoActivity : BaseActivity() {
         rv_comments.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
         rv_comments.adapter = CommentsAdapter(this, R.layout.comment_item, popular_comments)
         rv_comments.addItemDecoration(
-                DividerItemDecoration(
-                        this,
-                        R.drawable.ic_divider_item,
-                        LinearLayoutManager.VERTICAL
-                )
+            DividerItemDecoration(
+                this,
+                R.drawable.ic_divider_item,
+                LinearLayoutManager.VERTICAL
+            )
         )
-        val moreCommentsView =
-                LayoutInflater.from(this).inflate(
-                        R.layout.check_more_comments,
-                        findViewById(R.id.container), false
-                )
+        val moreCommentsView = LayoutInflater.from(this).inflate(
+            R.layout.check_more_comments,
+            findViewById(R.id.container), false
+        )
         rv_comments.addFooterView(moreCommentsView)
         moreCommentsView.findViewById<TextView>(R.id.comments_more).setOnClickListener {
             val intent = Intent(this, CommentsActivity::class.java)

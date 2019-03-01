@@ -7,7 +7,7 @@
     android:background="@color/color_white"
     tools:ignore="RtlHardcoded">
 
-    <ImageView
+    <de.hdodenhof.circleimageview.CircleImageView
         android:layout_marginLeft="@dimen/yy"
         android:layout_marginTop="@dimen/xx"
         android:src="@drawable/ic_menu_camera"

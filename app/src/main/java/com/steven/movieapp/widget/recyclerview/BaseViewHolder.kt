@@ -41,8 +41,8 @@ open class BaseViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
     fun setImage(viewId: Int, url: String): BaseViewHolder {
         val imageView = getView<ImageView>(viewId)
         Glide.with(imageView.context)
-                .load(url)
-                .into(imageView)
+            .load(url)
+            .into(imageView)
         return this
 
     }

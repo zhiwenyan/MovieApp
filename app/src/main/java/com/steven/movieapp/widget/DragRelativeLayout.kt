@@ -79,7 +79,7 @@ class DragRelativeLayout : RelativeLayout {
         val layoutParams = this.layoutParams as FrameLayout.LayoutParams
         if (topMargin == 0) {
             val animator = ObjectAnimator.ofFloat(distanceY.toFloat(), 0f)
-                    .setDuration(distanceY.toLong())
+                .setDuration(distanceY.toLong())
             animator.addUpdateListener { animation ->
                 val currentTopMargin = animation.animatedValue as Float
                 layoutParams.topMargin = currentTopMargin.toInt()

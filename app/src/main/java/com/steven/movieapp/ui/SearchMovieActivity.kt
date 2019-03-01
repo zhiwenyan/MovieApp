@@ -20,7 +20,7 @@ import kotlinx.android.synthetic.main.activity_search_movie.*
 import kotlinx.android.synthetic.main.load_view.*
 
 class SearchMovieActivity : BaseActivity(), RefreshRecyclerView.OnRefreshListener,
-        LoadRefreshRecyclerView.OnLoadListener {
+    LoadRefreshRecyclerView.OnLoadListener {
 
 
     private var adapter: MovieAdapter? = null
@@ -29,9 +29,6 @@ class SearchMovieActivity : BaseActivity(), RefreshRecyclerView.OnRefreshListene
     private lateinit var name: String
 
     override fun getLayoutId(): Int = R.layout.activity_search_movie
-
-    override fun initData() {
-    }
 
     override fun initView() {
         load_view.visibility = View.GONE
@@ -63,7 +60,7 @@ class SearchMovieActivity : BaseActivity(), RefreshRecyclerView.OnRefreshListene
             this.movies.clear()
             adapter = null
         }
-        movieViewModel.getMovieSearchByTag(name, 0, 10).observe(this, Observer {
+        movieViewModel.getMovieSearchByTag(name, 0, 20).observe(this, Observer {
             this.movies = it.subjects as ArrayList<Movie>
             showMovie()
         })
@@ -96,8 +93,8 @@ class SearchMovieActivity : BaseActivity(), RefreshRecyclerView.OnRefreshListene
     }
 
     override fun onLoad() {
-        start += 10
-        movieViewModel.getMovieSearchByTag(name, start, 10).observe(this, Observer {
+        start += 20
+        movieViewModel.getMovieSearchByTag(name, start, 20).observe(this, Observer {
             this.movies.addAll(it.subjects)
             showMovie()
         })

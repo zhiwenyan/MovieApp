@@ -6,7 +6,7 @@ package com.steven.movieapp.model
  * Actor:Steven
  */
 data class Images(
-    val small:String,
-    val large:String,
-    val medium:String
+    val small: String,
+    val large: String,
+    val medium: String
 )

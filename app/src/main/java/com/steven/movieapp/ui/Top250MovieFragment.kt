@@ -18,7 +18,6 @@ class Top250MovieFragment : BaseResultRefreshFragment() {
     }
 
     override fun onRequestData() {
-        super.onRequestData()
         movieViewModel.getTop250Movie(start, count).observe(this, mBaseResultObserver)
     }
 

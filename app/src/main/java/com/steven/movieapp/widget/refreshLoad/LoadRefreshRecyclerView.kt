@@ -20,7 +20,7 @@ class LoadRefreshRecyclerView : RefreshRecyclerView {
     private val mDragIndex: Float = 0.35f
     private var mCurrentDrag: Boolean = false
     private var mCurrentLoadStatus: Int =
-            LOAD_STATUS_NORMAL
+        LOAD_STATUS_NORMAL
     private var mListener: OnLoadListener? = null
 
     companion object {
@@ -33,6 +33,8 @@ class LoadRefreshRecyclerView : RefreshRecyclerView {
         //正在刷加载状态
         private const val LOAD_STATUS_LOADING = 0x0044
     }
+
+    private var isLoading: Boolean = false
 
     constructor(context: Context) : super(context)
     constructor(context: Context, attrs: AttributeSet?) : super(context, attrs)
@@ -74,7 +76,7 @@ class LoadRefreshRecyclerView : RefreshRecyclerView {
         val finalBottomMargin = 0
         if (mCurrentLoadStatus == LOAD_STATUS_LOOSEN_LOADING) {
             mCurrentLoadStatus =
-                    LOAD_STATUS_LOADING
+                LOAD_STATUS_LOADING
             mLoadViewCreator!!.onLoading()
 
             mListener?.apply {
@@ -85,7 +87,7 @@ class LoadRefreshRecyclerView : RefreshRecyclerView {
         val distance = currentBottomMargin - finalBottomMargin
 
         val animator = ObjectAnimator.ofFloat(currentBottomMargin.toFloat(), finalBottomMargin.toFloat())
-                .setDuration(distance.toLong())
+            .setDuration(distance.toLong())
         animator.addUpdateListener { animation ->
             @Suppress("NAME_SHADOWING")
             val currentBottomMargin = animation.animatedValue as Float
@@ -115,8 +117,10 @@ class LoadRefreshRecyclerView : RefreshRecyclerView {
         when (e.action) {
             MotionEvent.ACTION_MOVE -> {
                 if (canScrollDown() || mCurrentLoadStatus == LOAD_STATUS_LOADING || mLoadView == null || mLoadViewCreator == null) {
+                    isLoading = false
                     return super.onTouchEvent(e)
                 }
+
                 mLoadViewHeight = mLoadView!!.measuredHeight
 
                 if (mCurrentDrag) scrollToPosition(adapter!!.itemCount - 1)
@@ -126,6 +130,7 @@ class LoadRefreshRecyclerView : RefreshRecyclerView {
                     setLoadViewMarginBottom(-distanceY)
                     updateLoadStatus(-distanceY)
                     mCurrentDrag = true
+                    isLoading = true
                     return false
                 }
             }
@@ -158,5 +163,9 @@ class LoadRefreshRecyclerView : RefreshRecyclerView {
 
     interface OnLoadListener {
         fun onLoad()
+    }
+
+    fun isLoading(): Boolean {
+        return isLoading
     }
 }

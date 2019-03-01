@@ -12,7 +12,13 @@
             android:supportsRtl="true"
             android:theme="@style/AppTheme"
             tools:ignore="AllowBackup,GoogleAppIndexingWarning">
-
+        <activity android:name=".ui.PreviewPhotoActivity">
+        </activity>
+        <activity
+                android:name=".ui.PhotosActivity"
+                android:screenOrientation="portrait"
+                android:theme="@style/AppTheme.NoActionBar">
+        </activity>
         <activity
                 android:name=".MainActivity"
                 android:launchMode="singleTask"
@@ -49,10 +55,10 @@
                 android:screenOrientation="portrait"
                 android:theme="@style/AppTheme.NoActionBar">
         </activity>
-
-        <activity android:name=".ui.PreviewPhotosActivity"
-                  android:screenOrientation="portrait"
-                  android:theme="@style/AppTheme.NoActionBar">
+        <activity
+                android:name=".ui.PreviewPhotosActivity"
+                android:screenOrientation="portrait"
+                android:theme="@style/AppTheme.NoActionBar">
         </activity>
     </application>
 

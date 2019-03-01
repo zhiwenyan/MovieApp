@@ -15,7 +15,7 @@ import androidx.recyclerview.widget.RecyclerView
  * @author yanzhiwen
  */
 class DividerItemDecoration(context: Context, drawableId: Int, private var orientation: Int) :
-        RecyclerView.ItemDecoration() {
+    RecyclerView.ItemDecoration() {
 
     companion object {
         private const val HORIZONTAL_LIST = LinearLayoutManager.HORIZONTAL

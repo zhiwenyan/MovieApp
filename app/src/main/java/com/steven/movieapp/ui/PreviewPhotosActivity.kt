@@ -34,8 +34,6 @@ class PreviewPhotosActivity : BaseActivity(), DragPhotoView.OnExitListener {
 
     override fun getLayoutId() = R.layout.activity_preview_photos
 
-    override fun initData() {
-    }
 
     override fun initView() {
         StatusBarUtil.statusBarTintColor(this, ContextCompat.getColor(this, android.R.color.black))

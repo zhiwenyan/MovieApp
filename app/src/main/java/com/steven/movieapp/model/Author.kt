@@ -6,10 +6,10 @@ package com.steven.movieapp.model
  * @author yanzhiwen
  */
 data class Author(
-    val uid:String,
-    val avatar:String,
-    val signature:String,
-    val alt:String,
-    val id:String,
-    val name:String
+    val uid: String,
+    val avatar: String,
+    val signature: String,
+    val alt: String,
+    val id: String,
+    val name: String
 )
