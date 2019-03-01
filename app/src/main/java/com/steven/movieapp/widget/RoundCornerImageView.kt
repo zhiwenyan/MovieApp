@@ -94,13 +94,9 @@ class RoundCornerImageView : AppCompatImageView {
         if (_borderWidth == 0f && _radius == 0f) {
             super.onDraw(canvas)
         } else {
-            println("====onDraw====")
-
             borderPaint.color = _borderColor
             borderPaint.strokeWidth = _borderWidth
             imagePaint.shader = generateBitmapShader(drawable)
-            println("====onDraw==== " + drawable)
-
             canvas.drawRoundRect(innerRectF, innerRadius, innerRadius, imagePaint)
             if (_borderWidth > 0f) {
                 canvas.drawRoundRect(rectF, _radius, _radius, borderPaint)
