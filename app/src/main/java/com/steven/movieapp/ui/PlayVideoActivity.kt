@@ -4,6 +4,7 @@ import android.media.MediaPlayer
 import android.net.Uri
 import android.view.View
 import android.widget.SeekBar
+import android.widget.Toast
 import com.steven.movieapp.R
 import com.steven.movieapp.base.BaseActivity
 import com.steven.movieapp.utils.StatusBarUtil
@@ -65,12 +66,7 @@ class PlayVideoActivity : BaseActivity() {
         }
 
         iv_next.setOnClickListener {
-            if (mMediaPlayer.isPlaying) {
-                mMediaPlayer.pause()
-            } else {
-                mMediaPlayer.start()
-            }
-            updatePausePlay()
+            Toast.makeText(this,"小编正在开发中...",Toast.LENGTH_SHORT).show()
         }
 
 

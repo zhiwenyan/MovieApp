@@ -8,7 +8,7 @@ import com.steven.movieapp.widget.recyclerview.BaseRecyclerAdapter
 import com.steven.movieapp.widget.recyclerview.BaseViewHolder
 
 /**
- * Description:
+ * Description:口碑
  * Data：1/29/2019-2:20 PM
  * @author yanzhiwen
  *

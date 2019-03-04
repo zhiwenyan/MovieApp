@@ -1,6 +1,9 @@
 package com.steven.movieapp.base
 
 import android.content.Intent
+import android.view.View
+import android.widget.ImageView
+import androidx.core.app.ActivityOptionsCompat
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.DefaultItemAnimator
@@ -28,7 +31,11 @@ import kotlinx.android.synthetic.main.load_view.*
 abstract class BaseSubjectsRefreshFragment : LazyFragment(), OnItemClickListener<Weekly>,
     RefreshRecyclerView.OnRefreshListener {
 
-    private var adapter: WeeklyAdapter? = null
+    private var movies = arrayListOf<Weekly>()
+
+    private val adapter: WeeklyAdapter by lazy {
+        WeeklyAdapter(activity!!, R.layout.movie_list_item, movies)
+    }
     protected val movieViewModel: MovieViewModel by lazy {
         ViewModelProviders.of(this, MovieViewModelFactory()).get(MovieViewModel::class.java)
 
@@ -36,14 +43,14 @@ abstract class BaseSubjectsRefreshFragment : LazyFragment(), OnItemClickListener
 
     protected val mBaseSubjectsObserver: Observer<BaseSubjects<Weekly>> by lazy {
         Observer<BaseSubjects<Weekly>> {
-            if (adapter == null) {
-                adapter = WeeklyAdapter(context!!, R.layout.movie_list_item, it.subjects)
-                recyclerView.adapter = adapter
-                adapter?.apply { setOnItemClickListener(this@BaseSubjectsRefreshFragment) }
+            if (movies.isEmpty()) {
+                this.movies = it.subjects as ArrayList<Weekly>
+                rv_movies.adapter = adapter
             } else {
-                recyclerView.onStopRefresh()
-                adapter?.apply { notifyDataSetChanged() }
+                rv_movies.onStopRefresh()
+                adapter.notifyDataSetChanged()
             }
+            adapter.setOnItemClickListener(this)
             setUpLoopMovieName(it.subjects)
         }
     }
@@ -51,21 +58,26 @@ abstract class BaseSubjectsRefreshFragment : LazyFragment(), OnItemClickListener
     override fun getLayoutId() = R.layout.fragment_base_refresh
 
     override fun initView() {
-        recyclerView.layoutManager = LinearLayoutManager(context)
-        recyclerView.itemAnimator = DefaultItemAnimator()
-        recyclerView.addRefreshViewCreator(DefaultRefreshViewCreator())
-        recyclerView.setOnRefreshListener(this)
-        recyclerView.addLoadingView(load_view)
-        recyclerView.addEmptyView(empty_view)
+        rv_movies.layoutManager = LinearLayoutManager(context)
+        rv_movies.itemAnimator = DefaultItemAnimator()
+        rv_movies.addRefreshViewCreator(DefaultRefreshViewCreator())
+        rv_movies.setOnRefreshListener(this)
+        rv_movies.addLoadingView(load_view)
+        rv_movies.addEmptyView(empty_view)
     }
 
 
-    override fun onItemClick(position: Int, item: Weekly) {
+    override fun onItemClick(view: View, position: Int, item: Weekly) {
         val intent = Intent(context, MovieInfoActivity::class.java)
         intent.putExtra("movie_id", item.subject.id)
-        startActivity(intent)
+        val v = view.findViewById<ImageView>(R.id.iv_movie)
+        val options =
+            ActivityOptionsCompat.makeSceneTransitionAnimation(
+                activity!!,
+                v, getString(R.string.transition_movie_image)
+            )
+        startActivity(intent, options.toBundle())
     }
-
 
     override fun onRefresh() {
         onRequestData()

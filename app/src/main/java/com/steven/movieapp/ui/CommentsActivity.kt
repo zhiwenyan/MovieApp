@@ -25,6 +25,15 @@ class CommentsActivity : BaseActivity() {
         fab.setOnClickListener {
             rv_more_comments.scrollToPosition(0)
         }
+        rv_more_comments.layoutManager = LinearLayoutManager(this)
+        rv_more_comments.addItemDecoration(
+            DividerItemDecoration(
+                this,
+                R.drawable.ic_divider_item,
+                LinearLayoutManager.VERTICAL
+            )
+        )
+
     }
 
     override fun onRequestData() {
@@ -39,14 +48,7 @@ class CommentsActivity : BaseActivity() {
         if (load_view.visibility == View.VISIBLE) {
             load_view.visibility = View.GONE
         }
-        rv_more_comments.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
         rv_more_comments.adapter = CommentsAdapter(this, R.layout.comment_item, comments)
-        rv_more_comments.addItemDecoration(
-            DividerItemDecoration(
-                this,
-                R.drawable.ic_divider_item,
-                LinearLayoutManager.VERTICAL
-            )
-        )
+
     }
 }

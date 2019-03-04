@@ -29,7 +29,9 @@ abstract class BaseActivity : AppCompatActivity() {
     private fun setUpActionBar() {
         toolbar?.apply {
             setSupportActionBar(this)
-            supportActionBar!!.setDisplayHomeAsUpEnabled(true)
+        }
+        supportActionBar?.apply {
+            setDisplayHomeAsUpEnabled(true)
         }
     }
 
@@ -41,7 +43,7 @@ abstract class BaseActivity : AppCompatActivity() {
 
 
     override fun onSupportNavigateUp(): Boolean {
-        this.finish()
+        onBackPressed()
         return super.onSupportNavigateUp()
     }
 }

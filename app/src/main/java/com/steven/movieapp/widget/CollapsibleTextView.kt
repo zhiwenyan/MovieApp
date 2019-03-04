@@ -12,7 +12,6 @@ import android.util.AttributeSet
 import android.view.MotionEvent
 import android.view.View
 import android.widget.TextView
-import androidx.core.content.ContextCompat
 import com.steven.movieapp.R
 
 
@@ -23,13 +22,13 @@ import com.steven.movieapp.R
  */
 class CollapsibleTextView : TextView {
     //最大显示的行数，其余的折叠
-    private var collapsedLines: Int
+    var collapsedLines: Int
     //折叠时的后缀文字,eg.“展开”
-    private var collapsedText: String
+    var collapsedText: String
     //展开时的后缀文字,eg.“收起”
-    private var expandedText: String
+    var expandedText: String
 
-    private var suffixColor: Int
+    var suffixColor: Int
     //默认显示3行
     private var defaultLines: Int = 3
 
@@ -51,6 +50,7 @@ class CollapsibleTextView : TextView {
     private var customLinkMovementMethod: CustomLinkMovementMethod? = null
 
     private var isDraw: Boolean = true
+
     private val mClickSpanListener = object : ClickableSpan() {
         override fun onClick(widget: View) {
             isNeedExpanded = !isNeedExpanded
@@ -186,36 +186,6 @@ class CollapsibleTextView : TextView {
         isDraw = false
 
     }
-
-
-    fun setDefaultLines(defaultLines: Int) {
-        this.defaultLines = defaultLines
-    }
-
-    fun setSuffixColor(colorId: Int) {
-        this.suffixColor = ContextCompat.getColor(context, colorId)
-    }
-
-    fun setDefaultCollapsedText(collapsedText: String) {
-        this.collapsedText = collapsedText
-    }
-
-    fun setDefaultExplandText(explandText: String) {
-        this.defaultExpandedText = explandText
-    }
-
-    fun setOnTextClickListener(onTextClickListener: OnTextClickListener) {
-        this.onTextClickListener = onTextClickListener
-    }
-
-    fun isNeedExpanded(isNeedExpanded: Boolean) {
-        this.isNeedExpanded = isNeedExpanded
-    }
-
-    fun isNeedEllipsis(isNeedEllipsis: Boolean) {
-        this.isNeedEllipsis = isNeedEllipsis
-    }
-
 
     override fun onTouchEvent(event: MotionEvent?): Boolean {
         val result = super.onTouchEvent(event)

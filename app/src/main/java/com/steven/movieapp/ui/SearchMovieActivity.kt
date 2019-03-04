@@ -22,11 +22,13 @@ import kotlinx.android.synthetic.main.load_view.*
 class SearchMovieActivity : BaseActivity(), RefreshRecyclerView.OnRefreshListener,
     LoadRefreshRecyclerView.OnLoadListener {
 
-
-    private var adapter: MovieAdapter? = null
-    private var movies = ArrayList<Movie>()
     private var start: Int = 0
     private lateinit var name: String
+    private var movies = arrayListOf<Movie>()
+
+    private val adapter: MovieAdapter by lazy {
+        MovieAdapter(this, R.layout.movie_list_item, this.movies)
+    }
 
     override fun getLayoutId(): Int = R.layout.activity_search_movie
 
@@ -56,47 +58,53 @@ class SearchMovieActivity : BaseActivity(), RefreshRecyclerView.OnRefreshListene
         load_view.visibility = View.VISIBLE
 
         if (this.movies.size > 0) {
-            adapter?.apply { this.notifyItemRangeRemoved(0, movies.size) }
+            adapter.notifyItemRangeRemoved(0, movies.size - 1)
             this.movies.clear()
-            adapter = null
         }
         movieViewModel.getMovieSearchByTag(name, 0, 20).observe(this, Observer {
-            this.movies = it.subjects as ArrayList<Movie>
-            showMovie()
+            showMovie(it.subjects)
         })
     }
 
-    private fun showMovie() {
+    private fun showMovie(movies: List<Movie>) {
         if (load_view.visibility == View.VISIBLE) {
             load_view.visibility = View.GONE
         }
-        if (adapter == null) {
-            adapter = MovieAdapter(this, R.layout.movie_list_item, this.movies)
-            rv_movies.adapter = adapter
+        if (this.movies.isEmpty()) {
+            this.movies = movies as ArrayList<Movie>
+            if (!adapter.hasObservers()) {
+                rv_movies.adapter = adapter
+            } else {
+                adapter.notifyDataSetChanged()
+            }
         } else {
             rv_movies.onStopRefresh()
-            adapter?.apply { notifyDataSetChanged() }
-            rv_movies.onStopLoad()
-        }
-        adapter?.setOnItemClickListener(object : OnItemClickListener<Movie> {
-            override fun onItemClick(position: Int, item: Movie) {
-                val intent = Intent(this@SearchMovieActivity, MovieInfoActivity::class.java)
-                intent.putExtra("movie_id", item.id)
-                startActivity(intent)
+            if (rv_movies.isLoading()) {
+                rv_movies.onStopLoad()
             }
-        })
-
+            adapter.notifyDataSetChanged()
+        }
+        adapter.setOnItemClickListener(
+            object : OnItemClickListener<Movie> {
+                override fun onItemClick(view: View, position: Int, item: Movie) {
+                    val intent = Intent(this@SearchMovieActivity, MovieInfoActivity::class.java)
+                    intent.putExtra("movie_id", item.id)
+                    startActivity(intent)
+                }
+            })
     }
 
     override fun onRefresh() {
-        showMovie()
+        showMovie(this.movies)
     }
 
     override fun onLoad() {
         start += 20
         movieViewModel.getMovieSearchByTag(name, start, 20).observe(this, Observer {
-            this.movies.addAll(it.subjects)
-            showMovie()
+            if (it.subjects.isNotEmpty()) {
+                this.movies.addAll(it.subjects)
+                showMovie(it.subjects)
+            }
         })
     }
 }

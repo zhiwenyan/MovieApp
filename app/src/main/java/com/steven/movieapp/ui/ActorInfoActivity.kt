@@ -72,7 +72,7 @@ class ActorInfoActivity : BaseActivity() {
         val adapter = ActorPhotosAdapter(this, R.layout.photo_image_item, photos)
         rv_photos.adapter = adapter
         adapter.setOnItemClickListener(object : OnItemClickListener<Photo> {
-            override fun onItemClick(position: Int, item: Photo) {
+            override fun onItemClick(view: View, position: Int, item: Photo) {
                 val intent = Intent(this@ActorInfoActivity, PreviewPhotosActivity::class.java)
                 intent.putExtra("position", position)
                 intent.putParcelableArrayListExtra("photos", photos as ArrayList<out Parcelable>)
@@ -102,7 +102,7 @@ class ActorInfoActivity : BaseActivity() {
         val adapter = ActorWorksAdapter(this, R.layout.works_image_item, works)
         rv_works.adapter = adapter
         adapter.setOnItemClickListener(object : OnItemClickListener<Works> {
-            override fun onItemClick(position: Int, item: Works) {
+            override fun onItemClick(view: View, position: Int, item: Works) {
                 val intent = Intent(this@ActorInfoActivity, MovieInfoActivity::class.java)
                 intent.putExtra("movie_id", item.subject.id)
                 startActivity(intent)

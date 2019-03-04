@@ -13,9 +13,15 @@
         android:theme="@style/AppTheme.AppBarOverlay">
 
 
-        <RelativeLayout
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
             android:layout_width="match_parent"
-            android:layout_height="48dp">
+            android:layout_height="?actionBarSize"
+            app:contentInsetLeft="0dp"
+            app:contentInsetStart="0dp"
+            app:contentInsetStartWithNavigation="0dp"
+            app:layout_scrollFlags="scroll|enterAlways"
+            app:popupTheme="@style/AppTheme.PopupOverlay">
 
             <com.steven.movieapp.widget.LoopTextView
                 android:id="@+id/loop_movie_name"
@@ -26,14 +32,13 @@
                 android:padding="@dimen/x"
                 tools:ignore="RtlHardcoded" />
 
-        </RelativeLayout>
+        </androidx.appcompat.widget.Toolbar>
 
         <com.google.android.material.tabs.TabLayout
             android:id="@+id/tab"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/color_white"
-            app:layout_scrollFlags="scroll"
             app:tabIndicatorColor="@color/colorAccent"
             app:tabMode="scrollable"
             app:tabSelectedTextColor="@color/colorAccent"
@@ -48,14 +53,4 @@
         android:layout_height="match_parent"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
         tools:ignore="PrivateResource" />
-
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/fab"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom|end"
-        android:layout_margin="@dimen/x"
-        android:visibility="gone"
-        app:layout_behavior="@string/fab_translation_behavior"
-        app:srcCompat="@mipmap/ic_grid" />
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

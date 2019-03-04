@@ -85,7 +85,8 @@ open class WrapRecyclerView : RecyclerView {
         mWrapRecyclerAdapter.adjustSpanSize(this)
 
         // 加载数据页面
-        if (mLoadingView != null && mLoadingView!!.visibility == View.VISIBLE) {
+        mLoadingView ?: return
+        if (mLoadingView!!.visibility == View.VISIBLE) {
             mLoadingView!!.visibility = View.GONE
         }
 
@@ -120,13 +121,12 @@ open class WrapRecyclerView : RecyclerView {
      * Adapter数据改变的方法
      */
     private fun dataChanged() {
-        if (mEmptyView != null) {
-            if (mAdapter.itemCount == 0) {
-                // 没有数据
-                mEmptyView!!.visibility = VISIBLE
-            } else {
-                mEmptyView!!.visibility = GONE
-            }
+        mEmptyView ?: return
+        if (mAdapter.itemCount == 0) {
+            // 没有数据
+            mEmptyView!!.visibility = VISIBLE
+        } else {
+            mEmptyView!!.visibility = GONE
         }
     }
 }

@@ -148,7 +148,7 @@ class RoundCornerImageView : AppCompatImageView {
         var dx = 0f
         var dy = 0f
         val fits =
-            (drawableWidth < 0 || viewWidth == drawableWidth) && (drawableHeight < 0 || viewHeight == drawableHeight)
+                (drawableWidth < 0 || viewWidth == drawableWidth) && (drawableHeight < 0 || viewHeight == drawableHeight)
         val scale = Math.max(viewWidth / drawableWidth.toFloat(), viewHeight / drawableHeight.toFloat())
         if (drawableWidth <= 0 || drawableHeight <= 0) {
             drawable.setBounds(0, 0, viewWidth, viewHeight)

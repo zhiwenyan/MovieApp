@@ -16,4 +16,5 @@
     <dimen name="yyy">24dp</dimen>
     <dimen name="yyyy">32dp</dimen>
 
+    <dimen name="app_bar_height">240dp</dimen>
 </resources>

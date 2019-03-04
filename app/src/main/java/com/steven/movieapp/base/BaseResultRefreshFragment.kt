@@ -1,6 +1,9 @@
 package com.steven.movieapp.base
 
 import android.content.Intent
+import android.view.View
+import android.widget.ImageView
+import androidx.core.app.ActivityOptionsCompat
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.DefaultItemAnimator
@@ -32,9 +35,12 @@ abstract class BaseResultRefreshFragment : LazyFragment(), OnItemClickListener<M
     RefreshRecyclerView.OnRefreshListener,
     LoadRefreshRecyclerView.OnLoadListener {
 
-    private var adapter: MovieAdapter? = null
 
     private var movies = arrayListOf<Movie>()
+
+    private val adapter: MovieAdapter  by lazy {
+        MovieAdapter(activity!!, R.layout.movie_list_item, movies)
+    }
 
     protected val movieViewModel: MovieViewModel by lazy {
         ViewModelProviders.of(this, MovieViewModelFactory()).get(MovieViewModel::class.java)
@@ -42,23 +48,20 @@ abstract class BaseResultRefreshFragment : LazyFragment(), OnItemClickListener<M
 
     protected val mBaseResultObserver: Observer<BaseResult<List<Movie>>> by lazy {
         Observer<BaseResult<List<Movie>>> {
-            if (adapter == null) {
-                movies = it.subjects as ArrayList<Movie>
-                adapter = MovieAdapter(context!!, R.layout.movie_list_item, movies)
-                recyclerView.adapter = adapter
+            if (movies.isEmpty()) {
+                this.movies = it.subjects as ArrayList<Movie>
+                rv_movies.adapter = adapter
             } else {
-                recyclerView.onStopRefresh()
-                adapter?.apply {
-                    if (this@BaseResultRefreshFragment is Top250MovieFragment) {
-                        recyclerView.onStopLoad()
-                        if (it.subjects.isNotEmpty() && recyclerView.isLoading()) {
-                            movies.addAll(it.subjects)
-                        }
+                rv_movies.onStopRefresh()
+                if (this is Top250MovieFragment) {
+                    if (it.subjects.isNotEmpty() && rv_movies.isLoading()) {
+                        movies.addAll(it.subjects)
+                        rv_movies.onStopLoad()
                     }
-                    notifyDataSetChanged()
                 }
+                adapter.notifyDataSetChanged()
             }
-            adapter?.apply { setOnItemClickListener(this@BaseResultRefreshFragment) }
+            adapter.setOnItemClickListener(this)
             setUpLoopMovieName(it.subjects)
         }
     }
@@ -66,22 +69,28 @@ abstract class BaseResultRefreshFragment : LazyFragment(), OnItemClickListener<M
     override fun getLayoutId() = R.layout.fragment_base_refresh
 
     override fun initView() {
-        recyclerView.layoutManager = LinearLayoutManager(context)
-        recyclerView.itemAnimator = DefaultItemAnimator()
-        recyclerView.addRefreshViewCreator(DefaultRefreshViewCreator())
-        recyclerView.setOnRefreshListener(this)
-        recyclerView.addLoadingView(load_view)
-        recyclerView.addEmptyView(empty_view)
+        rv_movies.layoutManager = LinearLayoutManager(context)
+        rv_movies.itemAnimator = DefaultItemAnimator()
+        rv_movies.addRefreshViewCreator(DefaultRefreshViewCreator())
+        rv_movies.setOnRefreshListener(this)
+        rv_movies.addLoadingView(load_view)
+        rv_movies.addEmptyView(empty_view)
         if (this is Top250MovieFragment) {
-            recyclerView.addLoadViewCreator(DefaultLoadViewCreator())
-            recyclerView.setOnLoadListener(this)
+            rv_movies.addLoadViewCreator(DefaultLoadViewCreator())
+            rv_movies.setOnLoadListener(this)
         }
     }
 
-    override fun onItemClick(position: Int, item: Movie) {
+    override fun onItemClick(view: View, position: Int, item: Movie) {
         val intent = Intent(context, MovieInfoActivity::class.java)
         intent.putExtra("movie_id", item.id)
-        startActivity(intent)
+        val v = view.findViewById<ImageView>(R.id.iv_movie)
+        val options =
+            ActivityOptionsCompat.makeSceneTransitionAnimation(
+                activity!!,
+                v, getString(R.string.transition_movie_image)
+            )
+        startActivity(intent, options.toBundle())
     }
 
 

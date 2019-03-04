@@ -20,8 +20,9 @@ open class RefreshRecyclerView : WrapRecyclerView {
     private val mDragIndex: Float = 0.35f
     private var mCurrentDrag: Boolean = false
     private var mCurrentRefreshStatus: Int =
-        REFRESH_STATUS_NORMAL
+            REFRESH_STATUS_NORMAL
     private var mListener: OnRefreshListener? = null
+    private var isRefreshing = true
 
     companion object {
         //默认状态
@@ -75,7 +76,7 @@ open class RefreshRecyclerView : WrapRecyclerView {
         if (mCurrentRefreshStatus == REFRESH_STATUS_LOOSEN_REFRESHING) {
             finalTopMargin = 0
             mCurrentRefreshStatus =
-                REFRESH_STATUS_REFRESHING
+                    REFRESH_STATUS_REFRESHING
             mRefreshCreator.onRefreshing()
 
             mListener?.apply {
@@ -86,7 +87,7 @@ open class RefreshRecyclerView : WrapRecyclerView {
         val distance = currentTopMargin - finalTopMargin
 
         val animator = ObjectAnimator.ofFloat(currentTopMargin.toFloat(), finalTopMargin.toFloat())
-            .setDuration(distance.toLong())
+                .setDuration(distance.toLong())
         animator.addUpdateListener { animation ->
             @Suppress("NAME_SHADOWING")
             val currentTooMargin = animation.animatedValue as Float
@@ -127,6 +128,7 @@ open class RefreshRecyclerView : WrapRecyclerView {
         when (e.action) {
             MotionEvent.ACTION_MOVE -> {
                 if (canScrollUp() || mCurrentRefreshStatus == REFRESH_STATUS_REFRESHING) {
+                    isRefreshing = false
                     return super.onTouchEvent(e)
                 }
                 if (mCurrentDrag) scrollToPosition(0)
@@ -136,6 +138,7 @@ open class RefreshRecyclerView : WrapRecyclerView {
                     val marginTop = distanceY - mRefreshViewHeight
                     setRefreshViewMarginTop(marginTop)
                     updateRefreshStatus(distanceY)
+                    isRefreshing = true
                     mCurrentDrag = true
                     return false
                 }
@@ -159,7 +162,7 @@ open class RefreshRecyclerView : WrapRecyclerView {
 
     fun onStopRefresh() {
         mCurrentRefreshStatus =
-            REFRESH_STATUS_NORMAL
+                REFRESH_STATUS_NORMAL
         restoreRefreshView()
         mRefreshCreator.onStopRefresh()
     }
@@ -170,5 +173,9 @@ open class RefreshRecyclerView : WrapRecyclerView {
 
     interface OnRefreshListener {
         fun onRefresh()
+    }
+
+    fun isRefreshing(): Boolean {
+        return isRefreshing
     }
 }

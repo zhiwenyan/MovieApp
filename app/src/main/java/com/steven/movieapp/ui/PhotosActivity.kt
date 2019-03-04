@@ -1,5 +1,6 @@
 package com.steven.movieapp.ui
 
+import android.content.Intent
 import android.view.View
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.GridLayoutManager
@@ -26,9 +27,13 @@ class PhotosActivity : BaseActivity(), RefreshRecyclerView.OnRefreshListener, Lo
     }
     private var start: Int = 0
     private var count: Int = 20
-    private var adapter: ActorPhotosAdapter? = null
 
     private var photos = arrayListOf<Photo>()
+
+    private val adapter: ActorPhotosAdapter by lazy {
+        ActorPhotosAdapter(this, R.layout.photo_item, photos)
+    }
+
 
     override fun getLayoutId(): Int = R.layout.activity_photos
 
@@ -54,19 +59,18 @@ class PhotosActivity : BaseActivity(), RefreshRecyclerView.OnRefreshListener, Lo
         if (load_view.visibility == View.VISIBLE) {
             load_view.visibility = View.GONE
         }
-        if (adapter == null) {
+        if (this.photos.isEmpty()) {
             this.photos = photos as ArrayList<Photo>
-            adapter = ActorPhotosAdapter(this, R.layout.photo_item, this.photos)
             rv_photos.adapter = adapter
         } else {
             rv_photos.onStopRefresh()
-            rv_photos.onStopLoad()
             if (photos.isNotEmpty() && rv_photos.isLoading()) {
                 this.photos.addAll(photos)
+                rv_photos.onStopLoad()
             }
-            adapter?.apply { notifyDataSetChanged() }
+            adapter.notifyDataSetChanged()
         }
-        adapter?.setOnItemClickListener(this)
+        adapter.setOnItemClickListener(this)
 
     }
 
@@ -82,7 +86,10 @@ class PhotosActivity : BaseActivity(), RefreshRecyclerView.OnRefreshListener, Lo
         onRequestData()
     }
 
-    override fun onItemClick(position: Int, item: Photo) {
+    override fun onItemClick(view: View, position: Int, item: Photo) {
+        val intent = Intent(this, PreviewPhotoActivity::class.java)
+        intent.putExtra("photo_url", item.image)
+        intent.putExtra("name", name)
+        startActivity(intent)
     }
-
 }

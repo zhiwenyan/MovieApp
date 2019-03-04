@@ -1,6 +1,7 @@
 package com.steven.movieapp.ui
 
 import android.content.Intent
+import android.os.Build
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.TextView
@@ -29,7 +30,6 @@ import kotlinx.android.synthetic.main.load_view.*
 class MovieInfoActivity : BaseActivity() {
 
     private lateinit var shareText: String
-
     private val movieId: String by lazy {
         intent.getStringExtra("movie_id")
     }
@@ -39,6 +39,11 @@ class MovieInfoActivity : BaseActivity() {
     override fun initView() {
         fab.setOnClickListener {
             ShareUtil.share(this, shareText)
+        }
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            iv_movie.transitionName = getString(R.string.transition_movie_image)
+            window.enterTransition = android.transition.Fade()
+            window.exitTransition = android.transition.Fade()
         }
     }
 
@@ -86,7 +91,7 @@ class MovieInfoActivity : BaseActivity() {
         val adapter = ActorsAdapter(this, R.layout.actor_image_item, actors)
         rv_actors.adapter = adapter
         adapter.setOnItemClickListener(object : OnItemClickListener<Actor> {
-            override fun onItemClick(position: Int, item: Actor) {
+            override fun onItemClick(view: View, position: Int, item: Actor) {
                 val intent = Intent(this@MovieInfoActivity, ActorInfoActivity::class.java)
                 intent.putExtra("actor_id", item.id)
                 startActivity(intent)
@@ -104,7 +109,7 @@ class MovieInfoActivity : BaseActivity() {
         val adapter = BloopersAdapter(this, R.layout.video_image_item, bloopers)
         rv_bloopers.adapter = adapter
         adapter.setOnItemClickListener(object : OnItemClickListener<Bloopers> {
-            override fun onItemClick(position: Int, item: Bloopers) {
+            override fun onItemClick(view: View, position: Int, item: Bloopers) {
                 val intent = Intent(this@MovieInfoActivity, PlayVideoActivity::class.java)
                 intent.putExtra("video_url", item.resource_url)
                 intent.putExtra("title", item.title)
@@ -124,7 +129,7 @@ class MovieInfoActivity : BaseActivity() {
         val adapter = TrailersAdapter(this, R.layout.video_image_item, trailers)
         rv_trailers.adapter = adapter
         adapter.setOnItemClickListener(object : OnItemClickListener<Trailers> {
-            override fun onItemClick(position: Int, item: Trailers) {
+            override fun onItemClick(view: View, position: Int, item: Trailers) {
                 val intent = Intent(this@MovieInfoActivity, PlayVideoActivity::class.java)
                 intent.putExtra("video_url", item.resource_url)
                 intent.putExtra("title", item.title)
@@ -159,6 +164,10 @@ class MovieInfoActivity : BaseActivity() {
             intent.putExtra("movie_id", movieId)
             startActivity(intent)
         }
+    }
 
+    override fun onBackPressed() {
+        fab.visibility = View.INVISIBLE
+        super.onBackPressed()
     }
 }

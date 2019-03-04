@@ -51,7 +51,7 @@ abstract class BaseRecyclerAdapter<T> : RecyclerView.Adapter<BaseViewHolder> {
     override fun onBindViewHolder(holder: BaseViewHolder, position: Int) {
         if (mOnItemClickListener != null) {
             holder.itemView.setOnClickListener {
-                mOnItemClickListener?.apply { onItemClick(position, data[position]) }
+                mOnItemClickListener?.apply { onItemClick(holder.itemView,position, data[position]) }
             }
         }
 
